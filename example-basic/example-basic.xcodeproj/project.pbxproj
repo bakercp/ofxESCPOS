@@ -19,7 +19,7 @@
 		E45BE9830E8CC7DD009D7055 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9790E8CC7DD009D7055 /* OpenGL.framework */; };
 		E45BE9840E8CC7DD009D7055 /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */; };
 		E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1D0A3A1BDC003C02F2 /* main.cpp */; };
-		E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */; };
+		E4B69E210A3A1BDC003C02F2 /* exampleApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1E0A3A1BDC003C02F2 /* exampleApp.cpp */; };
 		E4C2424710CC5A17004149E2 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424410CC5A17004149E2 /* AppKit.framework */; };
 		E4C2424810CC5A17004149E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424510CC5A17004149E2 /* Cocoa.framework */; };
 		E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424610CC5A17004149E2 /* IOKit.framework */; };
@@ -27,11 +27,14 @@
 		E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */; };
 		E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E715D3B6510020DFD4 /* QTKit.framework */; };
 		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
-		FDB24A0716E2999300E50624 /* ofxESCPOSPrinter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDB24A0516E2999300E50624 /* ofxESCPOSPrinter.cpp */; };
-		FDB24A0E16E3212800E50624 /* ofxDefaultESCPOSPrinter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDB24A0C16E3212800E50624 /* ofxDefaultESCPOSPrinter.cpp */; };
-		FDB24A1116E3A98900E50624 /* ofxESCPOSBarcodeData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDB24A0F16E3A98900E50624 /* ofxESCPOSBarcodeData.cpp */; };
-		FDB24A1416E3F68000E50624 /* ofxBarcode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDB24A1216E3F68000E50624 /* ofxBarcode.cpp */; };
-		FDB24A1716E46E5B00E50624 /* ofxBarcode2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDB24A1516E46E5A00E50624 /* ofxBarcode2D.cpp */; };
+		FD98BDAF1763CE8F006C9C22 /* ByteBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD98BDAD1763CE8F006C9C22 /* ByteBuffer.cpp */; };
+		FD98BDB21763CEB7006C9C22 /* DefaultCharacterCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD98BDB01763CEB7006C9C22 /* DefaultCharacterCommands.cpp */; };
+		FD98BDB51763CEF5006C9C22 /* DefaultSerialPrinter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD98BDB31763CEF5006C9C22 /* DefaultSerialPrinter.cpp */; };
+		FD98BDB81763E8EC006C9C22 /* DefaultMechanismCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD98BDB61763E8EB006C9C22 /* DefaultMechanismCommands.cpp */; };
+		FD98BDBB1763EE1B006C9C22 /* DefaultBitImageCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD98BDB91763EE1A006C9C22 /* DefaultBitImageCommands.cpp */; };
+		FD98BDBF17642160006C9C22 /* ImageUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD98BDBD1764215F006C9C22 /* ImageUtils.cpp */; };
+		FD98BDC21764DBB4006C9C22 /* BitImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD98BDC01764DBB2006C9C22 /* BitImage.cpp */; };
+		FDE2457417729EF300CACBD8 /* DefaultLineSpacingCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE2457217729EF300CACBD8 /* DefaultLineSpacingCommands.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,8 +81,8 @@
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
 		E4B69B5B0A3A1756003C02F2 /* example-basicDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "example-basicDebug.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
-		E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = testApp.cpp; path = src/testApp.cpp; sourceTree = SOURCE_ROOT; };
-		E4B69E1F0A3A1BDC003C02F2 /* testApp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = testApp.h; path = src/testApp.h; sourceTree = SOURCE_ROOT; };
+		E4B69E1E0A3A1BDC003C02F2 /* exampleApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = exampleApp.cpp; path = src/exampleApp.cpp; sourceTree = SOURCE_ROOT; };
+		E4B69E1F0A3A1BDC003C02F2 /* exampleApp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = exampleApp.h; path = src/exampleApp.h; sourceTree = SOURCE_ROOT; };
 		E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = "openFrameworks-Info.plist"; sourceTree = "<group>"; };
 		E4C2424410CC5A17004149E2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		E4C2424510CC5A17004149E2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -89,17 +92,24 @@
 		E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		E7E077E715D3B6510020DFD4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		E7F985F515E0DE99003869B5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
-		FDB24A0416E2997D00E50624 /* ofxESCPOSBaseTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ofxESCPOSBaseTypes.h; path = ../src/ofxESCPOSBaseTypes.h; sourceTree = "<group>"; };
-		FDB24A0516E2999300E50624 /* ofxESCPOSPrinter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxESCPOSPrinter.cpp; path = ../src/ofxESCPOSPrinter.cpp; sourceTree = "<group>"; };
-		FDB24A0616E2999300E50624 /* ofxESCPOSPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxESCPOSPrinter.h; path = ../src/ofxESCPOSPrinter.h; sourceTree = "<group>"; };
-		FDB24A0C16E3212800E50624 /* ofxDefaultESCPOSPrinter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxDefaultESCPOSPrinter.cpp; path = ../src/ofxDefaultESCPOSPrinter.cpp; sourceTree = "<group>"; };
-		FDB24A0D16E3212800E50624 /* ofxDefaultESCPOSPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxDefaultESCPOSPrinter.h; path = ../src/ofxDefaultESCPOSPrinter.h; sourceTree = "<group>"; };
-		FDB24A0F16E3A98900E50624 /* ofxESCPOSBarcodeData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxESCPOSBarcodeData.cpp; path = ../src/ofxESCPOSBarcodeData.cpp; sourceTree = "<group>"; };
-		FDB24A1016E3A98900E50624 /* ofxESCPOSBarcodeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxESCPOSBarcodeData.h; path = ../src/ofxESCPOSBarcodeData.h; sourceTree = "<group>"; };
-		FDB24A1216E3F68000E50624 /* ofxBarcode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxBarcode.cpp; path = ../src/ofxBarcode.cpp; sourceTree = "<group>"; };
-		FDB24A1316E3F68000E50624 /* ofxBarcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxBarcode.h; path = ../src/ofxBarcode.h; sourceTree = "<group>"; };
-		FDB24A1516E46E5A00E50624 /* ofxBarcode2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxBarcode2D.cpp; path = ../src/ofxBarcode2D.cpp; sourceTree = "<group>"; };
-		FDB24A1616E46E5A00E50624 /* ofxBarcode2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxBarcode2D.h; path = ../src/ofxBarcode2D.h; sourceTree = "<group>"; };
+		FD98BDAB1763CE8F006C9C22 /* BaseCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseCodes.h; path = ../src/BaseCodes.h; sourceTree = "<group>"; };
+		FD98BDAC1763CE8F006C9C22 /* BaseTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseTypes.h; path = ../src/BaseTypes.h; sourceTree = "<group>"; };
+		FD98BDAD1763CE8F006C9C22 /* ByteBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ByteBuffer.cpp; path = ../src/ByteBuffer.cpp; sourceTree = "<group>"; };
+		FD98BDAE1763CE8F006C9C22 /* ByteBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ByteBuffer.h; path = ../src/ByteBuffer.h; sourceTree = "<group>"; };
+		FD98BDB01763CEB7006C9C22 /* DefaultCharacterCommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultCharacterCommands.cpp; path = ../src/DefaultCharacterCommands.cpp; sourceTree = "<group>"; };
+		FD98BDB11763CEB7006C9C22 /* DefaultCharacterCommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefaultCharacterCommands.h; path = ../src/DefaultCharacterCommands.h; sourceTree = "<group>"; };
+		FD98BDB31763CEF5006C9C22 /* DefaultSerialPrinter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultSerialPrinter.cpp; path = ../src/DefaultSerialPrinter.cpp; sourceTree = "<group>"; };
+		FD98BDB41763CEF5006C9C22 /* DefaultSerialPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefaultSerialPrinter.h; path = ../src/DefaultSerialPrinter.h; sourceTree = "<group>"; };
+		FD98BDB61763E8EB006C9C22 /* DefaultMechanismCommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultMechanismCommands.cpp; path = ../src/DefaultMechanismCommands.cpp; sourceTree = "<group>"; };
+		FD98BDB71763E8EC006C9C22 /* DefaultMechanismCommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefaultMechanismCommands.h; path = ../src/DefaultMechanismCommands.h; sourceTree = "<group>"; };
+		FD98BDB91763EE1A006C9C22 /* DefaultBitImageCommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultBitImageCommands.cpp; path = ../src/DefaultBitImageCommands.cpp; sourceTree = "<group>"; };
+		FD98BDBA1763EE1A006C9C22 /* DefaultBitImageCommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefaultBitImageCommands.h; path = ../src/DefaultBitImageCommands.h; sourceTree = "<group>"; };
+		FD98BDBD1764215F006C9C22 /* ImageUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageUtils.cpp; path = ../src/ImageUtils.cpp; sourceTree = "<group>"; };
+		FD98BDBE1764215F006C9C22 /* ImageUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageUtils.h; path = ../src/ImageUtils.h; sourceTree = "<group>"; };
+		FD98BDC01764DBB2006C9C22 /* BitImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BitImage.cpp; path = ../src/BitImage.cpp; sourceTree = "<group>"; };
+		FD98BDC11764DBB3006C9C22 /* BitImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BitImage.h; path = ../src/BitImage.h; sourceTree = "<group>"; };
+		FDE2457217729EF300CACBD8 /* DefaultLineSpacingCommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultLineSpacingCommands.cpp; path = ../src/DefaultLineSpacingCommands.cpp; sourceTree = "<group>"; };
+		FDE2457317729EF300CACBD8 /* DefaultLineSpacingCommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefaultLineSpacingCommands.h; path = ../src/DefaultLineSpacingCommands.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +143,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				FDB24A0216E2995D00E50624 /* ofxThermalPrinter */,
+				FDB24A0216E2995D00E50624 /* ofxESCPOSPrinter */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -202,8 +212,8 @@
 			isa = PBXGroup;
 			children = (
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
-				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
-				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
+				E4B69E1E0A3A1BDC003C02F2 /* exampleApp.cpp */,
+				E4B69E1F0A3A1BDC003C02F2 /* exampleApp.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -217,28 +227,35 @@
 			name = openFrameworks;
 			sourceTree = "<group>";
 		};
-		FDB24A0216E2995D00E50624 /* ofxThermalPrinter */ = {
+		FDB24A0216E2995D00E50624 /* ofxESCPOSPrinter */ = {
 			isa = PBXGroup;
 			children = (
 				FDB24A0316E2996D00E50624 /* src */,
 			);
-			name = ofxThermalPrinter;
+			name = ofxESCPOSPrinter;
 			sourceTree = "<group>";
 		};
 		FDB24A0316E2996D00E50624 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				FDB24A0416E2997D00E50624 /* ofxESCPOSBaseTypes.h */,
-				FDB24A0516E2999300E50624 /* ofxESCPOSPrinter.cpp */,
-				FDB24A0616E2999300E50624 /* ofxESCPOSPrinter.h */,
-				FDB24A0C16E3212800E50624 /* ofxDefaultESCPOSPrinter.cpp */,
-				FDB24A0D16E3212800E50624 /* ofxDefaultESCPOSPrinter.h */,
-				FDB24A0F16E3A98900E50624 /* ofxESCPOSBarcodeData.cpp */,
-				FDB24A1016E3A98900E50624 /* ofxESCPOSBarcodeData.h */,
-				FDB24A1216E3F68000E50624 /* ofxBarcode.cpp */,
-				FDB24A1316E3F68000E50624 /* ofxBarcode.h */,
-				FDB24A1516E46E5A00E50624 /* ofxBarcode2D.cpp */,
-				FDB24A1616E46E5A00E50624 /* ofxBarcode2D.h */,
+				FD98BDB91763EE1A006C9C22 /* DefaultBitImageCommands.cpp */,
+				FD98BDBA1763EE1A006C9C22 /* DefaultBitImageCommands.h */,
+				FD98BDAB1763CE8F006C9C22 /* BaseCodes.h */,
+				FD98BDAC1763CE8F006C9C22 /* BaseTypes.h */,
+				FD98BDAD1763CE8F006C9C22 /* ByteBuffer.cpp */,
+				FD98BDAE1763CE8F006C9C22 /* ByteBuffer.h */,
+				FD98BDB01763CEB7006C9C22 /* DefaultCharacterCommands.cpp */,
+				FD98BDB11763CEB7006C9C22 /* DefaultCharacterCommands.h */,
+				FD98BDB31763CEF5006C9C22 /* DefaultSerialPrinter.cpp */,
+				FD98BDB41763CEF5006C9C22 /* DefaultSerialPrinter.h */,
+				FD98BDB61763E8EB006C9C22 /* DefaultMechanismCommands.cpp */,
+				FD98BDB71763E8EC006C9C22 /* DefaultMechanismCommands.h */,
+				FD98BDBD1764215F006C9C22 /* ImageUtils.cpp */,
+				FD98BDBE1764215F006C9C22 /* ImageUtils.h */,
+				FD98BDC01764DBB2006C9C22 /* BitImage.cpp */,
+				FD98BDC11764DBB3006C9C22 /* BitImage.h */,
+				FDE2457217729EF300CACBD8 /* DefaultLineSpacingCommands.cpp */,
+				FDE2457317729EF300CACBD8 /* DefaultLineSpacingCommands.h */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -328,12 +345,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
-				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
-				FDB24A0716E2999300E50624 /* ofxESCPOSPrinter.cpp in Sources */,
-				FDB24A0E16E3212800E50624 /* ofxDefaultESCPOSPrinter.cpp in Sources */,
-				FDB24A1116E3A98900E50624 /* ofxESCPOSBarcodeData.cpp in Sources */,
-				FDB24A1416E3F68000E50624 /* ofxBarcode.cpp in Sources */,
-				FDB24A1716E46E5B00E50624 /* ofxBarcode2D.cpp in Sources */,
+				E4B69E210A3A1BDC003C02F2 /* exampleApp.cpp in Sources */,
+				FD98BDAF1763CE8F006C9C22 /* ByteBuffer.cpp in Sources */,
+				FD98BDB21763CEB7006C9C22 /* DefaultCharacterCommands.cpp in Sources */,
+				FD98BDB51763CEF5006C9C22 /* DefaultSerialPrinter.cpp in Sources */,
+				FD98BDB81763E8EC006C9C22 /* DefaultMechanismCommands.cpp in Sources */,
+				FD98BDBB1763EE1B006C9C22 /* DefaultBitImageCommands.cpp in Sources */,
+				FD98BDBF17642160006C9C22 /* ImageUtils.cpp in Sources */,
+				FD98BDC21764DBB4006C9C22 /* BitImage.cpp in Sources */,
+				FDE2457417729EF300CACBD8 /* DefaultLineSpacingCommands.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
