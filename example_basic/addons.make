@@ -1,3 +1,3 @@
-ofxESCPOSPrinter
+ofxESCPOS
 ofxIO
 ofxSerial
