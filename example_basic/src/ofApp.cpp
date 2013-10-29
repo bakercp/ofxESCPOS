@@ -28,146 +28,164 @@
 
 void ofApp::setup()
 {
-//    printer.setup("/dev/tty.PL2303-0030121A");
 
-    printer.setup("/dev/ttyUSB0");
+    ofEnableAlphaBlending();
 
-    printer.initialize();
-    printer.println("Initialization!");
-
-    printer.setInvert(true);
-    printer.println("Inverted");
-    printer.setInvert(false);
-
-    printer.setUnderline(BaseCodes::UNDERLINE_NORMAL);
-    printer.println("Normal Underline");
-    printer.setUnderline(BaseCodes::UNDERLINE_THICK);
-    printer.println("Thick Underline");
-    printer.setUnderline(BaseCodes::UNDERLINE_OFF);
-
-    printer.setEmphasis(true);
-    printer.println("Emphasis");
-    printer.setEmphasis(false);
-
-    printer.setDoubleStrike(true);
-    printer.println("Double Strike");
-    printer.setDoubleStrike(true);
-
-    printer.setFont(BaseCodes::FONT_A);
-    printer.println("FONT_A");
-    printer.setFont(BaseCodes::FONT_B);
-    printer.println("FONT_B");
-    printer.setFont(BaseCodes::FONT_C);
-    printer.println("FONT_C");
-    printer.setFont(BaseCodes::FONT_A);
-
-    printer.setColor(BaseCodes::COLOR_1);
-    printer.println("COLOR_1");
-    printer.setColor(BaseCodes::COLOR_2);
-    printer.println("COLOR_2");
-    printer.setColor(BaseCodes::COLOR_1);
-
-    printer.setUpsideDown(true);
-    printer.println("UPSIDE DOWN");
-    printer.setUpsideDown(false);
-
-    printer.setCharacterSize(BaseCodes::MAGNIFICATION_1X,
-                             BaseCodes::MAGNIFICATION_1X);
-    printer.println("MAGNIFICATION_1X");
-    printer.setCharacterSize(BaseCodes::MAGNIFICATION_2X,
-                             BaseCodes::MAGNIFICATION_2X);
-    printer.println("MAGNIFICATION_2X");
-    printer.setCharacterSize(BaseCodes::MAGNIFICATION_3X,
-                             BaseCodes::MAGNIFICATION_3X);
-    printer.println("MAGNIFICATION_3X");
-    printer.setCharacterSize(BaseCodes::MAGNIFICATION_4X,
-                             BaseCodes::MAGNIFICATION_4X);
-    printer.println("MAGNIFICATION_4X");
-    printer.setCharacterSize(BaseCodes::MAGNIFICATION_5X,
-                             BaseCodes::MAGNIFICATION_5X);
-    printer.println("MAGNIFICATION_5X");
-    printer.setCharacterSize(BaseCodes::MAGNIFICATION_6X,
-                             BaseCodes::MAGNIFICATION_6X);
-    printer.println("MAGNIFICATION_6X");
-    printer.setCharacterSize(BaseCodes::MAGNIFICATION_7X,
-                             BaseCodes::MAGNIFICATION_7X);
-    printer.println("MAGNIFICATION_7X");
-    printer.setCharacterSize(BaseCodes::MAGNIFICATION_1X,
-                             BaseCodes::MAGNIFICATION_1X);
-    printer.println("MAGNIFICATION_1X");
-
-    printer.setCharacterSmoothing(true);
-    printer.println("Smooth");
-    printer.setCharacterSmoothing(false);
-
-    printer.setRotation(BaseCodes::ROTATE_90_CW);
-    printer.println("ROTATE_90_CW");
-    printer.setRotation(BaseCodes::ROTATE_OFF);
-    printer.println("ROTATE_OFF");
-
-
-    printer.setLineSpacing(0);
-    printer.println("Tight line spacing.");
-    printer.println("Tight line spacing.");
-    printer.println("Tight line spacing.");
-    printer.setDefaultLineSpacing();
-
-    printer.println("Normal line spacing.");
-    printer.println("Normal line spacing.");
-    printer.println("Normal line spacing.");
-    printer.println("Normal line spacing.println");
-    printer.println("-------");
-
-    printer.cut(BaseCodes::CUT_PARTIAL);
-    printer.println("Partial cut.");
-    printer.cut(BaseCodes::CUT_FULL);
-    printer.println("Full cut with 90 dots fed.");
-
-
-
+//    serial.setup("/dev/tty.PL2303-0030121A",9600);
 //
-//    img.loadImage("puppy.jpeg");
-//    pixels = ImageUtils::scaleAndCropTo(img.getPixelsRef(),
-//                                        target.getWidth(),
-//                                        target.getHeight(),
-//                                        OF_SCALEMODE_FILL);
+//
+//    unsigned char command[3] = { 0x1D, 0x49, 0x44 };
+//    int i = serial.writeBytes(command, 3);
+//
+////    serial.drain();
+//
+//    cout << "i = " << i << endl;
+//
+//    while(true)
+//    {
+//        int b = serial.readByte();
+//        if(b >= 0) {
+//            cout << (char) b;
+//        }
+//    }
+//
+//    
+//
+//
+    printer.setup("/dev/tty.PL2303-00001014",38400);
+//                  38400,
+//                  SerialDevice::DATA_BITS_EIGHT,
+//                  SerialDevice::PAR_NONE,
+//                  SerialDevice::STOP_ONE,
+//                  SerialDevice::FLOW_CTRL_SOFTWARE,
+//                  SerialDevice::Timeout::simpleTimeout(1000));
 
-//    pixels = ImageUtils::dither(pixels);
 
-    ofPixels pix;
-    pixels.allocate(200,12,OF_PIXELS_MONO);
+//    printer.setDataTerminalReady();
+//    printer.setRequestToSend();
 
-    for(int x = 0; x < pixels.getWidth(); x++)
-    {
-        for(int y = 0; y < pixels.getHeight(); y++)
-        {
-            pixels.getPixels()[pixels.getPixelIndex(x,y)] = (y % 5) || (x % 5) == 0 ? 0 : 255;
-        }
-    }
+//    printer.setup("/dev/ttyUSB0");
+//    printer.initialize();
+//    printer.println("Initialization!");
+
+
+//    printer.getPrinterStatusRealTime();
+
+
+//    printer.setInvert(true);
+//    printer.println("Inverted");
+//    printer.setInvert(false);
+//
+//    printer.setUnderline(BaseCodes::UNDERLINE_NORMAL);
+//    printer.println("Normal Underline");
+//    printer.setUnderline(BaseCodes::UNDERLINE_THICK);
+//    printer.println("Thick Underline");
+//    printer.setUnderline(BaseCodes::UNDERLINE_OFF);
+//
+//    printer.setEmphasis(true);
+//    printer.println("Emphasis");
+//    printer.setEmphasis(false);
+//
+//    printer.setDoubleStrike(true);
+//    printer.println("Double Strike");
+//    printer.setDoubleStrike(true);
+//
+//    printer.setFont(BaseCodes::FONT_A);
+//    printer.println("FONT_A");
+//    printer.setFont(BaseCodes::FONT_B);
+//    printer.println("FONT_B");
+//    printer.setFont(BaseCodes::FONT_C);
+//    printer.println("FONT_C");
+//    printer.setFont(BaseCodes::FONT_A);
+//
+//    printer.setColor(BaseCodes::COLOR_1);
+//    printer.println("COLOR_1");
+//    printer.setColor(BaseCodes::COLOR_2);
+//    printer.println("COLOR_2");
+//    printer.setColor(BaseCodes::COLOR_1);
+//
+//    printer.setUpsideDown(true);
+//    printer.println("UPSIDE DOWN");
+//    printer.setUpsideDown(false);
+//
+//    printer.setCharacterSize(BaseCodes::MAGNIFICATION_1X,
+//                             BaseCodes::MAGNIFICATION_1X);
+//    printer.println("MAGNIFICATION_1X");
+//    printer.setCharacterSize(BaseCodes::MAGNIFICATION_2X,
+//                             BaseCodes::MAGNIFICATION_2X);
+//    printer.println("MAGNIFICATION_2X");
+//    printer.setCharacterSize(BaseCodes::MAGNIFICATION_3X,
+//                             BaseCodes::MAGNIFICATION_3X);
+//    printer.println("MAGNIFICATION_3X");
+//    printer.setCharacterSize(BaseCodes::MAGNIFICATION_4X,
+//                             BaseCodes::MAGNIFICATION_4X);
+//    printer.println("MAGNIFICATION_4X");
+//    printer.setCharacterSize(BaseCodes::MAGNIFICATION_5X,
+//                             BaseCodes::MAGNIFICATION_5X);
+//    printer.println("MAGNIFICATION_5X");
+//    printer.setCharacterSize(BaseCodes::MAGNIFICATION_6X,
+//                             BaseCodes::MAGNIFICATION_6X);
+//    printer.println("MAGNIFICATION_6X");
+//    printer.setCharacterSize(BaseCodes::MAGNIFICATION_7X,
+//                             BaseCodes::MAGNIFICATION_7X);
+//    printer.println("MAGNIFICATION_7X");
+//    printer.setCharacterSize(BaseCodes::MAGNIFICATION_1X,
+//                             BaseCodes::MAGNIFICATION_1X);
+//    printer.println("MAGNIFICATION_1X");
+//
+//    printer.setCharacterSmoothing(true);
+//    printer.println("Smooth");
+//    printer.setCharacterSmoothing(false);
+//
+//    printer.setRotation(BaseCodes::ROTATE_90_CW);
+//    printer.println("ROTATE_90_CW");
+//    printer.setRotation(BaseCodes::ROTATE_OFF);
+//    printer.println("ROTATE_OFF");
+//
+//
+//    printer.setLineSpacing(0);
+//    printer.println("Tight line spacing.");
+//    printer.println("Tight line spacing.");
+//    printer.println("Tight line spacing.");
+//    printer.setDefaultLineSpacing();
+//
+//    printer.println("Normal line spacing.");
+//    printer.println("Normal line spacing.");
+//    printer.println("Normal line spacing.");
+//    printer.println("Normal line spacing.println");
+//    printer.println("-------");
+//
+//    printer.cut(BaseCodes::CUT_PARTIAL);
+//    printer.println("Partial cut.");
+//    printer.cut(BaseCodes::CUT_FULL);
+//    printer.println("Full cut with 90 dots fed.");
+
+
+
+    target = ofRectangle(0, 0, 200, 24 * 8);
+//
+    img.loadImage("puppy.jpeg");
+    pixels = ImageUtils::scaleAndCropTo(img.getPixelsRef(),
+                                        target.getWidth(),
+                                        target.getHeight(),
+                                        OF_SCALEMODE_FILL);
+
+    pixels = ImageUtils::dither(pixels);
 
     post.setFromPixels(pixels);
-
+    postPost.setFromPixels(pixels);
 
 }
 
 
 void ofApp::update()
 {
-////    if(grabber.isFrameNew()) {
-////        pixels = ImageUtils::scaleAndCropTo(grabber.getPixelsRef(),
-////                                            target.getWidth(),
-////                                            target.getHeight(),
-////                                            OF_SCALEMODE_FILL);
-////
-////        pixels = ImageUtils::dither(pixels);
-////        post.setFromPixels(pixels);
-////    }
-
 }
 
 
 void ofApp::draw()
 {
+    ofBackground(0);
     ofSetColor(255);
 //
 //    grabber.draw(0,0);
@@ -175,21 +193,126 @@ void ofApp::draw()
     ofPushMatrix();
     ofTranslate(img.getWidth(), 0);
 
+//    ofScale(4,4);
+
+
     if(post.isAllocated())
     {
         post.draw(0,0);
+
+        postPost.draw(400,0);
+
         ofNoFill();
-        ofSetColor(255,255,0);
-        ofRect(0,0,post.getWidth(),post.getHeight());
-        ofRect(0,0,200,200);
+        ofSetColor(255,255,0,200);
+
+
+        for(int i = 0; i < post.getWidth(); ++i)
+        {
+//            ofLine(i,0,i,post.getHeight());
+//            ofLine(i,0,i,post.getHeight());
+        }
+//        ofRect(0,0,post.getWidth(),post.getHeight());
+
     }
+//
+//
+//
+//
+//    ofPopMatrix();
 
-    ofPopMatrix();
 
+//    img.draw(100,100);
 }
 
 void ofApp::keyPressed(int key)
 {
+
+    if(key == 'w')
+    {
+        target.y -= 24;
+        if(target.y < 0) target.y = 0;
+    }
+    else if(key == 's')
+    {
+        target.y += 24;
+        if(target.y >= target.height) target.y = target.height - 24;
+
+    }
+
+    ofPixels p = pixels;
+    p.crop(0, target.y, target.getWidth(), 24);
+    postPost.setFromPixels(p);
+
+ //   printer.setLineSpacing(24);
+//    int x = 0;
+//    int xH = (uint8_t)(x >> 8);
+//    int xL = (uint8_t)(x & 0xFF);
+//
+//    int y = 0;
+//    int yH = (uint8_t)(y >> 8);
+//    int yL = (uint8_t)(y & 0xFF);
+//
+//    int dX = 500;
+//    int dXH = (uint8_t)(dX >> 8);
+//    int dXL = (uint8_t)(dX & 0xFF);
+//
+//    int dY = 48;
+//    int dYH = (uint8_t)(dY >> 8);
+//    int dYL = (uint8_t)(dY & 0xFF);
+//
+//
+//    printer.writeByte(BaseCodes::ESC);
+//    printer.writeByte('L');
+//
+//    printer.writeByte(BaseCodes::ESC);
+//    printer.writeByte('W');
+//
+//    printer.writeByte(xL);
+//    printer.writeByte(xH);
+//    printer.writeByte(yL);
+//    printer.writeByte(yH);
+//    printer.writeByte(dXL);
+//    printer.writeByte(dXH);
+//    printer.writeByte(dYL);
+//    printer.writeByte(dYH);
+
+    for(int k = 0; k < 4; ++k)
+    {
+
+//        printer.writeByte(BaseCodes::ESC);
+//        printer.writeByte('*');
+//        printer.writeByte(33);
+//
+//        int width = 400;
+//        int height = 100;
+//
+//        uint8_t nH = (uint8_t)(width >> 8);
+//        uint8_t nL = (uint8_t)(width & 0xFF);
+//
+//        cout << "nH=" << (int)nH << endl;
+//        cout << "nL=" << (int)nL << endl;
+//
+//        printer.writeByte(nL);
+//        printer.writeByte(nH);
+//
+//        for(int i = 0; i < width * 3; i++)
+//        {
+//            printer.writeByte((unsigned char)ofRandom(255) > 127);
+//        }
+//
+
+        printer.printPixels(p);
+        ofSleepMillis(10);
+//        printer.writeByte(BaseCodes::LF);
+    }
+
+//    printer.writeByte(BaseCodes::ESC);
+//    printer.writeByte(BaseCodes::FF);
+
+//    printer.setDefaultLineSpacing();
+
+   // printer.setDefaultLineSpacing();
+
 }
 
 void ofApp::keyReleased(int key)

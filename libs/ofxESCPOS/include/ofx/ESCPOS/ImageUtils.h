@@ -40,24 +40,31 @@ namespace ESCPOS {
 class ImageUtils
 {
 public:
-    static ofPixels scaleAndCropTo(const ofPixels& pixelsRef,
+    static ofPixels_<unsigned char> scaleAndCropTo(const ofPixels_<unsigned char>& pixelsRef,
                             int width,
                             int height,
                             ofScaleMode scaleMode = OF_SCALEMODE_FIT);
                             
-    static ofPixels dither(const ofPixels& pixels,
-                           float threshold = 0.5,
+    static ofPixels_<unsigned char> dither(const ofPixels_<unsigned char>& pixels,
+                           float threshold = 0.5, // will template
                            float quantWeight = 0.125);
 
 //    static BitImage makeBitImage(const ofPixels& pixels,
 //                                 BitImage::ByteFormat = BitImage::BYTE_FORMAT_COLUMN,
 //                                 float threshold = 0.5);
 
+    static ofPixels_<unsigned char> toGrayscale(const ofPixels_<unsigned char>& pixels);
+
+
+    static ofPixels_<unsigned char> slice(const ofPixels_<unsigned char>& pixelsRef,
+                                          const ofRectangle& subsection);
+
+
 protected:
 
     static void accumulateDitherError(int x,
                                       int y,
-                                      ofPixels& pixels,
+                                      ofPixels_<unsigned char>& pixels,
                                       int qError,
                                       float* qErrors,
                                       float quantWeight)

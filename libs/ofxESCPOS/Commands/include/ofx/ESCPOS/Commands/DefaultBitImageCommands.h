@@ -26,9 +26,12 @@
 #pragma once
 
 
+#include <algorithm>
+#include "ofImage.h"
 #include "ofPixels.h"
 #include "ofx/IO/AbstractTypes.h"
 #include "ofx/IO/ByteBuffer.h"
+#include "ofx/ESCPOS/ImageUtils.h"
 #include "ofx/ESCPOS/BaseCodes.h"
 #include "ofx/ESCPOS/BitImage.h"
 
@@ -44,10 +47,18 @@ public:
     DefaultBitImageCommands();
     virtual ~DefaultBitImageCommands();
 
-    virtual void bitmap(const ofPixels& pixels,
-                        BaseCodes::PrintResolution printResolution = BaseCodes::RESOLUTION_24_DOTS_DOUBLE_DENSITY,
-                        float threshold = 0.5);
+    virtual void printPixels(const ofPixels_<unsigned char>& pixels,
+                             float threshold = 0.5,
+                             BaseCodes::PrintResolution printResolution = BaseCodes::RESOLUTION_24_DOTS_DOUBLE_DENSITY,
+                             std::size_t maxWidth = 576);
 
+
+//    virtual void printImage(const ofPixels_<unsigned char>& pixels,
+//                            float threshold = 0.5,
+//                            BaseCodes::PrintResolution printResolution = BaseCodes::RESOLUTION_24_DOTS_DOUBLE_DENSITY,
+//                            std::size_t maxWidth = 576);
+
+    // TODO: check print for DLE EOT n marks
 };
 
 

@@ -49,96 +49,226 @@ DefaultBitImageCommands::~DefaultBitImageCommands()
 //
 //
 
-//void DefaultBitImageCommands::print(const BitImage& image)
-void DefaultBitImageCommands::bitmap(const ofPixels& pixels,
-                                     BaseCodes::PrintResolution printResolution,
-                                     float threshold)
+void DefaultBitImageCommands::printPixels(const ofPixels_<unsigned char>& _pixels,
+                                          float threshold,
+                                          BaseCodes::PrintResolution printResolution,
+                                          std::size_t maxWidth)
 {
 
-//    if(pixels.getImageType() != OF_IMAGE_GRAYSCALE)
+    if (OF_IMAGE_GRAYSCALE != _pixels.getImageType())
+    {
+        ofLogError("DefaultBitImageCommands::printPixels") << "Grayscale images only.";
+        return;
+    }
+
+    ofPixels_<unsigned char> pixels = _pixels;
+
+    int numVerticalDots;
+    int maxHorizontalDots;
+
+    switch(printResolution)
+    {
+        case BaseCodes::RESOLUTION_8_DOTS_SINGLE_DENSITY:
+            maxHorizontalDots = maxWidth / 2;
+            numVerticalDots = 8;
+            break;
+        case BaseCodes::RESOLUTION_8_DOTS_DOUBLE_DENSITY:
+            maxHorizontalDots = maxWidth;
+            numVerticalDots = 8;
+            break;
+        case BaseCodes::RESOLUTION_24_DOTS_SINGLE_DENSITY:
+            maxHorizontalDots = maxWidth / 2;
+            numVerticalDots = 24;
+            break;
+        case BaseCodes::RESOLUTION_24_DOTS_DOUBLE_DENSITY:
+            maxHorizontalDots = maxWidth;
+            numVerticalDots = 24;
+            break;
+    }
+
+    cout << "maxHorizontalDots=" << maxHorizontalDots << endl;
+    cout << "numVerticalDots=" << numVerticalDots << endl;
+
+    int width = pixels.getWidth();
+
+    if(width > maxHorizontalDots)
+    {
+        ofLogWarning("DefaultBitImageCommands::bitmap") << "Pixels width " << pixels.getWidth() << " exceeds print width for setting.";
+        width = maxHorizontalDots;
+    }
+
+    int height = pixels.getHeight();
+
+    if(height != numVerticalDots)
+    {
+        ofLogWarning("DefaultBitImageCommands::bitmap") << "Pixels height " << pixels.getHeight() << " exceeds print height for setting.";
+        height = numVerticalDots;
+    }
+
+
+    cout << "w=" << width << "h=" << height << endl;
+
+    int numPixels = width * height;
+
+    // width = nL + (nH * 256)
+    // nH is the HIGH part of the WIDTH VALUE.
+    // nL is the LOW part of the WIDTH VALUE.
+    // nH will always be 0 for values less that 256 (1 byte)
+    uint8_t nH = (uint8_t)(width >> 8);
+    uint8_t nL = (uint8_t)(width & 0xFF);
+
+    cout << "nH=" << (int)nH << endl;
+    cout << "nL=" << (int)nL << endl;
+
+    std::vector<uint8_t> buffer;
+
+    buffer.push_back(BaseCodes::ESC);
+    buffer.push_back('*');
+    buffer.push_back(33);//printResolution);
+    buffer.push_back(nL);
+    buffer.push_back(nH);
+
+    uint8_t currentByte = 0;
+    int bitIndex = 0;
+
+    for(int x = 0; x < width; ++x)
+    {
+
+//        cout << "column" << endl;
+        currentByte = 0;
+        bitIndex = 0;
+
+        for(int y = 0; y < height; ++y)
+        {
+            ofColor_<unsigned char> pixelValue = pixels.getColor(x, y);
+
+            bool thresholdValue = pixelValue.getBrightness() > (threshold * ofColor_<unsigned char>::limit());
+
+            thresholdValue = ((x % 4) == 0);
+
+
+//            cout << "BI=" << bitIndex << endl;
+
+            currentByte |= (thresholdValue << (7 - bitIndex));
+
+            bitIndex++;
+
+            if(bitIndex == 8)
+            {
+//                if(currentByte < 32)
+//                {
+//                    currentByte |= 1 << 7; // toggle bit ... could be smarter ...
+//                    //                    cout << "CURRENT BYTE IS < 32! " << (int)currentByte << " x= " << x << " y = " << y <<endl;
+//                }
+
+//                cout << "--" << endl;
+                buffer.push_back(currentByte);
+
+                currentByte = 0;
+                bitIndex = 0;
+            }
+        }
+    }
+
+
+//    cout << setw(30) << "BufferedBytes=" << buffer.size() << endl;
+//    cout << setw(30) << "Expected=" << (3 * (nL + nH * 256)) << endl;
+//
+    std::size_t bytesWritten = writeBytes(buffer);
+//    cout << setw(30) << "Written=" << bytesWritten << endl;
+    return bytesWritten;
+}
+
+//void DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& _pixels,
+//                                         float threshold,
+//                                         BaseCodes::PrintResolution printResolution,
+//                                         std::size_t maxWidth)
+//{
+//    if (OF_IMAGE_GRAYSCALE != _pixels.getImageType())
 //    {
-//        ofLogError("DefaultBitImageCommands::print") << "Only OF_IMAGE_GRAYSCALE.";
+//        ofLogError("DefaultBitImageCommands::printPixels") << "Grayscale images only.";
 //        return;
 //    }
 //
+//    ofPixels_<unsigned char> pixels = _pixels;
 //
-//    cout << "pixels=" << pixels.getNumChannels() << endl;
+//    int numVerticalDots = 0;
+//    int maxHorizontalDots = 0;
 //
-//    const int width     = pixels.getWidth();
-//    const int height    = pixels.getHeight();
-//    const int numPixels = width * height;
-//
-//    // width = nL + (nH * 256)
-//    // nH is the HIGH part of the WIDTH VALUE.
-//    // nL is the LOW part of the WIDTH VALUE.
-//    // nH will always be 0 for values less that 256 (1 byte)
-//    unsigned char nH = (unsigned char)(width >> 8);
-//    unsigned char nL = (unsigned char)(width & 0xFF);
-//
-//    int numVerticalDots;
-//
-//    switch(printResolution) {
+//    switch(printResolution)
+//    {
 //        case BaseCodes::RESOLUTION_8_DOTS_SINGLE_DENSITY:
+//            maxHorizontalDots = maxWidth / 2;
+//            numVerticalDots = 8;
+//            break;
 //        case BaseCodes::RESOLUTION_8_DOTS_DOUBLE_DENSITY:
+//            maxHorizontalDots = maxWidth;
 //            numVerticalDots = 8;
 //            break;
 //        case BaseCodes::RESOLUTION_24_DOTS_SINGLE_DENSITY:
-//        case BaseCodes::RESOLUTION_24_DOTS_DOUBLE_DENSITY:
+//            maxHorizontalDots = maxWidth / 2;
 //            numVerticalDots = 24;
 //            break;
-//        default:
-//            numVerticalDots = 0;
+//        case BaseCodes::RESOLUTION_24_DOTS_DOUBLE_DENSITY:
+//            maxHorizontalDots = maxWidth;
+//            numVerticalDots = 24;
+//            break;
 //    }
 //
-//    int numVerticalBytesPerRow = numVerticalDots / 8;
+//    cout << "maxHorizontalDots=" << maxHorizontalDots << endl;
+//    cout << "numVerticalDots=" << numVerticalDots << endl;
 //
-//    int yOffset = 0;
+//    int width = _pixels.getWidth();
 //
-//    const unsigned char* pPixels = pixels.getPixels();
+//    if(width > maxHorizontalDots)
+//    {
+//        ofLogWarning("DefaultBitImageCommands::printImage") << "Pixels width " << _pixels.getWidth() << " exceeds print width for setting.";
+//        width = maxHorizontalDots;
+//    }
 //
-//    while(yOffset < height) {
+//    int height = _pixels.getHeight();
 //
+//    if(height != numVerticalDots)
+//    {
+//        int remainder = height % numVerticalDots;
 //
-//        // each of these is a ROW of data
-//
-//        ByteBuffer buffer;
-//
-//        buffer.write(BaseCodes::ESC);
-//        buffer.write('*'); // specify bit image mode
-//        buffer.write((unsigned char)printResolution); // resolution
-//        buffer.write(nL); // low byte
-//        buffer.write(nH); // high byte
-//
-//        for(int x = 0; x < width; ++x)
+//        if (remainder != 0)
 //        {
-//            for(int byteIndex = 0; byteIndex < numVerticalBytesPerRow; byteIndex++)
-//            {
-//                unsigned char currentByte = 0;
-//
-//                for(int bitIndex = 0; bitIndex < 8; ++bitIndex)
-//                {
-//
-//                    int y = (((yOffset / 8) + byteIndex) * 8) + bitIndex;
-//
-//                    int index = pixels.getPixelIndex(x,y);
-//
-//                    if(index < numPixels) {
-//                        currentByte |= (pPixels[index] < threshold * 255 ? 1 : 0) << (7 - bitIndex);
-//                    }
-//                }
-//
-//                buffer.write(currentByte);
-//            }
+//            height = height + numVerticalDots - remainder;
 //        }
-//
-//        buffer.write(BaseCodes::LF);
-//
-//        cout << "writing " << buffer.size() << " bytes" << endl;
-//        write(buffer);
-//        
-//        yOffset += numVerticalDots;
 //    }
-}
+//
+//    ofPixels_<unsigned char> toPrint;
+//
+//    toPrint.allocate(width, height, 1);
+//
+//    toPrint = ImageUtils::dither(toPrint);
+//
+//
+//    ofPixels_<unsigned char> buffer;
+//    buffer.allocate(width,numVerticalDots,1);
+//
+//
+//    const uint8_t command[3] = { BaseCodes::ESC, '3', 0 };
+//    writeBytes(command, 3);
+//
+//    for(int y = 0; y < height; y += numVerticalDots)
+//    {
+//        toPrint.cropTo(buffer, 0, y, width, numVerticalDots);
+//
+//        printPixels(toPrint,
+//                    threshold,
+//                    printResolution,
+//                    maxWidth);
+//    }
+//
+//    const uint8_t command0[2] = { BaseCodes::ESC, '2' };
+//    writeBytes(command0, 2);
+//    writeByte('\n');
+//
+//
+//}
+
 
 
 } } } // namespace ofx::ESCPOS::Commands

@@ -28,9 +28,9 @@
 
 #include <string>
 #include "ofx/IO/AbstractTypes.h"
-#include "ofx/IO/Serial/Serial.h"
-//#include "ofx/ESCPOS/BaseTypes.h"
+#include "ofx/IO/SerialDevice.h"
 #include "ofx/ESCPOS/Commands/DefaultCharacterCommands.h"
+#include "ofx/ESCPOS/Commands/DefaultPrinterStatusCommands.h"
 #include "ofx/ESCPOS/Commands/DefaultBitImageCommands.h"
 #include "ofx/ESCPOS/Commands/DefaultMechanismCommands.h"
 #include "ofx/ESCPOS/Commands/MiscellaneousCommands.h"
@@ -38,19 +38,20 @@
 
 
 using ofx::IO::AbstractByteSink;
-using ofx::IO::Serial::Serial;
+using ofx::IO::SerialDevice;
 
 
 namespace ofx {
 namespace ESCPOS {
 
 
-class DefaultSerialPrinter: public Serial,
+class DefaultSerialPrinter: public SerialDevice,
     public Commands::DefaultCharacterCommands,
     public Commands::DefaultBitImageCommands,
     public Commands::DefaultMechanismCommands,
     public Commands::MiscellaneousCommands,
-    public Commands::DefaultLineSpacingCommands
+    public Commands::DefaultLineSpacingCommands,
+    public Commands::DefaultPrinterStatusCommands
 {
 public:
     DefaultSerialPrinter();

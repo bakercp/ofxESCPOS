@@ -61,7 +61,5 @@ public:
 
     ofRectangle target;
 
-    float t;
-    float f;
 
 };
