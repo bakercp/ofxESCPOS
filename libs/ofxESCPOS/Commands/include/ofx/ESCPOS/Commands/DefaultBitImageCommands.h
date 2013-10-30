@@ -53,10 +53,10 @@ public:
                              std::size_t maxWidth = 576);
 
 
-//    virtual void printImage(const ofPixels_<unsigned char>& pixels,
-//                            float threshold = 0.5,
-//                            BaseCodes::PrintResolution printResolution = BaseCodes::RESOLUTION_24_DOTS_DOUBLE_DENSITY,
-//                            std::size_t maxWidth = 576);
+    virtual void printImage(const ofPixels_<unsigned char>& pixels,
+                            float threshold = 0.5,
+                            BaseCodes::PrintResolution printResolution = BaseCodes::RESOLUTION_24_DOTS_DOUBLE_DENSITY,
+                            std::size_t maxWidth = 576);
 
     // TODO: check print for DLE EOT n marks
 };
