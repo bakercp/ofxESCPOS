@@ -56,8 +56,6 @@ public:
     ofPixels pixels;
 
     ofImage img;
-    ofImage post;
-    ofImage postPost;
 
     ofRectangle target;
 

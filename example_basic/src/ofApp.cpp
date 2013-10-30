@@ -53,12 +53,12 @@ void ofApp::setup()
 //
 //
     printer.setup("/dev/ttyUSB0",
-                 115200);//,
-                 // SerialDevice::DATA_BITS_EIGHT,
-                 // SerialDevice::PAR_NONE,
-                 // SerialDevice::STOP_ONE,
-                 // SerialDevice::FLOW_CTRL_HARDWARE,
-                 // SerialDevice::Timeout::simpleTimeout(1000));
+                 115200,
+                 SerialDevice::DATA_BITS_EIGHT,
+                 SerialDevice::PAR_NONE,
+                 SerialDevice::STOP_ONE,
+                 SerialDevice::FLOW_CTRL_HARDWARE,
+                 SerialDevice::Timeout::simpleTimeout(1000));
 
 
    printer.setDataTerminalReady();
@@ -161,18 +161,10 @@ void ofApp::setup()
 
 
 
-    target = ofRectangle(0, 0, 576, 24 * 8);
+//    target = ofRectangle(0, 0, 200, 24);
 //
-    img.loadImage("puppy.jpeg");
-    pixels = ImageUtils::scaleAndCropTo(img.getPixelsRef(),
-                                        target.getWidth(),
-                                        target.getHeight(),
-                                        OF_SCALEMODE_FILL);
-
-    pixels = ImageUtils::dither(pixels);
-
-    post.setFromPixels(pixels);
-    postPost.setFromPixels(pixels);
+    img.loadImage("441.png");
+//    img.resize(576,576);
 
 }
 
@@ -181,73 +173,81 @@ void ofApp::update()
 {
 }
 
-
 void ofApp::draw()
 {
     ofBackground(0);
     ofSetColor(255);
+//    post.draw(0,0);
+
+//    ofRectangle imageRect(0,0,img.getWidth(),img.getHeight());
 //
-//    grabber.draw(0,0);
+//    ofRectangle rectangle(0,0,567,img.getHeight());
 //
-    ofPushMatrix();
-    ofTranslate(img.getWidth(), 0);
-
-//    ofScale(4,4);
-
-
-    if(post.isAllocated())
-    {
-        post.draw(0,0);
-
-        postPost.draw(400,0);
-
-        ofNoFill();
-        ofSetColor(255,255,0,200);
-
-
-        for(int i = 0; i < post.getWidth(); ++i)
-        {
-//            ofLine(i,0,i,post.getHeight());
-//            ofLine(i,0,i,post.getHeight());
-        }
-//        ofRect(0,0,post.getWidth(),post.getHeight());
-
-    }
+//    imageRect.scaleTo(rectangle,
+//                      OF_ASPECT_RATIO_KEEP,
+//                      OF_ALIGN_HORZ_CENTER,//alignHorz,
+//                      OF_ALIGN_VERT_TOP,
+//                      OF_ALIGN_HORZ_CENTER,
+//                      OF_ALIGN_VERT_TOP);
 //
 //
+//    cout << imageRect << endl;
 //
+//    ofPixelsRef pix = img.getPixelsRef();
 //
-//    ofPopMatrix();
+//    ofPixels toPrint;
+//
+//    int width = rectangle.getWidth();
+//    int height = imageRect.getHeight();
+//    int numVerticalDots = 3;
+//
+//    if(height != numVerticalDots)
+//    {
+//        int remainder = height % numVerticalDots;
+//        if (remainder != 0)
+//        {
+//            height = height + numVerticalDots - remainder;
+//        }
+//    }
+//
+//    cout << width << "/" << height << endl;
+//
+//    toPrint.allocate(width, height, pix.getNumChannels());
+//    toPrint.setColor(ofColor(255));
+//
+//    pix.resize(imageRect.getWidth(), imageRect.getHeight());
+//    pix.pasteInto(toPrint,imageRect.getX(),imageRect.getY());
+//
+//    ofImage iimmgg;
+//    iimmgg.setFromPixels(toPrint);
+//
+//    ofSetColor(255,255,0);
+//    ofNoFill();
+//    ofRect(rectangle);
+//
+//    ofSetColor(255,127);
+//    iimmgg.draw(0,0);
 
 
-//    img.draw(100,100);
+
 }
 
 void ofApp::keyPressed(int key)
 {
+//    printer.printImage(img.getPixelsRef(),OF_ALIGN_HORZ_IGNORE);
+//    printer.printImage(img.getPixelsRef(),OF_ALIGN_HORZ_LEFT);
+//    printer.printImage(img.getPixelsRef(),OF_ALIGN_HORZ_RIGHT);
 
-printer.printImage(pixels);
 
-    // if(key == 'w')
-    // {
-    //     target.y -= 24;
-    //     if(target.y < 0) target.y = 0;
-    // }
-    // else if(key == 's')
-    // {
-    //     target.y += 24;
-    //     if(target.y >= target.height) target.y = target.height - 24;
+    printer.printImage(img.getPixelsRef(),
+                       OF_ALIGN_HORZ_CENTER);
 
-    // }
+//    printer.println("Hello world!");
 
-   //  ofPixels p = pixels;
-   //  p.crop(0, target.y, target.getWidth(), 24);
-   //  postPost.setFromPixels(p);
-
-   // printer.setLineSpacing(0);
-   //  printer.printPixels(p);
-   // printer.setDefaultLineSpacing();
-
+//    printer.setLineSpacing(24);
+//    printer.selectBitImageMode(pixels, BaseCodes::RESOLUTION_24_DOTS_DOUBLE_DENSITY);
+//    printer.println("Hello world!");
+//    printer.setDefaultLineSpacing();
 }
 
 void ofApp::keyReleased(int key)
