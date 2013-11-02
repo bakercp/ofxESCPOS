@@ -44,14 +44,14 @@ DefaultLineSpacingCommands::~DefaultLineSpacingCommands()
 
 std::size_t DefaultLineSpacingCommands::setDefaultLineSpacing()
 {
-    const uint8_t command[2] = { BaseCodes::ESC, '2' };
+    const uint8_t command[2] = { 27, 50 };
     return writeBytes(command, 2);
 }
 
 
 std::size_t DefaultLineSpacingCommands::setLineSpacing(uint8_t n)
 {
-    const uint8_t command[3] = { BaseCodes::ESC, '3', n };
+    const uint8_t command[3] = { 27, 51, n };
     return writeBytes(command, 3);
 }
 

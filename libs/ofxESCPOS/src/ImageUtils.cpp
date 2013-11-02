@@ -30,21 +30,21 @@ namespace ofx {
 namespace ESCPOS {
 
     
-ofPixels ImageUtils::scaleAndCropTo(const ofPixels& pixels,
-                                    int width,
-                                    int height,
-                                    ofScaleMode scaleMode)
+ofPixels_<unsigned char> ImageUtils::scaleAndCropTo(const ofPixels_<unsigned char>& pixels,
+                                                    int width,
+                                                    int height,
+                                                    ofScaleMode scaleMode)
 {
     ofRectangle inRect(0,0,pixels.getWidth(),pixels.getHeight());
     ofRectangle outRect(0,0,width,height);
 
     inRect.scaleTo(outRect,scaleMode);
 
-    ofPixels inPixels = pixels;
+    ofPixels_<unsigned char> inPixels = pixels;
 
     inPixels.resize(inRect.getWidth(),inRect.getHeight());
 
-    ofPixels outPixels;
+    ofPixels_<unsigned char> outPixels;
 
     inPixels.cropTo(outPixels,
                     outRect.x - inRect.x,
@@ -57,23 +57,23 @@ ofPixels ImageUtils::scaleAndCropTo(const ofPixels& pixels,
 
 
 //------------------------------------------------------------------------------
-ofPixels ImageUtils::dither(const ofPixels& pixels,
-                            float threshold,
-                            float quantWeight)
+ofPixels_<unsigned char> ImageUtils::dither(const ofPixels_<unsigned char>& pixels,
+                                            float threshold,
+                                            float quantWeight)
 {
 
     // Special thanks to @julapy / ofxDither
 
-    ofPixels pixelsIn = pixels;
+    ofPixels_<unsigned char> pixelsIn = pixels;
 
     // ensure the image is grayscale
-    if(pixelsIn.getImageType() != OF_IMAGE_GRAYSCALE)
+    if(OF_IMAGE_GRAYSCALE != pixelsIn.getImageType())
     {
-        pixelsIn.setImageType(OF_IMAGE_GRAYSCALE);
+        pixelsIn = toGrayscale(pixels);
     }
 
     // make a copy
-    ofPixels pixelsOut =  pixelsIn;
+    ofPixels_<unsigned char> pixelsOut =  pixelsIn;
 
     // set up the quantization error
     int width  = pixelsOut.getWidth();
@@ -87,14 +87,16 @@ ofPixels ImageUtils::dither(const ofPixels& pixels,
     unsigned char* inPix  = pixelsIn.getPixels();
     unsigned char* outPix = pixelsOut.getPixels();
 
+    float limit = ofColor_<unsigned char>::limit();
+
     for(int y = 0; y < height; y++)
     {
         for(int x = 0; x < width; x++)
         {
-            int p = pixelsIn.getPixelIndex(x,y);
+            int p = pixelsIn.getPixelIndex(x, y);
 
             int oldPx = outPix[p] + qErrors[p]; // add error
-            int newPx = oldPx < threshold * 255 ? 0 : 255;  // threshold
+            int newPx = (oldPx < (threshold * limit)) ? 0 : limit;  // threshold
 
             outPix[p] = newPx;
 
@@ -167,6 +169,27 @@ ofPixels ImageUtils::dither(const ofPixels& pixels,
 //
 //}
 
+
+ofPixels_<unsigned char> ImageUtils::toGrayscale(const ofPixels_<unsigned char>& pixels)
+{
+    if(OF_IMAGE_GRAYSCALE == pixels.getImageType()) return pixels;
+
+    ofPixels pix;
+
+    pix.allocate(pixels.getWidth(), pixels.getHeight(), OF_IMAGE_GRAYSCALE);
+
+    for(std::size_t x = 0; x < pixels.getWidth(); ++x)
+    {
+        for(std::size_t y = 0; y < pixels.getHeight(); ++y)
+        {
+            ofColor_<unsigned char> c = pixels.getColor(x, y);
+            pix.setColor(x, y, 0.21 * c.r + 0.71 * c.g + 0.07 * c.b);
+        }
+    }
+
+    return pix;
     
+}
+
 
 } } // namespace ofx::ESCPOS

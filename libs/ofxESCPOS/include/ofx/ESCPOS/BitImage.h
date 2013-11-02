@@ -34,11 +34,9 @@
 //namespace ESCPOS {
 //
 //
-//class BitImage: public BaseHasByteBuffer
+//class BitImage
 //{
 //public:
-//    struct Settings;
-//
 //    enum ByteFormat {
 //        BYTE_FORMAT_RASTER,
 //        BYTE_FORMAT_COLUMN
@@ -59,9 +57,7 @@
 //    };
 //
 //    BitImage(const ofPixels& pixelsRef,
-//             
-//
-//             ByteFormat byteFormat,
+//             ByteFormat byteFormat = BYTE_FORMAT_COLUMN,
 //             unsigned char numBytesHorizontal,
 //             unsigned char numBytesVertical);
 //
@@ -73,14 +69,6 @@
 //
 //    unsigned char getNumBytesHorizontal() const;
 //    unsigned char getNumBytesVertical() const;
-//
-//    struct Settings {
-//
-//        
-//
-//        Settings();
-//    };
-//
 //
 //
 //private:

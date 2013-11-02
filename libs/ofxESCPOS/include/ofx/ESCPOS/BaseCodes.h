@@ -278,6 +278,15 @@ public:
         COMPOSITE_SYMBOLOGY         = 52  /// http://www.tec-it.com/en/support/knowbase/symbologies/rss-codes/Default.aspx
     };
 
+    enum RealTimeStatus
+    {
+        STATUS_PRINTER        = 1,
+        STATUS_OFFLINE_CAUSE  = 2,
+        STATUS_ERROR_CAUSE    = 3,
+        STATUS_PAPER          = 4
+    };
+
+
     BaseCodes()
     {
     }
