@@ -133,7 +133,7 @@ void ofApp::keyPressed(int key)
                                         BaseCodes::MAGNIFICATION_2X);
 
             devices[i].setUnderline(BaseCodes::UNDERLINE_NORMAL);
-            devices[i].println("Therma Printer Test");
+            devices[i].println("Thermal Printer Test");
             devices[i].setUnderline(BaseCodes::UNDERLINE_OFF);
 
             devices[i].setCharacterSize(BaseCodes::MAGNIFICATION_1X,
