@@ -45,7 +45,7 @@ void ofApp::setup()
     for(std::size_t i = 0; i < devices.size(); ++i)
     {
         bool success = devices[i].setup(devicesInfo[i],
-                                        115200,
+                                        9600,
                                         SerialDevice::DATA_BITS_EIGHT,
                                         SerialDevice::PAR_NONE,
                                         SerialDevice::STOP_ONE,
