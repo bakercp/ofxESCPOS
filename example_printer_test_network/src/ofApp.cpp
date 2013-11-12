@@ -110,7 +110,7 @@ void ofApp::draw()
 
        ofDrawBitmapStringHighlight(ss.str(), ofVec2f(x, y));
 
-       if(yOffset > ofGetWidth() - 100)
+       if(y > ofGetWidth() - 100)
        {
            x = 20;
            y += yOffset;
