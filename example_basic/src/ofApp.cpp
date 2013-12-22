@@ -31,140 +31,125 @@ void ofApp::setup()
 
     ofEnableAlphaBlending();
 
-//    serial.setup("/dev/tty.PL2303-0030121A",9600);
-//
-//
-//    unsigned char command[3] = { 0x1D, 0x49, 0x44 };
-//    int i = serial.writeBytes(command, 3);
-//
-////    serial.drain();
-//
-//    cout << "i = " << i << endl;
-//
-//    while(true)
-//    {
-//        int b = serial.readByte();
-//        if(b >= 0) {
-//            cout << (char) b;
-//        }
-//    }
-//
-//    
-//
-//
-    printer.setup("/dev/ttyUSB0",
-                 115200,
-                 SerialDevice::DATA_BITS_EIGHT,
-                 SerialDevice::PAR_NONE,
-                 SerialDevice::STOP_ONE,
-                 SerialDevice::FLOW_CTRL_HARDWARE,
-                 SerialDevice::Timeout::simpleTimeout(1000));
+#if defined(TARGET_LINUX)
+    std::string port = "/dev/ttyUSB0";
+#else
+    #if defined(TARGET_OSX)
+        std::string port = "/dev/tty.PL2303-00002014";
+    #else
+        std::string port = "COM1";
+    #endif
+#endif
+
+    printer.setup(port,
+                  115200,
+                  SerialDevice::DATA_BITS_EIGHT,
+                  SerialDevice::PAR_NONE,
+                  SerialDevice::STOP_ONE,
+                  SerialDevice::FLOW_CTRL_HARDWARE,
+                  SerialDevice::Timeout::simpleTimeout(1000));
 
 
-   printer.setDataTerminalReady();
-   printer.setRequestToSend();
+    printer.setDataTerminalReady();
+    printer.setRequestToSend();
 
-   printer.initialize();
-   // printer.println("Initialization!");
-
-
-   // printer.getPrinterStatusRealTime();
+    printer.initialize();
+    printer.println("Initialization!");
 
 
-   // printer.setInvert(true);
-   // printer.println("Inverted");
-   // printer.setInvert(false);
-
-   // printer.setUnderline(BaseCodes::UNDERLINE_NORMAL);
-   // printer.println("Normal Underline");
-   // printer.setUnderline(BaseCodes::UNDERLINE_THICK);
-   // printer.println("Thick Underline");
-   // printer.setUnderline(BaseCodes::UNDERLINE_OFF);
-
-   // printer.setEmphasis(true);
-   // printer.println("Emphasis");
-   // printer.setEmphasis(false);
-
-   // printer.setDoubleStrike(true);
-   // printer.println("Double Strike");
-   // printer.setDoubleStrike(true);
-
-   // printer.setFont(BaseCodes::FONT_A);
-   // printer.println("FONT_A");
-   // printer.setFont(BaseCodes::FONT_B);
-   // printer.println("FONT_B");
-   // printer.setFont(BaseCodes::FONT_C);
-   // printer.println("FONT_C");
-   // printer.setFont(BaseCodes::FONT_A);
-
-   // printer.setColor(BaseCodes::COLOR_1);
-   // printer.println("COLOR_1");
-   // printer.setColor(BaseCodes::COLOR_2);
-   // printer.println("COLOR_2");
-   // printer.setColor(BaseCodes::COLOR_1);
-
-   // printer.setUpsideDown(true);
-   // printer.println("UPSIDE DOWN");
-   // printer.setUpsideDown(false);
-
-   // printer.setCharacterSize(BaseCodes::MAGNIFICATION_1X,
-   //                          BaseCodes::MAGNIFICATION_1X);
-   // printer.println("MAGNIFICATION_1X");
-   // printer.setCharacterSize(BaseCodes::MAGNIFICATION_2X,
-   //                          BaseCodes::MAGNIFICATION_2X);
-   // printer.println("MAGNIFICATION_2X");
-   // printer.setCharacterSize(BaseCodes::MAGNIFICATION_3X,
-   //                          BaseCodes::MAGNIFICATION_3X);
-   // printer.println("MAGNIFICATION_3X");
-   // printer.setCharacterSize(BaseCodes::MAGNIFICATION_4X,
-   //                          BaseCodes::MAGNIFICATION_4X);
-   // printer.println("MAGNIFICATION_4X");
-   // printer.setCharacterSize(BaseCodes::MAGNIFICATION_5X,
-   //                          BaseCodes::MAGNIFICATION_5X);
-   // printer.println("MAGNIFICATION_5X");
-   // printer.setCharacterSize(BaseCodes::MAGNIFICATION_6X,
-   //                          BaseCodes::MAGNIFICATION_6X);
-   // printer.println("MAGNIFICATION_6X");
-   // printer.setCharacterSize(BaseCodes::MAGNIFICATION_7X,
-   //                          BaseCodes::MAGNIFICATION_7X);
-   // printer.println("MAGNIFICATION_7X");
-   // printer.setCharacterSize(BaseCodes::MAGNIFICATION_1X,
-   //                          BaseCodes::MAGNIFICATION_1X);
-   // printer.println("MAGNIFICATION_1X");
-
-   // printer.setCharacterSmoothing(true);
-   // printer.println("Smooth");
-   // printer.setCharacterSmoothing(false);
-
-   // printer.setRotation(BaseCodes::ROTATE_90_CW);
-   // printer.println("ROTATE_90_CW");
-   // printer.setRotation(BaseCodes::ROTATE_OFF);
-   // printer.println("ROTATE_OFF");
+    // printer.getPrinterStatusRealTime();
 
 
-   // printer.setLineSpacing(0);
-   // printer.println("Tight line spacing.");
-   // printer.println("Tight line spacing.");
-   // printer.println("Tight line spacing.");
-   // printer.setDefaultLineSpacing();
+    // printer.setInvert(true);
+    // printer.println("Inverted");
+    // printer.setInvert(false);
 
-   // printer.println("Normal line spacing.");
-   // printer.println("Normal line spacing.");
-   // printer.println("Normal line spacing.");
-   // printer.println("Normal line spacing.println");
-   // printer.println("-------");
+    // printer.setUnderline(BaseCodes::UNDERLINE_NORMAL);
+    // printer.println("Normal Underline");
+    // printer.setUnderline(BaseCodes::UNDERLINE_THICK);
+    // printer.println("Thick Underline");
+    // printer.setUnderline(BaseCodes::UNDERLINE_OFF);
 
-   // printer.cut(BaseCodes::CUT_PARTIAL);
-   // printer.println("Partial cut.");
-   // printer.cut(BaseCodes::CUT_FULL);
-   // printer.println("Full cut with 90 dots fed.");
+    // printer.setEmphasis(true);
+    // printer.println("Emphasis");
+    // printer.setEmphasis(false);
+
+    // printer.setDoubleStrike(true);
+    // printer.println("Double Strike");
+    // printer.setDoubleStrike(true);
+
+    // printer.setFont(BaseCodes::FONT_A);
+    // printer.println("FONT_A");
+    // printer.setFont(BaseCodes::FONT_B);
+    // printer.println("FONT_B");
+    // printer.setFont(BaseCodes::FONT_C);
+    // printer.println("FONT_C");
+    // printer.setFont(BaseCodes::FONT_A);
+
+    // printer.setColor(BaseCodes::COLOR_1);
+    // printer.println("COLOR_1");
+    // printer.setColor(BaseCodes::COLOR_2);
+    // printer.println("COLOR_2");
+    // printer.setColor(BaseCodes::COLOR_1);
+
+    // printer.setUpsideDown(true);
+    // printer.println("UPSIDE DOWN");
+    // printer.setUpsideDown(false);
+
+    // printer.setCharacterSize(BaseCodes::MAGNIFICATION_1X,
+    //                          BaseCodes::MAGNIFICATION_1X);
+    // printer.println("MAGNIFICATION_1X");
+    // printer.setCharacterSize(BaseCodes::MAGNIFICATION_2X,
+    //                          BaseCodes::MAGNIFICATION_2X);
+    // printer.println("MAGNIFICATION_2X");
+    // printer.setCharacterSize(BaseCodes::MAGNIFICATION_3X,
+    //                          BaseCodes::MAGNIFICATION_3X);
+    // printer.println("MAGNIFICATION_3X");
+    // printer.setCharacterSize(BaseCodes::MAGNIFICATION_4X,
+    //                          BaseCodes::MAGNIFICATION_4X);
+    // printer.println("MAGNIFICATION_4X");
+    // printer.setCharacterSize(BaseCodes::MAGNIFICATION_5X,
+    //                          BaseCodes::MAGNIFICATION_5X);
+    // printer.println("MAGNIFICATION_5X");
+    // printer.setCharacterSize(BaseCodes::MAGNIFICATION_6X,
+    //                          BaseCodes::MAGNIFICATION_6X);
+    // printer.println("MAGNIFICATION_6X");
+    // printer.setCharacterSize(BaseCodes::MAGNIFICATION_7X,
+    //                          BaseCodes::MAGNIFICATION_7X);
+    // printer.println("MAGNIFICATION_7X");
+    // printer.setCharacterSize(BaseCodes::MAGNIFICATION_1X,
+    //                          BaseCodes::MAGNIFICATION_1X);
+    // printer.println("MAGNIFICATION_1X");
+
+    // printer.setCharacterSmoothing(true);
+    // printer.println("Smooth");
+    // printer.setCharacterSmoothing(false);
+
+    // printer.setRotation(BaseCodes::ROTATE_90_CW);
+    // printer.println("ROTATE_90_CW");
+    // printer.setRotation(BaseCodes::ROTATE_OFF);
+    // printer.println("ROTATE_OFF");
 
 
+    // printer.setLineSpacing(0);
+    // printer.println("Tight line spacing.");
+    // printer.println("Tight line spacing.");
+    // printer.println("Tight line spacing.");
+    // printer.setDefaultLineSpacing();
 
-//    target = ofRectangle(0, 0, 200, 24);
-//
-    img.loadImage("441.png");
-//    img.resize(576,576);
+    // printer.println("Normal line spacing.");
+    // printer.println("Normal line spacing.");
+    // printer.println("Normal line spacing.");
+    // printer.println("Normal line spacing.println");
+    // printer.println("-------");
+
+    // printer.cut(BaseCodes::CUT_PARTIAL);
+    // printer.println("Partial cut.");
+    // printer.cut(BaseCodes::CUT_FULL);
+    // printer.println("Full cut with 90 dots fed.");
+
+
+    img.loadImage("puppy.jpeg");
 
 }
 
