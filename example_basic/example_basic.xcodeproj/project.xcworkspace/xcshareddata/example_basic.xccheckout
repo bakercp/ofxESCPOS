@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>41C0A8F9-3237-4B83-A724-72318AC2E316</string>
+	<string>465CEC47-B0FC-4962-B006-A757E3977163</string>
 	<key>IDESourceControlProjectName</key>
 	<string>example_basic</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>3B34514A-1075-456B-8AF0-DAEFD698200B</key>
 		<string>ssh://github.com/bakercp/openFrameworks.git</string>
-		<key>80513326-8F80-463F-9DA4-C6EDA6717C23</key>
+		<key>B2887F2F-7BB7-474B-B2A2-06E8B3BDE6B5</key>
 		<string>ssh://github.com/bakercp/ofxESCPOSPrinter.git</string>
-		<key>A0AC1125-9F94-4191-A4CF-5DA17EC74D67</key>
+		<key>C2EE0DEC-F5B3-4784-BEB0-0253992E051B</key>
 		<string>ssh://github.com/bakercp/ofxSerial.git</string>
 		<key>F9CDDD62-DE69-4B49-A03C-784EDA348CB5</key>
 		<string>ssh://github.com/bakercp/ofxIO.git</string>
@@ -25,15 +25,15 @@
 	<dict>
 		<key>3B34514A-1075-456B-8AF0-DAEFD698200B</key>
 		<string>../../../../..</string>
-		<key>80513326-8F80-463F-9DA4-C6EDA6717C23</key>
+		<key>B2887F2F-7BB7-474B-B2A2-06E8B3BDE6B5</key>
 		<string>../../..</string>
-		<key>A0AC1125-9F94-4191-A4CF-5DA17EC74D67</key>
+		<key>C2EE0DEC-F5B3-4784-BEB0-0253992E051B</key>
 		<string>../../../../ofxSerial</string>
 		<key>F9CDDD62-DE69-4B49-A03C-784EDA348CB5</key>
 		<string>../../../../ofxIO</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/bakercp/openFrameworks.git</string>
+	<string>ssh://github.com/bakercp/ofxESCPOSPrinter.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
@@ -44,7 +44,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>80513326-8F80-463F-9DA4-C6EDA6717C23</string>
+			<string>B2887F2F-7BB7-474B-B2A2-06E8B3BDE6B5</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxESCPOS</string>
 		</dict>
@@ -60,7 +60,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>A0AC1125-9F94-4191-A4CF-5DA17EC74D67</string>
+			<string>C2EE0DEC-F5B3-4784-BEB0-0253992E051B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxSerial</string>
 		</dict>
