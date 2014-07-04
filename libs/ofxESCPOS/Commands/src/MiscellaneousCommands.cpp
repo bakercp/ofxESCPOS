@@ -51,13 +51,13 @@ std::size_t MiscellaneousCommands::initialize()
 
 std::size_t MiscellaneousCommands::print(const std::string& text)
 {
-    writeBytes(text);
+    return writeBytes(text);
 }
 
 
 std::size_t MiscellaneousCommands::println(const std::string& text)
 {
-    writeBytes(text + "\n");
+    return writeBytes(text + "\n");
 }
 
 
