@@ -68,8 +68,6 @@ public:
 
     virtual std::size_t getPrinterStatusRealTime();
 
-
-
     virtual std::size_t getOfflineStatus();
     virtual std::size_t getErrorStatus();
     virtual std::size_t getPaperStatus();
