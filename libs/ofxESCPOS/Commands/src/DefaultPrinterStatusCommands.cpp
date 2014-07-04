@@ -24,6 +24,7 @@
 
 
 #include "ofx/ESCPOS/Commands/DefaultPrinterStatusCommands.h"
+#include "ofx/IO/ByteBufferUtils.h"
 
 
 namespace ofx {
@@ -41,12 +42,18 @@ DefaultPrinterStatusCommands::~DefaultPrinterStatusCommands()
 
 std::size_t DefaultPrinterStatusCommands::getPrinterStatusRealTime()
 {
-    const uint8_t command[3] = { BaseCodes::DLE, BaseCodes::EOT, BaseCodes::STATUS_PRINTER };
+    const uint8_t command[3] = {
+                                 BaseCodes::DLE,
+                                 BaseCodes::EOT,
+                                 BaseCodes::STATUS_PRINTER
+                               };
+
     std::size_t numBytesWritten = writeBytes(command, 3);
 
     if(3 == numBytesWritten)
     {
         uint8_t data;
+
         std::size_t numBytesRead = readByte(data);
 
         if(numBytesRead > 0)

@@ -1,6 +1,8 @@
 docs/html
 docs/tagfile.xml
 
+raw/
+
 *.mode1v3
 
 # xcode
