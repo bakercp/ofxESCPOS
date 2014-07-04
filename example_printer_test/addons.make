@@ -1,3 +1,0 @@
-ofxESCPOS
-ofxIO
-ofxSerial

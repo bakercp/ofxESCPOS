@@ -1,7 +1,0 @@
-ofxESCPOS
-ofxHTTP
-ofxIO
-ofxJSON
-ofxMediaType
-ofxNetworkUtils
-ofxSerial
