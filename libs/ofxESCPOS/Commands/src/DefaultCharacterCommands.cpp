@@ -146,6 +146,12 @@ std::size_t DefaultCharacterCommands::setColor(BaseCodes::TextColor color)
     return writeBytes(command, 3);
 }
 
+std::size_t DefaultCharacterCommands::setAlign(BaseCodes::TextAlignment align)
+{
+    const uint8_t command[3] = { BaseCodes::ESC,'a',align};
+    return writeBytes(command, 3);
+}
+
 
 std::size_t DefaultCharacterCommands::setUpsideDown(bool enable)
 {
