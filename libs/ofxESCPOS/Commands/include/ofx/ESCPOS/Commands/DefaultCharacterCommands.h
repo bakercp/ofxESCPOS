@@ -72,6 +72,7 @@ public:
                                          BaseCodes::TextMagnification vertical);
     virtual std::size_t setCharacterSmoothing(bool enable);
     virtual std::size_t setRotation(BaseCodes::TextRotate textRotate);
+    virtual std::size_t setAlign(BaseCodes::TextAlignment align);
 
 };
 
