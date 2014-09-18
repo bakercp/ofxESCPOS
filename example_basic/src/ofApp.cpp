@@ -133,6 +133,13 @@ void ofApp::keyPressed(int key)
     printer.println("ROTATE_90_CW");
     printer.setRotation(ofx::ESCPOS::BaseCodes::ROTATE_OFF);
     printer.println("ROTATE_OFF");
+    
+    printer.setAlign(ofx::ESCPOS::BaseCodes::TextAlignment(2));
+    printer.println("right_align");
+    printer.setAlign(ofx::ESCPOS::BaseCodes::TextAlignment(1));
+    printer.println("center_align");
+    printer.setAlign(ofx::ESCPOS::BaseCodes::TextAlignment(0));
+    printer.println("left_align");
 
     printer.setLineSpacing(0);
     printer.println("Tight line spacing.");
