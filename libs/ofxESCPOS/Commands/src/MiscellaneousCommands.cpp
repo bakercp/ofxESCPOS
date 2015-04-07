@@ -31,7 +31,6 @@ namespace ESCPOS {
 namespace Commands {
 
 
-
 MiscellaneousCommands::MiscellaneousCommands()
 {
 }
@@ -59,7 +58,6 @@ std::size_t MiscellaneousCommands::println(const std::string& text)
 {
     return writeBytes(text + "\n");
 }
-
 
 
 } } } // namespace ofx::ESCPOS::Commands

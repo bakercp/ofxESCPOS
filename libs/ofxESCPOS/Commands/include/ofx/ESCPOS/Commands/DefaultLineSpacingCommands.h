@@ -36,7 +36,7 @@ namespace ESCPOS {
 namespace Commands {
 
 
-class DefaultLineSpacingCommands: public virtual ofx::IO::AbstractByteSink
+class DefaultLineSpacingCommands: public virtual IO::AbstractByteSink
 {
 public:
     DefaultLineSpacingCommands();

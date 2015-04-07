@@ -65,7 +65,7 @@ std::size_t DefaultCharacterCommands::uploadUserDefinedCharacterSet(const std::v
 {
     const uint8_t command[2] = { BaseCodes::ESC, '&' };
 
-    ByteBuffer buffer(command,2);
+    IO::ByteBuffer buffer(command,2);
     buffer.writeBytes(charSet);
 
     return writeBytes(buffer.getDataRef());
@@ -74,7 +74,8 @@ std::size_t DefaultCharacterCommands::uploadUserDefinedCharacterSet(const std::v
 
 std::size_t DefaultCharacterCommands::clearUserDefinedCharacter(uint8_t character)
 {
-    if(character > 126 || character < 32) {
+    if (character > 126 || character < 32)
+    {
         ofLogError("DefaultCharacterCommands::clearUserDefinedCharacter") << "Invalid character " << character;
         return 0;
     }

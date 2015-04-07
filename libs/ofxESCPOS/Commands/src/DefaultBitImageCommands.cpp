@@ -54,7 +54,7 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
     int maxHorizontalDots = 0;
     int verticalScale = 1;
 
-    switch(printResolution)
+    switch (printResolution)
     {
         case BaseCodes::RESOLUTION_8_DOTS_SINGLE_DENSITY:
             maxHorizontalDots = printHeadWidth / 2;
@@ -90,7 +90,7 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
     int height = imageRect.getHeight();
 
     // ensure vertical res
-    if(height != numVerticalDots)
+    if (height != numVerticalDots)
     {
         int remainder = height % numVerticalDots;
         if (remainder != 0)
@@ -110,7 +110,6 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
 
     toPrint = ImageUtils::dither(toPrint,ditherThreshold,ditherQuantWeight);
 
-
     cout << pix.getWidth() << " / " << pix.getHeight() << endl;
 
     ofPixels bandBuffer;
@@ -125,7 +124,7 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
     totalBytesWritten += setPageModePrintArea(0,0,toPrint.getWidth(),toPrint.getHeight() * 2); // TODO 2 * works for double vert density
 
 
-    for(int y = 0; y < height; y += numVerticalDots)
+    for (int y = 0; y < height; y += numVerticalDots)
     {
         // set the vertical displacement
         const uint8_t command[3] = { BaseCodes::ESC, '3', numVerticalDots * 2 }; // TODO 2 * works for double vert density
@@ -149,7 +148,10 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
 }
 
 
-std::size_t DefaultBitImageCommands::setPageModePrintArea(int x, int y, int width, int height)
+std::size_t DefaultBitImageCommands::setPageModePrintArea(int x,
+                                                          int y,
+                                                          int width,
+                                                          int height)
 {
     uint8_t xL = getLowByte(x);
     uint8_t xH = getHighByte(x);
@@ -190,12 +192,12 @@ std::size_t DefaultBitImageCommands::selectBitImageMode(const ofPixels_<unsigned
     uint8_t currentByte = 0;
     int bitIndex = 0;
 
-    for(int x = 0; x < binaryPixels.getWidth(); ++x)
+    for (int x = 0; x < binaryPixels.getWidth(); ++x)
     {
         currentByte = 0;
         bitIndex = 0;
 
-        for(int y = 0; y < binaryPixels.getHeight(); ++y)
+        for (int y = 0; y < binaryPixels.getHeight(); ++y)
         {
             bool binaryValue = binaryPixels[binaryPixels.getPixelIndex(x,y)] < ofColor_<unsigned char>::limit() / 2;
 
@@ -203,7 +205,7 @@ std::size_t DefaultBitImageCommands::selectBitImageMode(const ofPixels_<unsigned
 
             bitIndex++;
 
-            if(8 == bitIndex)
+            if (8 == bitIndex)
             {
                 buffer.push_back(currentByte);
                 currentByte = 0;
@@ -215,6 +217,17 @@ std::size_t DefaultBitImageCommands::selectBitImageMode(const ofPixels_<unsigned
     return writeBytes(buffer);
 }
 
+
+uint8_t DefaultBitImageCommands::getHighByte(std::size_t d)
+{
+    return (uint8_t)(d >> 8);
+}
+
+
+uint8_t DefaultBitImageCommands::getLowByte(std::size_t d)
+{
+    return (uint8_t)(d & 0xFF);
+}
 
 
 } } } // namespace ofx::ESCPOS::Commands

@@ -36,7 +36,7 @@ namespace ESCPOS {
 namespace Commands {
 
 
-class MiscellaneousCommands: public virtual ofx::IO::AbstractByteSink
+class MiscellaneousCommands: public virtual IO::AbstractByteSink
 {
 public:
     MiscellaneousCommands();

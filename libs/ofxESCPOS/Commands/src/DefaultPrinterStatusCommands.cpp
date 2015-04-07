@@ -36,9 +36,11 @@ DefaultPrinterStatusCommands::DefaultPrinterStatusCommands()
 {
 }
 
+
 DefaultPrinterStatusCommands::~DefaultPrinterStatusCommands()
 {
 }
+
 
 std::size_t DefaultPrinterStatusCommands::getPrinterStatusRealTime()
 {
@@ -50,13 +52,15 @@ std::size_t DefaultPrinterStatusCommands::getPrinterStatusRealTime()
 
     std::size_t numBytesWritten = writeBytes(command, 3);
 
-    if(3 == numBytesWritten)
+    if (3 == numBytesWritten)
     {
         uint8_t data;
 
+        //pSerial->waitByteTimes(3);
+
         std::size_t numBytesRead = readByte(data);
 
-        if(numBytesRead > 0)
+        if (numBytesRead > 0)
         {
             std::bitset<8> bits(data);
             std::cout << "Data Read: " << bits << std::endl;
@@ -81,16 +85,19 @@ std::size_t DefaultPrinterStatusCommands::getPrinterStatusRealTime()
     return numBytesWritten;
 }
 
+
 std::size_t DefaultPrinterStatusCommands::getOfflineStatus()
 {
     return 0; // TBI
 }
+
 
 std::size_t DefaultPrinterStatusCommands::getErrorStatus()
 {
     return 0; // TBI
 }
 
+    
 std::size_t DefaultPrinterStatusCommands::getPaperStatus()
 {
     return 0; // TBI

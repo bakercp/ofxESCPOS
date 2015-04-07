@@ -40,14 +40,11 @@ namespace ESCPOS {
 namespace Commands {
 
 
-using ofx::IO::AbstractByteSink;
-using ofx::IO::ByteBuffer;
-using ofx::IO::ByteBufferUtils;
-
-
-class DefaultCharacterCommands: public virtual AbstractByteSink
+class DefaultCharacterCommands: public virtual IO::AbstractByteSink
 {
 public:
+
+
     DefaultCharacterCommands();
     virtual ~DefaultCharacterCommands();
 

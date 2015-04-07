@@ -30,7 +30,8 @@ namespace ofx {
 namespace ESCPOS {
 
 
-class BaseCodes {
+class BaseCodes
+{
 public:
     enum CommandFlags
     {
@@ -41,6 +42,7 @@ public:
         CANCELS_MODE_PAGE     = 0x00010000,
         OBSOLETE              = 0x00100000
     };
+
 
     enum Command
     {
@@ -78,11 +80,13 @@ public:
         US  = 31  // Unit seperator
     };
 
+
     enum PrintMode
     {
         MODE_STANDARD,
         MODE_PAGE
     };
+
 
     enum TextFont
     {
@@ -91,12 +95,14 @@ public:
         FONT_C  = 2  // Character font C (optional)
     };
 
+
     enum TextUnderline
     {
         UNDERLINE_OFF    = 0, // Underline off
         UNDERLINE_NORMAL = 1, // Underline 1 dot thick
         UNDERLINE_THICK  = 2  // Underline 2 dots thick
     };
+
 
     enum TextAlignment
     {
@@ -105,11 +111,13 @@ public:
         ALIGN_RIGHT   = 2  // Align text right
     };
 
+
     enum MoveToTopOfLine
     {
         BUFFER_ERASE_MOVE = 0,
         BUFFER_PRINT_MOVE = 1
     };
+
 
     enum TextMagnification
     {
@@ -123,11 +131,13 @@ public:
         MAGNIFICATION_8X  = 7, //
     };
 
+
     enum TextRotate
     {
         ROTATE_OFF    = 0, // Rotate off
         ROTATE_90_CW  = 1, // Rotate 90deg clockwise
     };
+
 
     enum PagePrintDirection
     {
@@ -137,11 +147,13 @@ public:
         TOP_TO_BOTTOM = 3
     };
 
+
     enum TextColor
     {
         COLOR_1  = 0, // Black (normally)
         COLOR_2  = 1, // Red (normally)
     };
+
 
     enum PaperCut
     {
@@ -149,11 +161,13 @@ public:
         CUT_PARTIAL = 1
     };
 
+
     enum ByteFormat
     {
         BYTE_FORMAT_RASTER,
         BYTE_FORMAT_COLUMN
     };
+
 
     enum PrintResolution
     {
@@ -162,6 +176,7 @@ public:
         RESOLUTION_24_DOTS_SINGLE_DENSITY = 32,
         RESOLUTION_24_DOTS_DOUBLE_DENSITY = 33
     };
+
 
     enum PrintScale
     {
@@ -194,6 +209,7 @@ public:
         VIETNAM          = 16,
         ARABIA           = 17
     };
+
 
     enum CodePage
     {
@@ -242,6 +258,7 @@ public:
         USER_PAGE   = 255  /// User-defined page
     };
 
+
     enum BarcodeTextLocation
     {
         TEXT_NONE            = 0, /// Not printed
@@ -250,6 +267,7 @@ public:
         TEXT_ABOVE_AND_BELOW = 3  /// Both above and below the bar code
     };
 
+    
     // for use with GS K n
     enum BarcodeType1D
     {
@@ -269,6 +287,7 @@ public:
         GS1_DATABAR_EXPANDED        = 78, /// http://en.wikipedia.org/wiki/GS1_DataBar
     };
 
+
     enum BarcodeType2D
     {
         PDF417                      = 48, /// http://en.wikipedia.org/wiki/PDF417
@@ -278,6 +297,7 @@ public:
         COMPOSITE_SYMBOLOGY         = 52  /// http://www.tec-it.com/en/support/knowbase/symbologies/rss-codes/Default.aspx
     };
 
+
     enum RealTimeStatus
     {
         STATUS_PRINTER        = 1,
@@ -285,16 +305,6 @@ public:
         STATUS_ERROR_CAUSE    = 3,
         STATUS_PAPER          = 4
     };
-
-
-    BaseCodes()
-    {
-    }
-
-    virtual ~BaseCodes()
-    {
-    }
-
 
 };
 

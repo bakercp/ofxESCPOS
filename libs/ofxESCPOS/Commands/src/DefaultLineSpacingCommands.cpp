@@ -31,7 +31,6 @@ namespace ESCPOS {
 namespace Commands {
 
 
-
 DefaultLineSpacingCommands::DefaultLineSpacingCommands()
 {
 }

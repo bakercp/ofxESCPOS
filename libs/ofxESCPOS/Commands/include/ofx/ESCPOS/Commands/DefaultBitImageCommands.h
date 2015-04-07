@@ -42,10 +42,11 @@ namespace ESCPOS {
 namespace Commands {
 
 
-class DefaultBitImageCommands: public virtual ofx::IO::AbstractByteSink
+class DefaultBitImageCommands: public virtual IO::AbstractByteSink
 {
 public:
     DefaultBitImageCommands();
+    
     virtual ~DefaultBitImageCommands();
 
     virtual std::size_t printImage(const ofPixels_<unsigned char>& pixels,
@@ -58,22 +59,15 @@ public:
 
     virtual std::size_t setPageModePrintArea(int x, int y, int width, int height);
 
-
 protected:
     // the user is responsible for making sure that the binary pixels are appropriate
     // for the print resolution selected.
     virtual std::size_t selectBitImageMode(const ofPixels_<unsigned char>& binaryPixels,
                                            BaseCodes::PrintResolution printResolution);
 
-    static uint8_t getHighByte(std::size_t d)
-    {
-        return (uint8_t)(d >> 8);
-    }
+    static uint8_t getHighByte(std::size_t d);
+    static uint8_t getLowByte(std::size_t d);
 
-    static uint8_t getLowByte(std::size_t d)
-    {
-        return (uint8_t)(d & 0xFF);
-    }
 };
 
 

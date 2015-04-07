@@ -36,7 +36,7 @@ namespace ESCPOS {
 namespace Commands {
 
 
-class DefaultMechanismCommands: public virtual ofx::IO::AbstractByteSink
+class DefaultMechanismCommands: public virtual IO::AbstractByteSink
 {
 public:
     DefaultMechanismCommands();

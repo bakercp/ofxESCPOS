@@ -42,7 +42,7 @@ namespace ESCPOS {
 
 
 class DefaultSerialPrinter:
-    public ofx::IO::SerialDevice,
+    public IO::SerialDevice,
     public Commands::DefaultCharacterCommands,
     public Commands::DefaultBitImageCommands,
     public Commands::DefaultMechanismCommands,

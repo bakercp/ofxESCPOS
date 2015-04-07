@@ -46,11 +46,12 @@ public:
     {
     }
 
+
     virtual ~DefaultPrinterStatus()
     {
     }
 
-
+    
 private:
     int _modelId;
     int _typeId;
@@ -59,8 +60,8 @@ private:
 
 
 class DefaultPrinterStatusCommands:
-    public virtual ofx::IO::AbstractByteSink,
-    public virtual ofx::IO::AbstractBufferedByteSource
+    public virtual IO::AbstractByteSink,
+    public virtual IO::AbstractBufferedByteSource
 {
 public:
     DefaultPrinterStatusCommands();

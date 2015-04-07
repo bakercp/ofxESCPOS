@@ -44,7 +44,7 @@ DefaultMechanismCommands::~DefaultMechanismCommands()
 std::size_t DefaultMechanismCommands::cut(BaseCodes::PaperCut type,
                                           uint8_t numDotsToFeed)
 {
-    if(numDotsToFeed > 0)
+    if (numDotsToFeed > 0)
     {
         const uint8_t command[3] = { BaseCodes::GS, 'V', type };
         return writeBytes(command, 3);

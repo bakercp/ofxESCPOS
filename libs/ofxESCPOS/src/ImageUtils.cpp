@@ -56,18 +56,15 @@ ofPixels_<unsigned char> ImageUtils::scaleAndCropTo(const ofPixels_<unsigned cha
 }
 
 
-//------------------------------------------------------------------------------
 ofPixels_<unsigned char> ImageUtils::dither(const ofPixels_<unsigned char>& pixels,
                                             float threshold,
                                             float quantWeight)
 {
-
     // Special thanks to @julapy / ofxDither
-
     ofPixels_<unsigned char> pixelsIn = pixels;
 
     // ensure the image is grayscale
-    if(OF_IMAGE_GRAYSCALE != pixelsIn.getImageType())
+    if (OF_IMAGE_GRAYSCALE != pixelsIn.getImageType())
     {
         pixelsIn = toGrayscale(pixels);
     }
@@ -89,9 +86,9 @@ ofPixels_<unsigned char> ImageUtils::dither(const ofPixels_<unsigned char>& pixe
 
     float limit = ofColor_<unsigned char>::limit();
 
-    for(int y = 0; y < height; y++)
+    for (int y = 0; y < height; y++)
     {
-        for(int x = 0; x < width; x++)
+        for (int x = 0; x < width; x++)
         {
             int p = pixelsIn.getPixelIndex(x, y);
 
@@ -172,15 +169,18 @@ ofPixels_<unsigned char> ImageUtils::dither(const ofPixels_<unsigned char>& pixe
 
 ofPixels_<unsigned char> ImageUtils::toGrayscale(const ofPixels_<unsigned char>& pixels)
 {
-    if(OF_IMAGE_GRAYSCALE == pixels.getImageType()) return pixels;
+    if (OF_IMAGE_GRAYSCALE == pixels.getImageType())
+    {
+        return pixels;
+    }
 
     ofPixels pix;
 
     pix.allocate(pixels.getWidth(), pixels.getHeight(), OF_IMAGE_GRAYSCALE);
 
-    for(std::size_t x = 0; x < pixels.getWidth(); ++x)
+    for (std::size_t x = 0; x < pixels.getWidth(); ++x)
     {
-        for(std::size_t y = 0; y < pixels.getHeight(); ++y)
+        for (std::size_t y = 0; y < pixels.getHeight(); ++y)
         {
             ofColor_<unsigned char> c = pixels.getColor(x, y);
             pix.setColor(x, y, 0.21 * c.r + 0.71 * c.g + 0.07 * c.b);
@@ -188,7 +188,6 @@ ofPixels_<unsigned char> ImageUtils::toGrayscale(const ofPixels_<unsigned char>&
     }
 
     return pix;
-    
 }
 
 
