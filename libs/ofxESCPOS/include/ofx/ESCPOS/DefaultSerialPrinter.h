@@ -37,15 +37,12 @@
 #include "ofx/ESCPOS/Commands/DefaultLineSpacingCommands.h"
 
 
-using ofx::IO::AbstractByteSink;
-using ofx::IO::SerialDevice;
-
-
 namespace ofx {
 namespace ESCPOS {
 
 
-class DefaultSerialPrinter: public SerialDevice,
+class DefaultSerialPrinter:
+    public ofx::IO::SerialDevice,
     public Commands::DefaultCharacterCommands,
     public Commands::DefaultBitImageCommands,
     public Commands::DefaultMechanismCommands,
@@ -55,8 +52,8 @@ class DefaultSerialPrinter: public SerialDevice,
 {
 public:
     DefaultSerialPrinter();
-    virtual ~DefaultSerialPrinter();
 
+    virtual ~DefaultSerialPrinter();
 
 };
 
