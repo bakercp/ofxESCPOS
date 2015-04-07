@@ -30,6 +30,9 @@
 #include "ofxESCPOS.h"
 
 
+using namespace ofx;
+
+
 class ofApp: public ofBaseApp
 {
 public:
@@ -38,6 +41,6 @@ public:
 
     void keyPressed(int key);
 
-    ofx::ESCPOS::DefaultSerialPrinter printer;
+    ESCPOS::DefaultSerialPrinter printer;
 
 };
