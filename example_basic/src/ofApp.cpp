@@ -29,17 +29,18 @@
 void ofApp::setup()
 {
     // We can get all of the connected serial devices using the
-    // ofx::IO::SerialDeviceUtils::getDevices() method.
+    // IO::SerialDeviceUtils::getDevices() method.
     // See documentation for more information.
 
-    std::string port = "/dev/cu.NoZAP-PL2303-00202114";
+    std::string port = "/dev/tty.Repleo-PL2303-00002014";
 
     if (!printer.setup(port,
-                       38400,
-                       SerialDevice::DATA_BITS_EIGHT,
-                       SerialDevice::PAR_NONE,
-                       SerialDevice::STOP_ONE,
-                       SerialDevice::FLOW_CTRL_HARDWARE))
+                       9600,
+                       IO::SerialDevice::DATA_BITS_EIGHT,
+                       IO::SerialDevice::PAR_NONE,
+                       IO::SerialDevice::STOP_ONE,
+                       IO::SerialDevice::FLOW_CTRL_HARDWARE,
+                       serial::Timeout::simpleTimeout(10)))
     {
         ofLogError("ofApp::setup") << "Unable to connect to: " << port;
         ofExit();
