@@ -43,8 +43,6 @@ namespace Commands {
 class DefaultCharacterCommands: public virtual IO::AbstractByteSink
 {
 public:
-
-
     DefaultCharacterCommands();
     virtual ~DefaultCharacterCommands();
 
