@@ -50,9 +50,9 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
                                                 int printHeadHeight)
 {
 
-    int numVerticalDots = 0;
-    int maxHorizontalDots = 0;
-    int verticalScale = 1;
+    uint8_t numVerticalDots = 0;
+    uint8_t maxHorizontalDots = 0;
+    uint8_t verticalScale = 1;
 
     switch (printResolution)
     {
@@ -127,7 +127,7 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
     for (int y = 0; y < height; y += numVerticalDots)
     {
         // set the vertical displacement
-        const uint8_t command[3] = { BaseCodes::ESC, '3', numVerticalDots * 2 }; // TODO 2 * works for double vert density
+        const uint8_t command[3] = { BaseCodes::ESC, '3', static_cast<uint8_t>(numVerticalDots * 2) }; // TODO 2 * works for double vert density
         totalBytesWritten += writeBytes(command, 3);
 
         bandBuffer.clear();
@@ -165,7 +165,7 @@ std::size_t DefaultBitImageCommands::setPageModePrintArea(int x,
     uint8_t dYL = getLowByte(height);
     uint8_t dYH = getHighByte(height);
 
-    const uint8_t command[10] = {BaseCodes::ESC, 'W', xL, xH, yL, yH, dXL, dXH, dYL, dYH };
+    const uint8_t command[10] = { BaseCodes::ESC, 'W', xL, xH, yL, yH, dXL, dXH, dYL, dYH };
 
     return writeBytes(command,10);
 }
@@ -199,7 +199,7 @@ std::size_t DefaultBitImageCommands::selectBitImageMode(const ofPixels_<unsigned
 
         for (int y = 0; y < binaryPixels.getHeight(); ++y)
         {
-            bool binaryValue = binaryPixels[binaryPixels.getPixelIndex(x,y)] < ofColor_<unsigned char>::limit() / 2;
+            bool binaryValue = binaryPixels[binaryPixels.getPixelIndex(x, y)] < ofColor_<unsigned char>::limit() / 2;
 
             currentByte |= binaryValue << (7 - bitIndex);
 

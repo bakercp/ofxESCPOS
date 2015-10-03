@@ -82,7 +82,7 @@ ofPixels_<unsigned char> ImageUtils::dither(const ofPixels_<unsigned char>& pixe
     std::fill(qErrors, qErrors + numPixels, 0.0);
 
     //unsigned char* inPix  = pixelsIn.getPixels();
-    unsigned char* outPix = pixelsOut.getPixels();
+    unsigned char* outPix = pixelsOut.getData();
 
     float limit = ofColor_<unsigned char>::limit();
 

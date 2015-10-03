@@ -68,7 +68,7 @@ std::size_t DefaultCharacterCommands::uploadUserDefinedCharacterSet(const std::v
     IO::ByteBuffer buffer(command,2);
     buffer.writeBytes(charSet);
 
-    return writeBytes(buffer.getDataRef());
+    return writeBytes(buffer.getData());
 }
 
 
@@ -164,8 +164,13 @@ std::size_t DefaultCharacterCommands::setUpsideDown(bool enable)
 std::size_t DefaultCharacterCommands::setCharacterSize(BaseCodes::TextMagnification horizontal,
                                                        BaseCodes::TextMagnification vertical)
 {
-    const uint8_t command[3] = { BaseCodes::GS, '!', (horizontal << 4) | (vertical) };
-    return writeBytes(command, 3);
+    const uint8_t command[3] = {
+								BaseCodes::GS,
+								'!',
+								static_cast<uint8_t>((horizontal << 4) | (vertical))
+								};
+
+	return writeBytes(command, 3);
 }
 
 

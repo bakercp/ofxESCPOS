@@ -33,7 +33,7 @@ namespace ESCPOS {
 class BaseCodes
 {
 public:
-    enum CommandFlags
+	enum CommandFlags
     {
         PRIORITY_NORMAL       = 0x00000001,
         PRIORITY_REALTIME     = 0x00000010,
@@ -44,7 +44,7 @@ public:
     };
 
 
-    enum Command
+	enum Command: uint8_t
     {
         NUL = 0,  // Null
         SOH = 1,  // Start of heading
@@ -81,14 +81,14 @@ public:
     };
 
 
-    enum PrintMode
+	enum PrintMode: uint8_t
     {
         MODE_STANDARD,
         MODE_PAGE
     };
 
 
-    enum TextFont
+	enum TextFont: uint8_t
     {
         FONT_A  = 0, // Character font A (12 x 24 normally)
         FONT_B  = 1, // Character font B (9 x 17 normally)
@@ -96,7 +96,7 @@ public:
     };
 
 
-    enum TextUnderline
+	enum TextUnderline: uint8_t
     {
         UNDERLINE_OFF    = 0, // Underline off
         UNDERLINE_NORMAL = 1, // Underline 1 dot thick
@@ -104,7 +104,7 @@ public:
     };
 
 
-    enum TextAlignment
+	enum TextAlignment: uint8_t
     {
         ALIGN_LEFT    = 0, // Align text left
         ALIGN_CENTER  = 1, // Align text center
@@ -112,14 +112,14 @@ public:
     };
 
 
-    enum MoveToTopOfLine
+	enum MoveToTopOfLine: uint8_t
     {
         BUFFER_ERASE_MOVE = 0,
         BUFFER_PRINT_MOVE = 1
     };
 
 
-    enum TextMagnification
+	enum TextMagnification: uint8_t
     {
         MAGNIFICATION_1X  = 0, //
         MAGNIFICATION_2X  = 1, //
@@ -132,14 +132,14 @@ public:
     };
 
 
-    enum TextRotate
+	enum TextRotate: uint8_t
     {
         ROTATE_OFF    = 0, // Rotate off
         ROTATE_90_CW  = 1, // Rotate 90deg clockwise
     };
 
 
-    enum PagePrintDirection
+	enum PagePrintDirection: uint8_t
     {
         LEFT_TO_RIGHT = 0,
         BOTTOM_TO_TOP = 1,
@@ -148,14 +148,14 @@ public:
     };
 
 
-    enum TextColor
+	enum TextColor: uint8_t
     {
         COLOR_1  = 0, // Black (normally)
         COLOR_2  = 1, // Red (normally)
     };
 
 
-    enum PaperCut
+	enum PaperCut: uint8_t
     {
         CUT_FULL    = 0,
         CUT_PARTIAL = 1
@@ -188,7 +188,7 @@ public:
 
 
     // Usually used with ESC R <CharacterSet>
-    enum CharacterSet
+    enum CharacterSet: uint8_t
     {
         USA              = 0,
         FRANCE           = 1,
@@ -211,7 +211,7 @@ public:
     };
 
 
-    enum CodePage
+	enum CodePage: uint8_t
     {
         PC437       = 0,   /// USA, Standard Europe http://en.wikipedia.org/wiki/Code_page_437
         Katakana    = 1,   /// Katakana
@@ -259,7 +259,7 @@ public:
     };
 
 
-    enum BarcodeTextLocation
+    enum BarcodeTextLocation: uint8_t
     {
         TEXT_NONE            = 0, /// Not printed
         TEXT_ABOVE           = 1, /// Above the bar code
@@ -269,7 +269,7 @@ public:
 
     
     // for use with GS K n
-    enum BarcodeType1D
+    enum BarcodeType1D: uint8_t
     {
         UPC_A                       = 65, /// http://en.wikipedia.org/wiki/Universal_Product_Code
         UPC_E                       = 66, /// http://en.wikipedia.org/wiki/Universal_Product_Code#UPC-E
@@ -288,7 +288,7 @@ public:
     };
 
 
-    enum BarcodeType2D
+    enum BarcodeType2D: uint8_t
     {
         PDF417                      = 48, /// http://en.wikipedia.org/wiki/PDF417
         QR_CODE                     = 49, /// http://en.wikipedia.org/wiki/QR_code
@@ -298,7 +298,7 @@ public:
     };
 
 
-    enum RealTimeStatus
+    enum RealTimeStatus: uint8_t
     {
         STATUS_PRINTER        = 1,
         STATUS_OFFLINE_CAUSE  = 2,
