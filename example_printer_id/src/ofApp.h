@@ -23,11 +23,24 @@
 // =============================================================================
 
 
-#include "ofApp.h"
+#pragma once
 
 
-int main()
+#include "ofMain.h"
+#include "ofxESCPOS.h"
+
+
+using namespace ofx;
+
+
+class ofApp: public ofBaseApp
 {
-	ofSetupOpenGL(300, 50, OF_WINDOW);
-    return ofRunApp(std::make_shared<ofApp>());
-}
+public:
+    void setup();
+    void draw();
+
+    void keyPressed(int key);
+
+    ESCPOS::DefaultSerialPrinter printer;
+
+};
