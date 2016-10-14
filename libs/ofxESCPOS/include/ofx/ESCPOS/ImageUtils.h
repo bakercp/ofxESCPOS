@@ -37,12 +37,13 @@ namespace ofx {
 namespace ESCPOS {
 
 
+/// TODO template on ofPixels_
 class ImageUtils
 {
 public:
     static ofPixels_<unsigned char> scaleAndCropTo(const ofPixels_<unsigned char>& pixelsRef,
-                                                   int width,
-                                                   int height,
+                                                   std::size_t width,
+                                                   std::size_t height,
                                                    ofScaleMode scaleMode = OF_SCALEMODE_FIT);
                             
     static ofPixels_<unsigned char> dither(const ofPixels_<unsigned char>& pixels,
@@ -61,14 +62,14 @@ public:
 
 
 protected:
-    static void accumulateDitherError(int x,
-                                      int y,
+    static void accumulateDitherError(std::size_t x,
+                                      std::size_t y,
                                       ofPixels_<unsigned char>& pixels,
                                       int qError,
                                       float* qErrors,
                                       float quantWeight)
     {
-        if (x >= 0 && x < pixels.getWidth() && y >= 0 && y < pixels.getHeight())
+        if (x < pixels.getWidth() && y < pixels.getHeight())
         {
             qErrors[pixels.getPixelIndex(x, y)] += quantWeight * qError;
         }

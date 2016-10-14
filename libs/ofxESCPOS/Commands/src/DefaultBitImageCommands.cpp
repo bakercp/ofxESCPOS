@@ -50,9 +50,9 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
                                                 int printHeadHeight)
 {
 
-    uint8_t numVerticalDots = 0;
-    uint8_t maxHorizontalDots = 0;
-    uint8_t verticalScale = 1;
+    int numVerticalDots = 0;
+    int maxHorizontalDots = 0;
+    //uint8_t verticalScale = 1;
 
     switch (printResolution)
     {
@@ -76,8 +76,8 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
 
     std::size_t totalBytesWritten = 0;
 
-    ofRectangle imageRect(0,0,pixels.getWidth(),pixels.getHeight());
-    ofRectangle rectangle(0,0,maxHorizontalDots,pixels.getHeight());
+    ofRectangle imageRect(0, 0, pixels.getWidth(), pixels.getHeight());
+    ofRectangle rectangle(0, 0, maxHorizontalDots, pixels.getHeight());
 
     imageRect.scaleTo(rectangle,
                       OF_ASPECT_RATIO_KEEP,
@@ -106,29 +106,33 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
     toPrint.setColor(ofColor(255));
 
     pix.resize(imageRect.getWidth(), imageRect.getHeight());
-    pix.pasteInto(toPrint,imageRect.getX(),imageRect.getY());
+    pix.pasteInto(toPrint, imageRect.getX(), imageRect.getY());
 
-    toPrint = ImageUtils::dither(toPrint,ditherThreshold,ditherQuantWeight);
+    toPrint = ImageUtils::dither(toPrint, ditherThreshold, ditherQuantWeight);
 
     cout << pix.getWidth() << " / " << pix.getHeight() << endl;
 
     ofPixels bandBuffer;
 
-    bandBuffer.allocate(toPrint.getWidth(), numVerticalDots, toPrint.getNumChannels());
+    bandBuffer.allocate(toPrint.getWidth(),
+                        numVerticalDots,
+                        toPrint.getNumChannels());
 
-    // go into page mode
+    // Go into page mode
     totalBytesWritten += writeByte(BaseCodes::ESC);
     totalBytesWritten += writeByte('L');
 
     // set the print area / origin
-    totalBytesWritten += setPageModePrintArea(0,0,toPrint.getWidth(),toPrint.getHeight() * 2); // TODO 2 * works for double vert density
-
+    totalBytesWritten += setPageModePrintArea(0,
+                                              0,
+                                              toPrint.getWidth(),
+                                              toPrint.getHeight() * 2); // TODO 2 * works for double vert density
 
     for (int y = 0; y < height; y += numVerticalDots)
     {
         // set the vertical displacement
-        const uint8_t command[3] = { BaseCodes::ESC, '3', static_cast<uint8_t>(numVerticalDots * 2) }; // TODO 2 * works for double vert density
-        totalBytesWritten += writeBytes(command, 3);
+        std::vector<uint8_t> command = { BaseCodes::ESC, '3', static_cast<uint8_t>(numVerticalDots * 2) }; // TODO 2 * works for double vert density
+        totalBytesWritten += writeBytes(command);
 
         bandBuffer.clear();
         toPrint.cropTo(bandBuffer,0,y,width,numVerticalDots);
@@ -197,6 +201,7 @@ std::size_t DefaultBitImageCommands::selectBitImageMode(const ofPixels_<unsigned
         currentByte = 0;
         bitIndex = 0;
 
+        // Pack pixels into bytes.
         for (int y = 0; y < binaryPixels.getHeight(); ++y)
         {
             bool binaryValue = binaryPixels[binaryPixels.getPixelIndex(x, y)] < ofColor_<unsigned char>::limit() / 2;

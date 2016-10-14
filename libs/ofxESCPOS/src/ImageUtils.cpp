@@ -31,18 +31,19 @@ namespace ESCPOS {
 
     
 ofPixels_<unsigned char> ImageUtils::scaleAndCropTo(const ofPixels_<unsigned char>& pixels,
-                                                    int width,
-                                                    int height,
+                                                    std::size_t width,
+                                                    std::size_t height,
                                                     ofScaleMode scaleMode)
 {
-    ofRectangle inRect(0,0,pixels.getWidth(),pixels.getHeight());
-    ofRectangle outRect(0,0,width,height);
+    ofRectangle inRect(0, 0, pixels.getWidth(), pixels.getHeight());
 
-    inRect.scaleTo(outRect,scaleMode);
+    ofRectangle outRect(0, 0, width, height);
 
-    ofPixels_<unsigned char> inPixels = pixels;
+    inRect.scaleTo(outRect, scaleMode);
 
-    inPixels.resize(inRect.getWidth(),inRect.getHeight());
+    auto inPixels = pixels;
+
+    inPixels.resize(inRect.getWidth(), inRect.getHeight());
 
     ofPixels_<unsigned char> outPixels;
 
@@ -61,7 +62,7 @@ ofPixels_<unsigned char> ImageUtils::dither(const ofPixels_<unsigned char>& pixe
                                             float quantWeight)
 {
     // Special thanks to @julapy / ofxDither
-    ofPixels_<unsigned char> pixelsIn = pixels;
+    auto pixelsIn = pixels;
 
     // ensure the image is grayscale
     if (OF_IMAGE_GRAYSCALE != pixelsIn.getImageType())
@@ -70,15 +71,16 @@ ofPixels_<unsigned char> ImageUtils::dither(const ofPixels_<unsigned char>& pixe
     }
 
     // make a copy
-    ofPixels_<unsigned char> pixelsOut =  pixelsIn;
+    auto pixelsOut = pixelsIn;
 
     // set up the quantization error
-    int width  = pixelsOut.getWidth();
-    int height = pixelsOut.getHeight();
+    std::size_t width  = pixelsOut.getWidth();
+    std::size_t height = pixelsOut.getHeight();
 
     std::size_t numPixels = width * height; // 1 byte / pixel
 
     float qErrors[numPixels];
+
     std::fill(qErrors, qErrors + numPixels, 0.0);
 
     //unsigned char* inPix  = pixelsIn.getPixels();
@@ -86,18 +88,18 @@ ofPixels_<unsigned char> ImageUtils::dither(const ofPixels_<unsigned char>& pixe
 
     float limit = ofColor_<unsigned char>::limit();
 
-    for (int y = 0; y < height; y++)
+    for (std::size_t y = 0; y < height; y++)
     {
-        for (int x = 0; x < width; x++)
+        for (std::size_t x = 0; x < width; x++)
         {
-            int p = pixelsIn.getPixelIndex(x, y);
+            std::size_t p = pixelsIn.getPixelIndex(x, y);
 
-            int oldPx = outPix[p] + qErrors[p]; // add error
-            int newPx = (oldPx < (threshold * limit)) ? 0 : limit;  // threshold
+            std::size_t oldPx = outPix[p] + qErrors[p]; // add error
+            std::size_t newPx = (oldPx < (threshold * limit)) ? 0 : limit;  // threshold
 
             outPix[p] = newPx;
 
-            int qError = oldPx - newPx;
+            std::size_t qError = oldPx - newPx;
 
             accumulateDitherError(x+1,y  ,pixelsOut,qError,qErrors,quantWeight); // check east
             accumulateDitherError(x+2,y  ,pixelsOut,qError,qErrors,quantWeight); // check east east
@@ -182,7 +184,7 @@ ofPixels_<unsigned char> ImageUtils::toGrayscale(const ofPixels_<unsigned char>&
     {
         for (std::size_t y = 0; y < pixels.getHeight(); ++y)
         {
-            ofColor_<unsigned char> c = pixels.getColor(x, y);
+            auto c = pixels.getColor(x, y);
             pix.setColor(x, y, 0.21 * c.r + 0.71 * c.g + 0.07 * c.b);
         }
     }
