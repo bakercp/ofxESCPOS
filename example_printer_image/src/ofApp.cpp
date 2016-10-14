@@ -39,7 +39,7 @@ void ofApp::setup()
     printer.initialize();
 
     ofPixels pixels;
-    ofLoadImage(pixels, "_86725938_hi010860041.jpg");
+    ofLoadImage(pixels, "puppy.jpeg");
 
 
     printer.printImage(pixels, OF_ALIGN_HORZ_LEFT);
