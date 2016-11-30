@@ -56,7 +56,9 @@ std::size_t DefaultPrinterStatusCommands::getPrinterStatusRealTime()
     {
         uint8_t data;
 
-        //pSerial->waitByteTimes(3);
+//        pSerial->waitByteTimes(3);
+
+        
 
         std::size_t numBytesRead = readByte(data);
 

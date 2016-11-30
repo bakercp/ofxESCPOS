@@ -32,30 +32,78 @@ void ofApp::setup()
     // IO::SerialDeviceUtils::getDevices() method.
     // See documentation for more information.
 
-    IO::SerialDeviceInfo::DeviceList devices = IO::SerialDeviceUtils::listDevices(".*2303.*");
+    auto devices = IO::SerialDeviceUtils::listDevices();
+
+
+    for (auto& device: devices)
+    {
+        std::cout << device << std::endl;
+    }
+
 
     if (!devices.empty())
     {
         if (!printer.setup(devices[0].port(),
-                           115200,
+                           38400,
                            IO::SerialDevice::DATA_BITS_EIGHT,
                            IO::SerialDevice::PAR_NONE,
                            IO::SerialDevice::STOP_ONE,
                            IO::SerialDevice::FLOW_CTRL_HARDWARE,
-                           serial::Timeout::simpleTimeout(10)))
+                           serial::Timeout::simpleTimeout(1000)))
         {
             ofLogError("ofApp::setup") << "Unable to connect to: " << devices[0].port();
             ofExit();
         }
 
+//        std::cout << printer.getPrinterStatusRealTime() << std::endl;
+
+//        DLE = 16, // Data link escape x10
+//        EOT = 4,  // End of text x4
+//        STATUS_PRINTER        = 1, x1
+//
+
+        const uint8_t command[3] = {
+            ofx::ESCPOS::BaseCodes::GS,
+            '(', 'A'
+
+            //            73,
+//            68
+//GS ( A
+    };
+
+        std::size_t numBytesWritten = printer.serial()->write(command, 3);
+
+
+//        std::size_t numBytesWritten = printer.writeBytes(command, 3);
+
+        std::cout << "Write: " << numBytesWritten << std::endl;
+
+        if (printer.serial()->waitReadable())
+        {
+            std::cout << "true ..." << std::endl;
+        }
+        else
+        {
+            std::cout << "false ..." << std::endl;
+        }
+
+//        printer.serial()->rea
+
+
+
         // Set up hardware flow control if needed.
-        printer.setDataTerminalReady();
-        printer.setRequestToSend();
+//        printer.setDataTerminalReady();
+//        printer.setRequestToSend();
 
-        // Initialize the printer.
-        printer.initialize();
-        printer.flush();
+//         Initialize the printer.
+//        printer.initialize();
+//        printer.flush();
 
+    }
+    else
+    {
+        ofLogError("ofApp::setup") << "No devices found.";
+        ofExit();
     }
 
 
@@ -79,11 +127,11 @@ void ofApp::keyPressed(int key)
 //    printer.println("Inverted");
 //    printer.setInvert(false);
 //
-//    printer.setUnderline(ESCPOS::BaseCodes::UNDERLINE_NORMAL);
-//    printer.println("Normal Underline");
-//    printer.setUnderline(ESCPOS::BaseCodes::UNDERLINE_THICK);
-//    printer.println("Thick Underline");
-//    printer.setUnderline(ESCPOS::BaseCodes::UNDERLINE_OFF);
+    printer.setUnderline(ESCPOS::BaseCodes::UNDERLINE_NORMAL);
+    printer.println("Normal Underline");
+    printer.setUnderline(ESCPOS::BaseCodes::UNDERLINE_THICK);
+    printer.println("Thick Underline");
+    printer.setUnderline(ESCPOS::BaseCodes::UNDERLINE_OFF);
 //
 //    printer.setEmphasis(true);
 //    printer.println("Emphasis");
@@ -167,5 +215,5 @@ void ofApp::keyPressed(int key)
 //    printer.println("Partial cut.");
 //    printer.cut(ESCPOS::BaseCodes::CUT_FULL);
 //    printer.println("Full cut with 90 dots fed.");
-
+//
 }

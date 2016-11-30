@@ -28,6 +28,8 @@
 
 void ofApp::setup()
 {
+
+
     printer.setup(115200,
                   ofxESCPOS::DefaultSerialPrinter::DATA_BITS_EIGHT,
                   ofxESCPOS::DefaultSerialPrinter::PAR_NONE,
@@ -42,17 +44,25 @@ void ofApp::setup()
     ofLoadImage(pixels, "puppy.jpeg");
 
 
-    printer.printImage(pixels, OF_ALIGN_HORZ_LEFT);
-    printer.println("OF_ALIGN_HORZ_LEFT");
 
     printer.printImage(pixels, OF_ALIGN_HORZ_LEFT);
-    printer.println("OF_ALIGN_HORZ_LEFT");
-
+    printer.flush();
+//    printer.println("OF_ALIGN_HORZ_LEFT");
     printer.printImage(pixels, OF_ALIGN_HORZ_LEFT);
-    printer.println("OF_ALIGN_HORZ_LEFT");
-
+    printer.flush();
+//    printer.println("OF_ALIGN_HORZ_LEFT");
     printer.printImage(pixels, OF_ALIGN_HORZ_LEFT);
-    printer.println("OF_ALIGN_HORZ_LEFT");
+    printer.flush();
+//    printer.println("OF_ALIGN_HORZ_LEFT");
+//
+//    printer.printImage(pixels, OF_ALIGN_HORZ_LEFT);
+//    printer.println("OF_ALIGN_HORZ_LEFT");
+//
+//    printer.printImage(pixels, OF_ALIGN_HORZ_LEFT);
+//    printer.println("OF_ALIGN_HORZ_LEFT");
+//
+//    printer.printImage(pixels, OF_ALIGN_HORZ_LEFT);
+//    printer.println("OF_ALIGN_HORZ_LEFT");
 
 //    printer.printImage(pixels, OF_ALIGN_HORZ_IGNORE);
 //    printer.println("OF_ALIGN_HORZ_IGNORE");
