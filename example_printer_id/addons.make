@@ -1,3 +1,4 @@
-ofxESCPOS
+ofxPoco
 ofxIO
 ofxSerial
+ofxESCPOS

@@ -5,6 +5,6 @@ meta:
 	ADDON_TAGS = "print" "thermal" "POS printer" "serial"
 	ADDON_URL = http://github.com/bakercp/ofxESCPOS
 common:
-	# dependencies with other addons, a list of them separated by spaces 
+	# dependencies with other addons, a list of them separated by spaces
 	# or use += in several lines
-	ADDON_DEPENDENCIES = ofxIO ofxSerial
+	ADDON_DEPENDENCIES = ofxPoco ofxIO ofxSerial 
