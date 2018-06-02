@@ -14,6 +14,7 @@ Features
 Required Addons
 ---------------
 
+-   ofxPoco (included in openFrameworks)
 -   [ofxIO](https://github.com/bakercp/ofxIO)
 -   [ofxSerial](https://github.com/bakercp/ofxSerial)
 
