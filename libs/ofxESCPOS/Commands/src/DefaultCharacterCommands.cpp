@@ -168,6 +168,6 @@ std::size_t DefaultCharacterCommands::setRotation(BaseCodes::TextRotate textRota
     const uint8_t command[3] = { BaseCodes::ESC, 'V', textRotate };
     return writeBytes(command, 3);
 }
-    
-    
+
+
 } } } // namespace ofx::ESCPOS::Commands

@@ -11,7 +11,7 @@
 namespace ofx {
 namespace ESCPOS {
 
-    
+
 ofPixels_<unsigned char> ImageUtils::scaleAndCropTo(const ofPixels_<unsigned char>& pixels,
                                                     std::size_t width,
                                                     std::size_t height,
@@ -119,7 +119,7 @@ ofPixels_<unsigned char> ImageUtils::dither(const ofPixels_<unsigned char>& pixe
 //    if(format == BitImage::BYTE_FORMAT_COLUMN) {
 //        for(int x = 0; x < width; x++) {
 //            for(int y = 0; y < height; y++) {
-//                
+//
 //                int p = pixelsIn.getPixelIndex(x,y);
 //
 //                buffer.write(pixels[p] < threshold * 255 ? 0 : 1);

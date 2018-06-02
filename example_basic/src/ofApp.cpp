@@ -80,7 +80,7 @@ void ofApp::setup()
 //            bool isDrawerKickoutHigh = bits[2];
 //            bool isOnline = bits[3];
 //
-//            
+//
 //
 //            // package these
 //
@@ -183,7 +183,7 @@ void ofApp::keyPressed(int key)
     printer.println("ROTATE_90_CW");
     printer.setRotation(ESCPOS::BaseCodes::ROTATE_OFF);
     printer.println("ROTATE_OFF");
-    
+
     printer.setAlign(ESCPOS::BaseCodes::ALIGN_RIGHT);
     printer.println("ALIGN_RIGHT");
     printer.setAlign(ESCPOS::BaseCodes::ALIGN_CENTER);

@@ -200,7 +200,7 @@ std::size_t DefaultBitImageCommands::selectBitImageMode(const ofPixels_<unsigned
             }
         }
     }
-    
+
     return writeBytes(buffer);
 }
 

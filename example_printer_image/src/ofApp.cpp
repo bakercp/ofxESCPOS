@@ -10,8 +10,6 @@
 
 void ofApp::setup()
 {
-
-
     printer.setup(115200,
                   ofxESCPOS::DefaultSerialPrinter::DATA_BITS_EIGHT,
                   ofxESCPOS::DefaultSerialPrinter::PAR_NONE,
@@ -59,7 +57,7 @@ void ofApp::setup()
 //    printer.println("OF_ALIGN_HORZ_CENTER");
 //
 //    ///
-//    
+//
 //    printer.printImage(pixels, OF_ALIGN_HORZ_IGNORE);
 //    printer.println("OF_ALIGN_HORZ_IGNORE");
 //

@@ -249,7 +249,7 @@ public:
         TEXT_ABOVE_AND_BELOW = 3  /// Both above and below the bar code
     };
 
-    
+
     // for use with GS K n
     enum BarcodeType1D: uint8_t
     {

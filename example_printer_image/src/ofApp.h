@@ -15,9 +15,9 @@
 class ofApp: public ofBaseApp
 {
 public:
-    void setup();
-    void draw();
-    void keyPressed(int key);
+    void setup() override;
+    void draw() override;
+    void keyPressed(int key) override;
 
     ofxESCPOS::DefaultSerialPrinter printer;
 

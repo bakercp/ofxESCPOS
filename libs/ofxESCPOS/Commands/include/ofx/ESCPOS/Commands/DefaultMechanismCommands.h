@@ -22,7 +22,7 @@ class DefaultMechanismCommands: public virtual IO::AbstractByteSink
 {
 public:
     DefaultMechanismCommands();
-    
+
     virtual ~DefaultMechanismCommands();
 
     virtual std::size_t cut(BaseCodes::PaperCut type = BaseCodes::CUT_FULL,

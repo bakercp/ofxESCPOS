@@ -13,7 +13,7 @@ namespace ofx {
 namespace ESCPOS {
 namespace Commands {
 
-    
+
 DefaultPrinterStatusCommands::DefaultPrinterStatusCommands()
 {
 }
@@ -40,7 +40,7 @@ std::size_t DefaultPrinterStatusCommands::getPrinterStatusRealTime()
 
 //        pSerial->waitByteTimes(3);
 
-        
+
 
         std::size_t numBytesRead = readByte(data);
 
@@ -59,7 +59,7 @@ std::size_t DefaultPrinterStatusCommands::getPrinterStatusRealTime()
         {
             ofLogError("DefaultPrinterStatusCommands::getPrinterStatus") << "No bytes read.";
         }
-        
+
     }
     else
     {
@@ -81,7 +81,7 @@ std::size_t DefaultPrinterStatusCommands::getErrorStatus()
     return 0; // TBI
 }
 
-    
+
 std::size_t DefaultPrinterStatusCommands::getPaperStatus()
 {
     return 0; // TBI

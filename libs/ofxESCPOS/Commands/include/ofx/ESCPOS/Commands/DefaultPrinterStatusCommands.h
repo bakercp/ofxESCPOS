@@ -20,7 +20,7 @@ namespace ofx {
 namespace ESCPOS {
 namespace Commands {
 
-    
+
 class DefaultPrinterStatus
 {
 public:
@@ -33,7 +33,7 @@ public:
     {
     }
 
-    
+
 private:
     int _modelId;
     int _typeId;

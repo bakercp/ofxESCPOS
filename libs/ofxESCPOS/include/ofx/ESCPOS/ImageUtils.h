@@ -27,7 +27,7 @@ public:
                                                    std::size_t width,
                                                    std::size_t height,
                                                    ofScaleMode scaleMode = OF_SCALEMODE_FIT);
-                            
+
     static ofPixels_<unsigned char> dither(const ofPixels_<unsigned char>& pixels,
                                            float threshold = 0.5, // will template
                                            float quantWeight = 0.125);
@@ -58,6 +58,6 @@ protected:
     }
 
 };
-    
+
 
 } } // namespace ofx::ESCPOS

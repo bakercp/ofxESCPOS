@@ -28,7 +28,7 @@ class DefaultBitImageCommands: public virtual IO::AbstractByteSink
 {
 public:
     DefaultBitImageCommands();
-    
+
     virtual ~DefaultBitImageCommands();
 
     virtual std::size_t printImage(const ofPixels_<unsigned char>& pixels,

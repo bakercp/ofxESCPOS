@@ -18,7 +18,7 @@
 namespace ofx {
 namespace ESCPOS {
 
-    
+
 
 //class BaseUserDefinedCharacter: public BaseByteBufferProvider
 //{

@@ -23,13 +23,13 @@
 //    _numBytesHorizontal(numBytesHorizontal),
 //    _numBytesVertical(numBytesVertical)
 //{
-//    
+//
 //}
 //
 ////------------------------------------------------------------------------------
 //BitImage::~BitImage()
 //{
-//    
+//
 //}
 //
 ////------------------------------------------------------------------------------
@@ -56,5 +56,5 @@
 //    return _numBytesVertical;
 //}
 //
-//    
+//
 //} } // namespace ofx::ESCPOS::Commands
