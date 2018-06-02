@@ -47,7 +47,7 @@ std::size_t DefaultPrinterStatusCommands::getPrinterStatusRealTime()
         if (numBytesRead > 0)
         {
             std::bitset<8> bits(data);
-            std::cout << "Data Read: " << bits << std::endl;
+            // std::cout << "Data Read: " << bits << std::endl;
 
             bool isDrawerKickoutHigh = bits[2];
             bool isOnline = bits[3];

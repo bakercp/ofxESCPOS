@@ -92,7 +92,7 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
 
     toPrint = ImageUtils::dither(toPrint, ditherThreshold, ditherQuantWeight);
 
-    cout << pix.getWidth() << " / " << pix.getHeight() << endl;
+    // std::cout << pix.getWidth() << " / " << pix.getHeight() << std::endl;
 
     ofPixels bandBuffer;
 

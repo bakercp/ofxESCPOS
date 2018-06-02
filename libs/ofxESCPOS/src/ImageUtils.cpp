@@ -6,6 +6,7 @@
 
 
 #include "ImageUtils.h"
+#include "ofGraphicsConstants.h"
 
 
 namespace ofx {
@@ -46,7 +47,7 @@ ofPixels_<unsigned char> ImageUtils::dither(const ofPixels_<unsigned char>& pixe
     // Special thanks to @julapy / ofxDither
     auto pixelsIn = pixels;
 
-    // ensure the image is grayscale
+    // Ensure the image is grayscale
     if (OF_IMAGE_GRAYSCALE != pixelsIn.getImageType())
     {
         pixelsIn = toGrayscale(pixels);
