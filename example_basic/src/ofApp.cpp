@@ -11,95 +11,31 @@
 void ofApp::setup()
 {
     // We can get all of the connected serial devices using the
-    // IO::SerialDeviceUtils::getDevices() method.
-    // See documentation for more information.
-
-    std::string port = "/dev/tty.Repleo-PL2303-00001014";
-
-    if (!printer.setup(port,
-                       115200,
-                       IO::SerialDevice::DATA_BITS_EIGHT,
-                       IO::SerialDevice::PAR_NONE,
-                       IO::SerialDevice::STOP_ONE,
-                       IO::SerialDevice::FLOW_CTRL_HARDWARE,
-                       serial::Timeout::simpleTimeout(10)))
+    // ofxIO::SerialDeviceUtils::listDevices() static method.
+    //
+    // auto devices = ofxIO::SerialDeviceUtils::listDevices();
+    //
+    // See ofxSerial documentation for more information.
+    
+    // Connect to the first available port.
+    // Conform that this is the one you want.
+    if (!printer.setup(38400))
     {
-        ofLogError("ofApp::setup") << "Unable to connect to: " << port;
+        ofLogError("ofApp::setup") << "Unable to connect to: " << printer.port();
         ofExit();
     }
-
+    else
+    {
+        ofLogNotice("ofApp::setup") << "Connected to: " << printer.port();
+    }
+    
     // Set up hardware flow control if needed.
     printer.setDataTerminalReady();
     printer.setRequestToSend();
-
+    
     // Initialize the printer.
     printer.initialize();
     printer.flush();
-
-
-    const uint8_t command[3] = {
-        ESCPOS::BaseCodes::DLE,
-        ESCPOS::BaseCodes::EOT,
-        ESCPOS::BaseCodes::STATUS_PRINTER
-    };
-
-
-//    unsigned long f = ofGetElapsedTimeMillis();
-//
-//    std::size_t numBytesWritten = printer.writeBytes(command, 3);
-//
-//    cout << (ofGetElapsedTimeMillis() - f) << endl;
-//
-//    if (3 == numBytesWritten)
-//    {
-//        uint8_t data[256];
-//
-//        std::shared_ptr<serial::Serial> serial = printer.getSerial();
-//
-//        unsigned long f = ofGetElapsedTimeMillis();
-//
-//        if (serial->waitReadable())
-//        {
-//            cout << "true" << endl;
-//        }
-//        else
-//        {
-//            cout << "false" << endl;
-//        }
-//
-//        std::size_t numBytesRead = serial->read(data, 256);
-//
-//        cout << (ofGetElapsedTimeMillis() - f) << endl;
-//
-//        if (numBytesRead > 0)
-//        {
-//            cout << "numBytesRead: " << numBytesRead << endl;
-//            std::bitset<8> bits(data[0]);
-//            std::cout << "Data Read: " << bits << std::endl;
-//
-//            bool isDrawerKickoutHigh = bits[2];
-//            bool isOnline = bits[3];
-//
-//
-//
-//            // package these
-//
-//        }
-//        else
-//        {
-//            ofLogError("DefaultPrinterStatusCommands::getPrinterStatus") << "No bytes read.";
-//        }
-//
-//    }
-//    else
-//    {
-//        ofLogError("DefaultPrinterStatusCommands::getPrinterStatus") << "Number of bytes written was " << numBytesWritten;
-//    }
-
-//    printer.writeByte(0);
-//    printer.writeByte(0);
-
-
 
 }
 
