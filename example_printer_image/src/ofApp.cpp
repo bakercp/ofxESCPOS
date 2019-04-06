@@ -19,7 +19,7 @@ void ofApp::setup()
     
     // Connect to the first available port.
     // Conform that this is the one you want.
-    if (!printer.setup(38400))
+    if (!printer.setup(9600))
     {
         ofLogError("ofApp::setup") << "Unable to connect to: " << printer.port();
         ofExit();
