@@ -37,6 +37,8 @@ public:
 
     virtual ~DefaultSerialPrinter();
 
+    std::string getSerialNumber();
+
 };
 
 
