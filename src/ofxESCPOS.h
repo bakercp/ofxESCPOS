@@ -13,7 +13,6 @@
 #include "ofx/ESCPOS/BaseCodes.h"
 #include "ofx/ESCPOS/Commands/DefaultCharacterCommands.h"
 #include "ofx/ESCPOS/DefaultSerialPrinter.h"
-#include "ofx/ESCPOS/ImageUtils.h"
 #include "ofx/ESCPOS/BitImage.h"
 
 

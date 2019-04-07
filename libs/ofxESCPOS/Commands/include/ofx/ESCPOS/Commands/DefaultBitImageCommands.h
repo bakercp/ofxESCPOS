@@ -14,7 +14,7 @@
 #include "ofPixels.h"
 #include "ofx/IO/AbstractTypes.h"
 #include "ofx/IO/ByteBuffer.h"
-#include "ofx/ESCPOS/ImageUtils.h"
+#include "ofx/IO/ImageUtils.h"
 #include "ofx/ESCPOS/BaseCodes.h"
 #include "ofx/ESCPOS/BitImage.h"
 
@@ -33,13 +33,16 @@ public:
 
     virtual std::size_t printImage(const ofPixels_<unsigned char>& pixels,
                                    ofAlignHorz alignHorz = OF_ALIGN_HORZ_LEFT,
-                                   float ditherThreshold = 0.5,
-                                   float ditherQuantWeight = 0.125,
+                                   float ditherThreshold = IO::ImageUtils::DEFAULT_DITHER_THRESHOLD,
+                                   float ditherQuantWeight = IO::ImageUtils::DEFAULT_DITHER_QUANT_WEIGHT,
                                    BaseCodes::PrintResolution printResolution = BaseCodes::RESOLUTION_24_DOTS_DOUBLE_DENSITY,
-                                   int printHeadWidth = 576,
-                                   int printHeadHeight = 24);
+                                   int printHeadWidth = DEFAULT_PRINT_HEAD_WIDTH,
+                                   int printHeadHeight = DEFAULT_PRINT_HEAD_HEIGHT);
 
     virtual std::size_t setPageModePrintArea(int x, int y, int width, int height);
+
+    static const int DEFAULT_PRINT_HEAD_WIDTH = 576;
+    static const int DEFAULT_PRINT_HEAD_HEIGHT = 24;
 
 protected:
     // the user is responsible for making sure that the binary pixels are appropriate
