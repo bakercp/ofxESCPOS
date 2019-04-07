@@ -18,8 +18,8 @@ void ofApp::setup()
     // See ofxSerial documentation for more information.
     
     // Connect to the first available port.
-    // Conform that this is the one you want.
-    if (!printer.setup(38400))
+    // Confirm that this is the one you want and the correct speed.
+    if (!printer.setup(115200))
     {
         ofLogError("ofApp::setup") << "Unable to connect to: " << printer.port();
         ofExit();
@@ -44,7 +44,7 @@ void ofApp::draw()
 {
     ofBackgroundGradient(ofColor::white, ofColor::black);
     ofSetColor(255);
-    ofDrawBitmapStringHighlight("Press any key for a test print.", ofVec2f(20, 30));
+    ofDrawBitmapStringHighlight("Press any key for a test print.", 20, 30);
 }
 
 
