@@ -31,13 +31,16 @@ public:
                                    float ditherThreshold = IO::ImageUtils::DEFAULT_DITHER_THRESHOLD,
                                    float ditherQuantWeight = IO::ImageUtils::DEFAULT_DITHER_QUANT_WEIGHT,
                                    BaseCodes::PrintResolution printResolution = BaseCodes::RESOLUTION_24_DOTS_DOUBLE_DENSITY,
-                                   int printHeadWidth = DEFAULT_PRINT_HEAD_WIDTH,
-                                   int printHeadHeight = DEFAULT_PRINT_HEAD_HEIGHT);
+                                   std::size_t printHeadWidth = DEFAULT_PRINT_HEAD_WIDTH,
+                                   std::size_t printHeadHeight = DEFAULT_PRINT_HEAD_HEIGHT);
 
-    virtual std::size_t setPageModePrintArea(int x, int y, int width, int height);
+    virtual std::size_t setPageModePrintArea(std::size_t x,
+                                             std::size_t y,
+                                             std::size_t width,
+                                             std::size_t height);
 
-    static const int DEFAULT_PRINT_HEAD_WIDTH = 576;
-    static const int DEFAULT_PRINT_HEAD_HEIGHT = 24;
+    static const std::size_t DEFAULT_PRINT_HEAD_WIDTH = 576;
+    static const std::size_t DEFAULT_PRINT_HEAD_HEIGHT = 24;
 
 protected:
     // the user is responsible for making sure that the binary pixels are appropriate

@@ -28,13 +28,12 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
                                                 float ditherThreshold,
                                                 float ditherQuantWeight,
                                                 BaseCodes::PrintResolution printResolution,
-                                                int printHeadWidth,
-                                                int printHeadHeight)
+                                                std::size_t printHeadWidth,
+                                                std::size_t printHeadHeight)
 {
 
-    int numVerticalDots = 0;
-    int maxHorizontalDots = 0;
-    //uint8_t verticalScale = 1;
+    std::size_t numVerticalDots = 0;
+    std::size_t maxHorizontalDots = 0;
 
     switch (printResolution)
     {
@@ -68,13 +67,14 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
                       alignHorz,
                       OF_ALIGN_VERT_TOP);
 
-    int width = rectangle.getWidth();
-    int height = imageRect.getHeight();
+    std::size_t width = std::size_t(rectangle.getWidth());
+    std::size_t height = std::size_t(imageRect.getHeight());
 
-    // ensure vertical res
+    // ensure vertical res.
     if (height != numVerticalDots)
     {
-        int remainder = height % numVerticalDots;
+        std::size_t remainder = height % numVerticalDots;
+
         if (remainder != 0)
         {
             height = height + numVerticalDots - remainder;
@@ -87,10 +87,16 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
     toPrint.allocate(width, height, pix.getNumChannels());
     toPrint.setColor(ofColor(255));
 
-    pix.resize(imageRect.getWidth(), imageRect.getHeight());
-    pix.pasteInto(toPrint, imageRect.getX(), imageRect.getY());
+    pix.resize(std::size_t(imageRect.getWidth()),
+               std::size_t(imageRect.getHeight()));
 
-    toPrint = IO::ImageUtils::dither(toPrint, ditherThreshold, ditherQuantWeight);
+    pix.pasteInto(toPrint,
+                  std::size_t(imageRect.getX()),
+                  std::size_t(imageRect.getY()));
+
+    toPrint = IO::ImageUtils::dither(toPrint,
+                                     ditherThreshold,
+                                     ditherQuantWeight);
 
     ofPixels bandBuffer;
 
@@ -109,7 +115,7 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
                                               toPrint.getWidth(),
                                               toPrint.getHeight() * 2); // TODO 2 * works for double vert density
 
-    for (int y = 0; y < height; y += numVerticalDots)
+    for (std::size_t y = 0; y < height; y += numVerticalDots)
     {
         // set the vertical displacement
         // https://www.epson-biz.com/modules/ref_escpos/index.php?content_id=20
@@ -117,7 +123,7 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
         totalBytesWritten += writeBytes(command);
 
         bandBuffer.clear();
-        toPrint.cropTo(bandBuffer,0,y,width,numVerticalDots);
+        toPrint.cropTo(bandBuffer, 0, y, width, numVerticalDots);
         totalBytesWritten += selectBitImageMode(bandBuffer, printResolution);
         totalBytesWritten += writeByte(BaseCodes::LF); // feed a line
 
@@ -138,10 +144,10 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
 }
 
 
-std::size_t DefaultBitImageCommands::setPageModePrintArea(int x,
-                                                          int y,
-                                                          int width,
-                                                          int height)
+std::size_t DefaultBitImageCommands::setPageModePrintArea(std::size_t x,
+                                                          std::size_t y,
+                                                          std::size_t width,
+                                                          std::size_t height)
 {
     uint8_t xL = getLowByte(x);
     uint8_t xH = getHighByte(x);
@@ -159,7 +165,7 @@ std::size_t DefaultBitImageCommands::setPageModePrintArea(int x,
     // https://www.epson-biz.com/modules/ref_escpos/index.php?content_id=56
     const uint8_t command[10] = { BaseCodes::ESC, 'W', xL, xH, yL, yH, dXL, dXH, dYL, dYH };
 
-    return writeBytes(command,10);
+    return writeBytes(command, 10);
 }
 
 
@@ -179,20 +185,21 @@ std::size_t DefaultBitImageCommands::selectBitImageMode(const ofPixels_<unsigned
     // https://www.epson-biz.com/modules/ref_escpos/index.php?content_id=88
     buffer.push_back(BaseCodes::ESC);
     buffer.push_back('*');
+
     buffer.push_back(printResolution);
     buffer.push_back(nL);
     buffer.push_back(nH);
 
     uint8_t currentByte = 0;
-    int bitIndex = 0;
+    std::size_t bitIndex = 0;
 
-    for (int x = 0; x < binaryPixels.getWidth(); ++x)
+    for (std::size_t x = 0; x < binaryPixels.getWidth(); ++x)
     {
         currentByte = 0;
         bitIndex = 0;
 
         // Pack pixels into bytes.
-        for (int y = 0; y < binaryPixels.getHeight(); ++y)
+        for (std::size_t y = 0; y < binaryPixels.getHeight(); ++y)
         {
             bool binaryValue = binaryPixels[binaryPixels.getPixelIndex(x, y)] < ofColor_<unsigned char>::limit() / 2;
 
@@ -215,13 +222,13 @@ std::size_t DefaultBitImageCommands::selectBitImageMode(const ofPixels_<unsigned
 
 uint8_t DefaultBitImageCommands::getHighByte(std::size_t d)
 {
-    return (uint8_t)(d >> 8);
+    return uint8_t(d >> 8);
 }
 
 
 uint8_t DefaultBitImageCommands::getLowByte(std::size_t d)
 {
-    return (uint8_t)(d & 0xFF);
+    return uint8_t(d & 0xFF);
 }
 
 
