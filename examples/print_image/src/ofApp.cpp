@@ -10,6 +10,15 @@
 
 void ofApp::setup()
 {
+    // Set up the gui parameters.
+    gui.setup();
+    gui.add(ditherThreshold.setup("ditherThreshold", ofxIO::ImageUtils::DEFAULT_DITHER_THRESHOLD, 0, 6));
+    gui.add(ditherQuantWeight.setup("ditherQuantWeight", ofxIO::ImageUtils::DEFAULT_DITHER_QUANT_WEIGHT, 0, 0.2));
+
+    // Enable the grabber.
+    grabber.setup(640, 480);
+
+    // Set up printer parameters.
     // We can get all of the connected serial devices using the
     // ofxIO::SerialDeviceUtils::listDevices() static method.
     //
@@ -36,39 +45,55 @@ void ofApp::setup()
     // Initialize the printer.
     printer.initialize();
     printer.flush();
+
+    ofBackground(0);
+}
+
+
+void ofApp::update()
+{
+    grabber.update();
+
+    if (grabber.isFrameNew() || firstFrame)
+    {
+        ditheredImage = ofxIO::ImageUtils::dither(grabber.getPixels(),
+                                                  ditherThreshold,
+                                                  ditherQuantWeight);
+        firstFrame = false;
+    }
 }
 
 
 void ofApp::draw()
 {
-    ofBackgroundGradient(ofColor::white, ofColor::black);
     ofSetColor(255);
-    ofDrawBitmapStringHighlight("Press any key for a test print.", 20, 30);
+
+    grabber.draw(0, 0);
+    ditheredImage.draw(grabber.getWidth(), 0);
+
+    gui.draw();
+    ofDrawBitmapStringHighlight("Press (spacebar) to print the image.", 20, ofGetHeight() - 20);
 }
 
 
 void ofApp::keyPressed(int key)
 {
-    ofPixels pixels;
-    ofLoadImage(pixels, "puppy.jpeg");
+    if (key != ' ')
+        return;
 
     // If you have printing problems, ensure that all default parameters work
     // for your device. For example depending on your printer, the print head
     // width or height may be different.
 
-    printer.printImage(pixels,
-                       OF_ALIGN_HORZ_LEFT,
-                       ofxIO::ImageUtils::DEFAULT_DITHER_THRESHOLD,
-                       ofxIO::ImageUtils::DEFAULT_DITHER_QUANT_WEIGHT,
+    printer.printImage(ditheredImage.getPixels(),
+                       OF_ALIGN_HORZ_CENTER,
+                       ditherThreshold,
+                       ditherQuantWeight,
                        ofxESCPOS::BaseCodes::RESOLUTION_24_DOTS_DOUBLE_DENSITY,
                        ofxESCPOS::DefaultSerialPrinter::DEFAULT_PRINT_HEAD_WIDTH,
                        ofxESCPOS::DefaultSerialPrinter::DEFAULT_PRINT_HEAD_HEIGHT);
 
     printer.flush();
-
-    printer.printImage(pixels, OF_ALIGN_HORZ_CENTER);
-    printer.flush();
-    
-    printer.printImage(pixels, OF_ALIGN_HORZ_RIGHT);
-    printer.flush();
+    printer.cut();
 }
+
