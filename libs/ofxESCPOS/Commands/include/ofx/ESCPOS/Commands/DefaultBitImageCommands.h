@@ -47,6 +47,8 @@ public:
 protected:
     // the user is responsible for making sure that the binary pixels are appropriate
     // for the print resolution selected.
+    ///
+    /// \sa https://www.epson-biz.com/modules/ref_escpos/index.php?content_id=88
     virtual std::size_t selectBitImageMode(const ofPixels_<unsigned char>& binaryPixels,
                                            BaseCodes::PrintResolution printResolution);
 
