@@ -27,7 +27,7 @@ public:
     virtual ~DefaultBitImageCommands();
 
     virtual std::size_t printImage(const ofPixels_<unsigned char>& pixels,
-                                   ofAlignHorz alignHorz = OF_ALIGN_HORZ_LEFT,
+                                   ofAlignHorz alignHorz = OF_ALIGN_HORZ_CENTER,
                                    float ditherThreshold = IO::ImageUtils::DEFAULT_DITHER_THRESHOLD,
                                    float ditherQuantWeight = IO::ImageUtils::DEFAULT_DITHER_QUANT_WEIGHT,
                                    BaseCodes::PrintResolution printResolution = BaseCodes::RESOLUTION_24_DOTS_DOUBLE_DENSITY,
