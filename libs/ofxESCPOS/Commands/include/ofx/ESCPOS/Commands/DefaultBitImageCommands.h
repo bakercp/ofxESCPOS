@@ -8,15 +8,10 @@
 #pragma once
 
 
-#include <algorithm>
-#include <cstring>
-#include "ofImage.h"
 #include "ofPixels.h"
 #include "ofx/IO/AbstractTypes.h"
-#include "ofx/IO/ByteBuffer.h"
 #include "ofx/IO/ImageUtils.h"
 #include "ofx/ESCPOS/BaseCodes.h"
-#include "ofx/ESCPOS/BitImage.h"
 
 
 namespace ofx {

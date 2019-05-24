@@ -6,7 +6,7 @@
 
 
 #include "DefaultBitImageCommands.h"
-#include "ofAppRunner.h"
+
 
 namespace ofx {
 namespace ESCPOS {
