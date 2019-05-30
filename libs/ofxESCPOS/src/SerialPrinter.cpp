@@ -92,7 +92,7 @@ std::size_t SerialPrinter::clearUserDefinedCharacter(uint8_t character)
 {
     if (character > 126 || character < 32)
     {
-        ofLogError("CharacterCommands::clearUserDefinedCharacter") << "Invalid character " << character;
+        ofLogError("SerialPrinter::clearUserDefinedCharacter") << "Invalid character " << character;
         return 0;
     }
 
@@ -385,13 +385,13 @@ std::size_t SerialPrinter::getPrinterStatusRealTime()
         }
         else
         {
-            ofLogError("PrinterStatusCommands::getPrinterStatus") << "No bytes read.";
+            ofLogError("SerialPrinter::getSerialPrinterStatus") << "No bytes read.";
         }
 
     }
     else
     {
-        ofLogError("PrinterStatusCommands::getPrinterStatus") << "Number of bytes written was " << numBytesWritten;
+        ofLogError("SerialPrinter::getSerialPrinterStatus") << "Number of bytes written was " << numBytesWritten;
     }
 
     return numBytesWritten;
