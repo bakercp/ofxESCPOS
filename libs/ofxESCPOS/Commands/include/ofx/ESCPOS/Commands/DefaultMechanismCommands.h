@@ -10,7 +10,7 @@
 
 #include <stdint.h>
 #include "ofx/IO/AbstractTypes.h"
-#include "ofx/ESCPOS/BaseCodes.h"
+#include "ofx/ESCPOS/Codes.h"
 
 
 namespace ofx {
@@ -25,7 +25,7 @@ public:
 
     virtual ~DefaultMechanismCommands();
 
-    virtual std::size_t cut(BaseCodes::PaperCut type = BaseCodes::CUT_FULL,
+    virtual std::size_t cut(Codes::PaperCut type = Codes::CUT_FULL,
                             uint8_t numDotsToFeed = 0);
 
 };

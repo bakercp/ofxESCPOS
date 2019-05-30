@@ -39,6 +39,7 @@ public:
 
     std::string getSerialNumber();
 
+
 };
 
 

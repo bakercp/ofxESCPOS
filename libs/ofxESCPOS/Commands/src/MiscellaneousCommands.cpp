@@ -25,8 +25,7 @@ MiscellaneousCommands::~MiscellaneousCommands()
 
 std::size_t MiscellaneousCommands::initialize()
 {
-    const uint8_t command[2] = { BaseCodes::ESC, '@' };
-    return writeBytes(command, 2);
+    return writeBytes({ Codes::ESC, '@' });
 }
 
 

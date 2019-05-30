@@ -13,8 +13,7 @@
 #include "ofx/IO/AbstractTypes.h"
 #include "ofx/IO/ByteBuffer.h"
 #include "ofx/IO/ByteBufferUtils.h"
-#include "ofx/ESCPOS/BaseCodes.h"
-#include "ofx/ESCPOS/BaseTypes.h"
+#include "ofx/ESCPOS/Codes.h"
 
 
 namespace ofx {
@@ -34,22 +33,22 @@ public:
     virtual std::size_t enableUserDefinedCharacterSet(bool enable);
     virtual std::size_t uploadUserDefinedCharacterSet(const std::vector<uint8_t>& charSet);
     virtual std::size_t clearUserDefinedCharacter(uint8_t character);
-    virtual std::size_t setCharacterSet(BaseCodes::CharacterSet charSet);
-    virtual std::size_t setCharacterCodePage(BaseCodes::CodePage codePage);
+    virtual std::size_t setCharacterSet(Codes::CharacterSet charSet);
+    virtual std::size_t setCharacterCodePage(Codes::CodePage codePage);
 
     virtual std::size_t setPrintMode(uint8_t modeByte);
     virtual std::size_t setInvert(bool enable);
-    virtual std::size_t setUnderline(BaseCodes::TextUnderline underline);
+    virtual std::size_t setUnderline(Codes::TextUnderline underline);
     virtual std::size_t setEmphasis(bool bEnable);
     virtual std::size_t setDoubleStrike(bool enable);
-    virtual std::size_t setFont(BaseCodes::TextFont font);
-    virtual std::size_t setColor(BaseCodes::TextColor color);
+    virtual std::size_t setFont(Codes::TextFont font);
+    virtual std::size_t setColor(Codes::TextColor color);
     virtual std::size_t setUpsideDown(bool enable);
-    virtual std::size_t setCharacterSize(BaseCodes::TextMagnification horizontal,
-                                         BaseCodes::TextMagnification vertical);
+    virtual std::size_t setCharacterSize(Codes::TextMagnification horizontal,
+                                         Codes::TextMagnification vertical);
     virtual std::size_t setCharacterSmoothing(bool enable);
-    virtual std::size_t setRotation(BaseCodes::TextRotate textRotate);
-    virtual std::size_t setAlign(BaseCodes::TextAlignment align);
+    virtual std::size_t setRotation(Codes::TextRotate textRotate);
+    virtual std::size_t setAlign(Codes::TextAlignment align);
 
 };
 

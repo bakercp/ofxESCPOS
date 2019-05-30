@@ -9,11 +9,9 @@
 
 
 #include "ofxSerial.h"
-#include "ofx/ESCPOS/BaseTypes.h"
-#include "ofx/ESCPOS/BaseCodes.h"
+#include "ofx/ESCPOS/Codes.h"
 #include "ofx/ESCPOS/Commands/DefaultCharacterCommands.h"
 #include "ofx/ESCPOS/DefaultSerialPrinter.h"
-#include "ofx/ESCPOS/BitImage.h"
 
 
 namespace ofxESCPOS = ofx::ESCPOS;

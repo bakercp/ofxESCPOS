@@ -24,13 +24,11 @@ DefaultSerialPrinter::~DefaultSerialPrinter()
 
 std::string DefaultSerialPrinter::getSerialNumber()
 {
-    const uint8_t command[3] = {
-        ESCPOS::BaseCodes::GS,
+    std::size_t b = writeBytes({
+        ESCPOS::Codes::GS,
         'I',
         68
-    };
-
-    std::size_t b = writeBytes(command, 3);
+    });
 
     std::cout << b << " bytes written." << std::endl;
 

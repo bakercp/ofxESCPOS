@@ -27,7 +27,7 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
                                                 ofAlignHorz alignHorz,
                                                 float ditherThreshold,
                                                 float ditherQuantWeight,
-                                                BaseCodes::PrintResolution printResolution,
+                                                Codes::PrintResolution printResolution,
                                                 std::size_t printHeadWidth,
                                                 std::size_t printHeadHeight)
 {
@@ -37,19 +37,19 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
 
     switch (printResolution)
     {
-        case BaseCodes::RESOLUTION_8_DOTS_SINGLE_DENSITY:
+        case Codes::RESOLUTION_8_DOTS_SINGLE_DENSITY:
             maxHorizontalDots = printHeadWidth / 2;
             numVerticalDots = 8;
             break;
-        case BaseCodes::RESOLUTION_8_DOTS_DOUBLE_DENSITY:
+        case Codes::RESOLUTION_8_DOTS_DOUBLE_DENSITY:
             maxHorizontalDots = printHeadWidth;
             numVerticalDots = 8;
             break;
-        case BaseCodes::RESOLUTION_24_DOTS_SINGLE_DENSITY:
+        case Codes::RESOLUTION_24_DOTS_SINGLE_DENSITY:
             maxHorizontalDots = printHeadWidth / 2;
             numVerticalDots = 24;
             break;
-        case BaseCodes::RESOLUTION_24_DOTS_DOUBLE_DENSITY:
+        case Codes::RESOLUTION_24_DOTS_DOUBLE_DENSITY:
             maxHorizontalDots = printHeadWidth;
             numVerticalDots = 24;
             break;
@@ -106,7 +106,7 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
 
     // Enter Page Mode
     // https://www.epson-biz.com/modules/ref_escpos/index.php?content_id=193
-    totalBytesWritten += writeByte(BaseCodes::ESC);
+    totalBytesWritten += writeByte(Codes::ESC);
     totalBytesWritten += writeByte('L');
 
     // set the print area / origin
@@ -119,26 +119,24 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
     {
         // set the vertical displacement
         // https://www.epson-biz.com/modules/ref_escpos/index.php?content_id=20
-        std::vector<uint8_t> command = { BaseCodes::ESC, '3', static_cast<uint8_t>(numVerticalDots * 2) }; // TODO 2 * works for double vert density
-        totalBytesWritten += writeBytes(command);
+        totalBytesWritten += writeBytes({ Codes::ESC, '3', static_cast<uint8_t>(numVerticalDots * 2) }); // TODO 2 * works for double vert density
 
         bandBuffer.clear();
         toPrint.cropTo(bandBuffer, 0, y, width, numVerticalDots);
         totalBytesWritten += selectBitImageMode(bandBuffer, printResolution);
-        totalBytesWritten += writeByte(BaseCodes::LF); // feed a line
+        totalBytesWritten += writeByte(Codes::LF); // feed a line
 
         // set vertical displacement back to normal
         // https://www.epson-biz.com/modules/ref_escpos/index.php?content_id=19
-        const uint8_t command0[2] = { BaseCodes::ESC, '2' };
-        totalBytesWritten += writeBytes(command0, 2);
+        totalBytesWritten += writeBytes({ Codes::ESC, '2' });
     }
 
     // https://www.epson-biz.com/modules/ref_escpos/index.php?content_id=10
-    // totalBytesWritten += writeByte(BaseCodes::LF); // feed a line
+    // totalBytesWritten += writeByte(Codes::LF); // feed a line
 
     // Print and return to standard mode, while in page mode.
     // https://www.epson-biz.com/modules/ref_escpos/index.php?content_id=12
-    totalBytesWritten += writeByte(BaseCodes::FF);
+    totalBytesWritten += writeByte(Codes::FF);
 
     return totalBytesWritten;
 }
@@ -163,14 +161,12 @@ std::size_t DefaultBitImageCommands::setPageModePrintArea(std::size_t x,
 
     // Set print area in Page mode
     // https://www.epson-biz.com/modules/ref_escpos/index.php?content_id=56
-    const uint8_t command[10] = { BaseCodes::ESC, 'W', xL, xH, yL, yH, dXL, dXH, dYL, dYH };
-
-    return writeBytes(command, 10);
+    return writeBytes({ Codes::ESC, 'W', xL, xH, yL, yH, dXL, dXH, dYL, dYH });
 }
 
 
 std::size_t DefaultBitImageCommands::selectBitImageMode(const ofPixels_<unsigned char>& binaryPixels,
-                                                        BaseCodes::PrintResolution printResolution)
+                                                        Codes::PrintResolution printResolution)
 {
     // width = nL + (nH * 256)
     // nH is the HIGH part of the WIDTH VALUE.
@@ -183,7 +179,7 @@ std::size_t DefaultBitImageCommands::selectBitImageMode(const ofPixels_<unsigned
 
     // Select bit image mode.
     // https://www.epson-biz.com/modules/ref_escpos/index.php?content_id=88
-    buffer.push_back(BaseCodes::ESC);
+    buffer.push_back(Codes::ESC);
     buffer.push_back('*');
 
     buffer.push_back(printResolution);

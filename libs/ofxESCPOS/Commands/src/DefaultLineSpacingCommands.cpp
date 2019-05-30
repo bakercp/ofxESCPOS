@@ -25,15 +25,13 @@ DefaultLineSpacingCommands::~DefaultLineSpacingCommands()
 
 std::size_t DefaultLineSpacingCommands::setDefaultLineSpacing()
 {
-    const uint8_t command[2] = { 27, 50 };
-    return writeBytes(command, 2);
+    return writeBytes({ 27, 50 });
 }
 
 
 std::size_t DefaultLineSpacingCommands::setLineSpacing(uint8_t n)
 {
-    const uint8_t command[3] = { 27, 51, n };
-    return writeBytes(command, 3);
+    return writeBytes({ 27, 51, n });
 }
 
 

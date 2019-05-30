@@ -25,29 +25,25 @@ DefaultCharacterCommands::~DefaultCharacterCommands()
 
 std::size_t DefaultCharacterCommands::clearPage()
 {
-    return writeByte(BaseCodes::CAN);
+    return writeByte(Codes::CAN);
 }
 
 
 std::size_t DefaultCharacterCommands::setRightSideCharacterSpacing(uint8_t n)
 {
-    const uint8_t command[3] = { BaseCodes::ESC, ' ', n };
-    return writeBytes(command, 3);
+    return writeBytes({ Codes::ESC, ' ', n });
 }
 
 
 std::size_t DefaultCharacterCommands::enableUserDefinedCharacterSet(bool enable)
 {
-    const uint8_t command[3] = { BaseCodes::ESC, '%', enable };
-    return writeBytes(command, 3);
+    return writeBytes({ Codes::ESC, '%', enable });
 }
 
 
 std::size_t DefaultCharacterCommands::uploadUserDefinedCharacterSet(const std::vector<uint8_t>& charSet)
 {
-    const uint8_t command[2] = { BaseCodes::ESC, '&' };
-
-    IO::ByteBuffer buffer(command,2);
+    IO::ByteBuffer buffer({ Codes::ESC, '&' });
     buffer.writeBytes(charSet);
 
     return writeBytes(buffer.getData());
@@ -62,111 +58,95 @@ std::size_t DefaultCharacterCommands::clearUserDefinedCharacter(uint8_t characte
         return 0;
     }
 
-    const uint8_t command[3] = { BaseCodes::ESC, '?', character };
-    return writeBytes(command, 3);
+    return writeBytes({ Codes::ESC, '?', character });
 }
 
 
-std::size_t DefaultCharacterCommands::setCharacterSet(BaseCodes::CharacterSet charSet)
+std::size_t DefaultCharacterCommands::setCharacterSet(Codes::CharacterSet charSet)
 {
-    const uint8_t command[3] = { BaseCodes::ESC, 'R', charSet };
-    return writeBytes(command, 3);
+    return writeBytes({ Codes::ESC, 'R', charSet });
 }
 
 
-std::size_t DefaultCharacterCommands::setCharacterCodePage(BaseCodes::CodePage codePage)
+std::size_t DefaultCharacterCommands::setCharacterCodePage(Codes::CodePage codePage)
 {
-    const uint8_t command[3] = { BaseCodes::ESC, 't', codePage };
-    return writeBytes(command, 3);
+    return writeBytes({ Codes::ESC, 't', codePage });
 }
 
 
 std::size_t DefaultCharacterCommands::setPrintMode(uint8_t modeByte)
 {
-    const uint8_t command[3] = { BaseCodes::ESC, '!', modeByte };
-    return writeBytes(command, 3);
+    return writeBytes({ Codes::ESC, '!', modeByte });
 }
 
 
 std::size_t DefaultCharacterCommands::setInvert(bool enable)
 {
-    const uint8_t command[3] = { BaseCodes::GS, 'B', enable };
-    return writeBytes(command, 3);
+    return writeBytes({ Codes::GS, 'B', enable });
 }
 
 
-std::size_t DefaultCharacterCommands::setUnderline(BaseCodes::TextUnderline underline)
+std::size_t DefaultCharacterCommands::setUnderline(Codes::TextUnderline underline)
 {
-    const uint8_t command[3] = { BaseCodes::ESC, '-', underline };
-    return writeBytes(command, 3);
+    return writeBytes({ Codes::ESC, '-', underline });
 }
 
 
 std::size_t DefaultCharacterCommands::setEmphasis(bool enable)
 {
-    const uint8_t command[3] = { BaseCodes::ESC, 'E', enable };
-    return writeBytes(command, 3);
+    return writeBytes({ Codes::ESC, 'E', enable });
 }
 
 
 std::size_t DefaultCharacterCommands::setDoubleStrike(bool enable)
 {
-    const uint8_t command[3] = { BaseCodes::ESC, 'G', enable };
-    return writeBytes(command, 3);
+    return writeBytes({ Codes::ESC, 'G', enable });
 }
 
 
-std::size_t DefaultCharacterCommands::setFont(BaseCodes::TextFont font)
+std::size_t DefaultCharacterCommands::setFont(Codes::TextFont font)
 {
-    const uint8_t command[3] = { BaseCodes::ESC, 'M', font };
-    return writeBytes(command, 3);
+    return writeBytes({ Codes::ESC, 'M', font });
 }
 
 
-std::size_t DefaultCharacterCommands::setColor(BaseCodes::TextColor color)
+std::size_t DefaultCharacterCommands::setColor(Codes::TextColor color)
 {
-    const uint8_t command[3] = { BaseCodes::ESC, 'r', color };
-    return writeBytes(command, 3);
+    return writeBytes({ Codes::ESC, 'r', color });
 }
 
-std::size_t DefaultCharacterCommands::setAlign(BaseCodes::TextAlignment align)
+std::size_t DefaultCharacterCommands::setAlign(Codes::TextAlignment align)
 {
-    const uint8_t command[3] = { BaseCodes::ESC,'a',align};
-    return writeBytes(command, 3);
+    return writeBytes({ Codes::ESC,'a',align});
 }
 
 
 std::size_t DefaultCharacterCommands::setUpsideDown(bool enable)
 {
-    const uint8_t command[3] = { BaseCodes::ESC, '{', enable };
-    return writeBytes(command, 3);
+    return writeBytes({ Codes::ESC, '{', enable });
 }
 
 
-std::size_t DefaultCharacterCommands::setCharacterSize(BaseCodes::TextMagnification horizontal,
-                                                       BaseCodes::TextMagnification vertical)
+std::size_t DefaultCharacterCommands::setCharacterSize(Codes::TextMagnification horizontal,
+                                                       Codes::TextMagnification vertical)
 {
-    const uint8_t command[3] = {
-								BaseCodes::GS,
-								'!',
-								static_cast<uint8_t>((horizontal << 4) | (vertical))
-								};
-
-	return writeBytes(command, 3);
+    return writeBytes({
+        Codes::GS,
+        '!',
+        static_cast<uint8_t>((horizontal << 4) | (vertical))
+    });
 }
 
 
 std::size_t DefaultCharacterCommands::setCharacterSmoothing(bool enable)
 {
-    const uint8_t command[3] = { BaseCodes::GS, 'b', enable };
-    return writeBytes(command, 3);
+    return writeBytes({ Codes::GS, 'b', enable });
 }
 
 
-std::size_t DefaultCharacterCommands::setRotation(BaseCodes::TextRotate textRotate)
+std::size_t DefaultCharacterCommands::setRotation(Codes::TextRotate textRotate)
 {
-    const uint8_t command[3] = { BaseCodes::ESC, 'V', textRotate };
-    return writeBytes(command, 3);
+    return writeBytes({ Codes::ESC, 'V', textRotate });
 }
 
 

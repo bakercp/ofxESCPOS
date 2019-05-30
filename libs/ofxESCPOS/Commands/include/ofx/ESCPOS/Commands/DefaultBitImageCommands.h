@@ -11,7 +11,7 @@
 #include "ofPixels.h"
 #include "ofx/IO/AbstractTypes.h"
 #include "ofx/IO/ImageUtils.h"
-#include "ofx/ESCPOS/BaseCodes.h"
+#include "ofx/ESCPOS/Codes.h"
 
 
 namespace ofx {
@@ -30,7 +30,7 @@ public:
                                    ofAlignHorz alignHorz = OF_ALIGN_HORZ_CENTER,
                                    float ditherThreshold = IO::ImageUtils::DEFAULT_DITHER_THRESHOLD,
                                    float ditherQuantWeight = IO::ImageUtils::DEFAULT_DITHER_QUANT_WEIGHT,
-                                   BaseCodes::PrintResolution printResolution = BaseCodes::RESOLUTION_24_DOTS_DOUBLE_DENSITY,
+                                   Codes::PrintResolution printResolution = Codes::RESOLUTION_24_DOTS_DOUBLE_DENSITY,
                                    std::size_t printHeadWidth = DEFAULT_PRINT_HEAD_WIDTH,
                                    std::size_t printHeadHeight = DEFAULT_PRINT_HEAD_HEIGHT);
 
@@ -48,7 +48,7 @@ protected:
     ///
     /// \sa https://www.epson-biz.com/modules/ref_escpos/index.php?content_id=88
     virtual std::size_t selectBitImageMode(const ofPixels_<unsigned char>& binaryPixels,
-                                           BaseCodes::PrintResolution printResolution);
+                                           Codes::PrintResolution printResolution);
 
     static uint8_t getHighByte(std::size_t d);
     static uint8_t getLowByte(std::size_t d);

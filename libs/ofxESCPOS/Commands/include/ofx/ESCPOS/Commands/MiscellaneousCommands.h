@@ -10,7 +10,7 @@
 
 #include <stdint.h>
 #include "ofx/IO/AbstractTypes.h"
-#include "ofx/ESCPOS/BaseCodes.h"
+#include "ofx/ESCPOS/Codes.h"
 
 
 namespace ofx {

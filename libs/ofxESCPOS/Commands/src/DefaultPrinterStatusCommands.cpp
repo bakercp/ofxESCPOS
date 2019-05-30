@@ -26,13 +26,11 @@ DefaultPrinterStatusCommands::~DefaultPrinterStatusCommands()
 
 std::size_t DefaultPrinterStatusCommands::getPrinterStatusRealTime()
 {
-    const uint8_t command[3] = {
-                                 BaseCodes::DLE,
-                                 BaseCodes::EOT,
-                                 BaseCodes::STATUS_PRINTER
-                               };
-
-    std::size_t numBytesWritten = writeBytes(command, 3);
+    std::size_t numBytesWritten = writeBytes({
+        Codes::DLE,
+        Codes::EOT,
+        Codes::STATUS_PRINTER
+    });
 
     if (3 == numBytesWritten)
     {
