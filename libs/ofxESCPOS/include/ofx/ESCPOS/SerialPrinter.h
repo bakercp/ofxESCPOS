@@ -15,14 +15,14 @@
 #include "ofx/IO/ImageUtils.h"
 #include "ofx/IO/SerialDevice.h"
 #include "ofx/ESCPOS/Codes.h"
+#include "ofx/ESCPOS/PrinterProfile.h"
 
 
 namespace ofx {
 namespace ESCPOS {
 
 
-class SerialPrinter:
-    public IO::SerialDevice
+class SerialPrinter: public IO::SerialDevice
 {
 public:
     SerialPrinter();
@@ -63,10 +63,8 @@ public:
                                    ofAlignHorz alignHorz = OF_ALIGN_HORZ_CENTER,
                                    float ditherThreshold = IO::ImageUtils::DEFAULT_DITHER_THRESHOLD,
                                    float ditherQuantWeight = IO::ImageUtils::DEFAULT_DITHER_QUANT_WEIGHT,
-                                   Codes::PrintResolution printResolution = Codes::RESOLUTION_24_DOTS_DOUBLE_DENSITY,
-                                   std::size_t printHeadWidth = DEFAULT_PRINT_HEAD_WIDTH,
-                                   std::size_t printHeadHeight = DEFAULT_PRINT_HEAD_HEIGHT);
-
+                                   Codes::PrintResolution printResolution = Codes::RESOLUTION_24_DOTS_DOUBLE_DENSITY);
+    
     virtual std::size_t setPageModePrintArea(std::size_t x,
                                              std::size_t y,
                                              std::size_t width,
@@ -99,8 +97,6 @@ public:
     //    virtual bool multibyteCharactersSupported();
     //    virtual bool autocutterInstalled();
 
-    static const std::size_t DEFAULT_PRINT_HEAD_WIDTH = 576;
-    static const std::size_t DEFAULT_PRINT_HEAD_HEIGHT = 24;
 
 protected:
     // the user is responsible for making sure that the binary pixels are appropriate
@@ -118,6 +114,9 @@ protected:
 
 
 private:
+    PrinterProfile _profile;
+
+
     /// \brief Printer Status
     std::bitset<8> _typeId;
     std::string _firmwareVersion;

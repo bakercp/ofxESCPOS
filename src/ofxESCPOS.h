@@ -10,6 +10,7 @@
 
 #include "ofxSerial.h"
 #include "ofx/ESCPOS/Codes.h"
+#include "ofx/ESCPOS/PrinterProfile.h"
 #include "ofx/ESCPOS/SerialPrinter.h"
 
 

@@ -192,9 +192,7 @@ std::size_t SerialPrinter::printImage(const ofPixels_<unsigned char>& pixels,
                                       ofAlignHorz alignHorz,
                                       float ditherThreshold,
                                       float ditherQuantWeight,
-                                      Codes::PrintResolution printResolution,
-                                      std::size_t printHeadWidth,
-                                      std::size_t printHeadHeight)
+                                      Codes::PrintResolution printResolution)
 {
 
     std::size_t numVerticalDots = 0;
@@ -203,19 +201,19 @@ std::size_t SerialPrinter::printImage(const ofPixels_<unsigned char>& pixels,
     switch (printResolution)
     {
         case Codes::RESOLUTION_8_DOTS_SINGLE_DENSITY:
-            maxHorizontalDots = printHeadWidth / 2;
+            maxHorizontalDots = _profile.printHeadWidthPixels / 2;
             numVerticalDots = 8;
             break;
         case Codes::RESOLUTION_8_DOTS_DOUBLE_DENSITY:
-            maxHorizontalDots = printHeadWidth;
+            maxHorizontalDots = _profile.printHeadWidthPixels;
             numVerticalDots = 8;
             break;
         case Codes::RESOLUTION_24_DOTS_SINGLE_DENSITY:
-            maxHorizontalDots = printHeadWidth / 2;
+            maxHorizontalDots = _profile.printHeadWidthPixels / 2;
             numVerticalDots = 24;
             break;
         case Codes::RESOLUTION_24_DOTS_DOUBLE_DENSITY:
-            maxHorizontalDots = printHeadWidth;
+            maxHorizontalDots = _profile.printHeadWidthPixels;
             numVerticalDots = 24;
             break;
     }
