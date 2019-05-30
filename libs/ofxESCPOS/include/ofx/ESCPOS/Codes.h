@@ -8,6 +8,10 @@
 #pragma once
 
 
+#include <string>
+#include "json.hpp"
+
+
 namespace ofx {
 namespace ESCPOS {
 
@@ -399,6 +403,19 @@ inline Codes::CodePage from_string(std::string page)
 
     return Codes::CodePage::UNKNOWN;
 }
+
+
+inline void to_json(nlohmann::json& j, const Codes::CodePage& v)
+{
+    j = to_string(v);
+}
+
+
+inline void from_json(const nlohmann::json& j, Codes::CodePage& v)
+{
+    v = from_string(j);
+}
+
 
 
 } } // namespace ofx::ESCPOS
