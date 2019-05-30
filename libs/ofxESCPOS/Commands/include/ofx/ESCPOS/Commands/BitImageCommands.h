@@ -19,12 +19,12 @@ namespace ESCPOS {
 namespace Commands {
 
 
-class DefaultBitImageCommands: public virtual IO::AbstractByteSink
+class BitImageCommands: public virtual IO::AbstractByteSink
 {
 public:
-    DefaultBitImageCommands();
+    BitImageCommands();
 
-    virtual ~DefaultBitImageCommands();
+    virtual ~BitImageCommands();
 
     virtual std::size_t printImage(const ofPixels_<unsigned char>& pixels,
                                    ofAlignHorz alignHorz = OF_ALIGN_HORZ_CENTER,
@@ -54,6 +54,9 @@ protected:
     static uint8_t getLowByte(std::size_t d);
 
 };
+
+
+typedef BitImageCommands DefaultBitImageCommands;
 
 
 } } } // namespace ofx::ESCPOS::Commands

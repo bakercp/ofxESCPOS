@@ -5,7 +5,7 @@
 //
 
 
-#include "ofx/ESCPOS/Commands/DefaultLineSpacingCommands.h"
+#include "ofx/ESCPOS/Commands/LineSpacingCommands.h"
 
 
 namespace ofx {
@@ -13,23 +13,23 @@ namespace ESCPOS {
 namespace Commands {
 
 
-DefaultLineSpacingCommands::DefaultLineSpacingCommands()
+LineSpacingCommands::LineSpacingCommands()
 {
 }
 
 
-DefaultLineSpacingCommands::~DefaultLineSpacingCommands()
+LineSpacingCommands::~LineSpacingCommands()
 {
 }
 
 
-std::size_t DefaultLineSpacingCommands::setDefaultLineSpacing()
+std::size_t LineSpacingCommands::setDefaultLineSpacing()
 {
     return writeBytes({ 27, 50 });
 }
 
 
-std::size_t DefaultLineSpacingCommands::setLineSpacing(uint8_t n)
+std::size_t LineSpacingCommands::setLineSpacing(uint8_t n)
 {
     return writeBytes({ 27, 51, n });
 }

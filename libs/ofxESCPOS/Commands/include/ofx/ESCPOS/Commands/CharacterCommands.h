@@ -21,11 +21,11 @@ namespace ESCPOS {
 namespace Commands {
 
 
-class DefaultCharacterCommands: public virtual IO::AbstractByteSink
+class CharacterCommands: public virtual IO::AbstractByteSink
 {
 public:
-    DefaultCharacterCommands();
-    virtual ~DefaultCharacterCommands();
+    CharacterCommands();
+    virtual ~CharacterCommands();
 
     virtual std::size_t clearPage();
     virtual std::size_t setRightSideCharacterSpacing(uint8_t n);
@@ -51,6 +51,9 @@ public:
     virtual std::size_t setAlign(Codes::TextAlignment align);
 
 };
+
+
+typedef CharacterCommands DefaultCharacterCommands;
 
 
 } } } // namespace ofx::ESCPOS::Commands

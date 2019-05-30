@@ -18,17 +18,20 @@ namespace ESCPOS {
 namespace Commands {
 
 
-class DefaultMechanismCommands: public virtual IO::AbstractByteSink
+class MechanismCommands: public virtual IO::AbstractByteSink
 {
 public:
-    DefaultMechanismCommands();
+    MechanismCommands();
 
-    virtual ~DefaultMechanismCommands();
+    virtual ~MechanismCommands();
 
     virtual std::size_t cut(Codes::PaperCut type = Codes::CUT_FULL,
                             uint8_t numDotsToFeed = 0);
 
 };
+
+
+typedef MechanismCommands DefaultMechanismCommands;
 
 
 } } } // namespace ofx::ESCPOS::Commands

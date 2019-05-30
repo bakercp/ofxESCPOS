@@ -5,24 +5,24 @@
 //
 
 
-#include "ofx/ESCPOS/DefaultSerialPrinter.h"
+#include "ofx/ESCPOS/SerialPrinter.h"
 
 
 namespace ofx {
 namespace ESCPOS {
 
 
-DefaultSerialPrinter::DefaultSerialPrinter()
+SerialPrinter::SerialPrinter()
 {
 }
 
 
-DefaultSerialPrinter::~DefaultSerialPrinter()
+SerialPrinter::~SerialPrinter()
 {
 }
 
 
-std::string DefaultSerialPrinter::getSerialNumber()
+std::string SerialPrinter::getSerialNumber()
 {
     std::size_t b = writeBytes({
         ESCPOS::Codes::GS,

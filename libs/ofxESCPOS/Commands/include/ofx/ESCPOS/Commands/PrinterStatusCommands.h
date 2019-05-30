@@ -19,33 +19,13 @@ namespace ESCPOS {
 namespace Commands {
 
 
-class DefaultPrinterStatus
-{
-public:
-    DefaultPrinterStatus()
-    {
-    }
-
-
-    virtual ~DefaultPrinterStatus()
-    {
-    }
-
-
-private:
-    int _modelId;
-    int _typeId;
-
-};
-
-
-class DefaultPrinterStatusCommands:
+class PrinterStatusCommands:
     public virtual IO::AbstractByteSink,
     public virtual IO::AbstractBufferedByteSource
 {
 public:
-    DefaultPrinterStatusCommands();
-    virtual ~DefaultPrinterStatusCommands();
+    PrinterStatusCommands();
+    virtual ~PrinterStatusCommands();
 
     virtual std::size_t getPrinterStatusRealTime();
 
@@ -74,6 +54,9 @@ public:
     std::string _additionalFonts;
 
 };
+
+
+typedef PrinterStatusCommands DefaultPrinterStatusCommands;
 
 
 } } } // namespace ofx::ESCPOS::Commands

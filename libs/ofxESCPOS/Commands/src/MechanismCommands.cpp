@@ -5,7 +5,7 @@
 //
 
 
-#include "ofx/ESCPOS/Commands/DefaultMechanismCommands.h"
+#include "ofx/ESCPOS/Commands/MechanismCommands.h"
 
 
 namespace ofx {
@@ -13,17 +13,17 @@ namespace ESCPOS {
 namespace Commands {
 
 
-DefaultMechanismCommands::DefaultMechanismCommands()
+MechanismCommands::MechanismCommands()
 {
 }
 
 
-DefaultMechanismCommands::~DefaultMechanismCommands()
+MechanismCommands::~MechanismCommands()
 {
 }
 
 
-std::size_t DefaultMechanismCommands::cut(Codes::PaperCut type,
+std::size_t MechanismCommands::cut(Codes::PaperCut type,
                                           uint8_t numDotsToFeed)
 {
     if (numDotsToFeed > 0)

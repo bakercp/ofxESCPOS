@@ -18,16 +18,19 @@ namespace ESCPOS {
 namespace Commands {
 
 
-class DefaultLineSpacingCommands: public virtual IO::AbstractByteSink
+class LineSpacingCommands: public virtual IO::AbstractByteSink
 {
 public:
-    DefaultLineSpacingCommands();
-    virtual ~DefaultLineSpacingCommands();
+    LineSpacingCommands();
+    virtual ~LineSpacingCommands();
 
     virtual std::size_t setDefaultLineSpacing();
     virtual std::size_t setLineSpacing(uint8_t n);
 
 };
+
+
+typedef LineSpacingCommands DefaultLineSpacingCommands;
 
 
 } } } // namespace ofx::ESCPOS::Commands

@@ -5,7 +5,7 @@
 //
 
 
-#include "ofx/ESCPOS/Commands/DefaultPrinterStatusCommands.h"
+#include "ofx/ESCPOS/Commands/PrinterStatusCommands.h"
 #include "ofx/IO/ByteBufferUtils.h"
 
 
@@ -14,17 +14,17 @@ namespace ESCPOS {
 namespace Commands {
 
 
-DefaultPrinterStatusCommands::DefaultPrinterStatusCommands()
+PrinterStatusCommands::PrinterStatusCommands()
 {
 }
 
 
-DefaultPrinterStatusCommands::~DefaultPrinterStatusCommands()
+PrinterStatusCommands::~PrinterStatusCommands()
 {
 }
 
 
-std::size_t DefaultPrinterStatusCommands::getPrinterStatusRealTime()
+std::size_t PrinterStatusCommands::getPrinterStatusRealTime()
 {
     std::size_t numBytesWritten = writeBytes({
         Codes::DLE,
@@ -55,32 +55,32 @@ std::size_t DefaultPrinterStatusCommands::getPrinterStatusRealTime()
         }
         else
         {
-            ofLogError("DefaultPrinterStatusCommands::getPrinterStatus") << "No bytes read.";
+            ofLogError("PrinterStatusCommands::getPrinterStatus") << "No bytes read.";
         }
 
     }
     else
     {
-        ofLogError("DefaultPrinterStatusCommands::getPrinterStatus") << "Number of bytes written was " << numBytesWritten;
+        ofLogError("PrinterStatusCommands::getPrinterStatus") << "Number of bytes written was " << numBytesWritten;
     }
 
     return numBytesWritten;
 }
 
 
-std::size_t DefaultPrinterStatusCommands::getOfflineStatus()
+std::size_t PrinterStatusCommands::getOfflineStatus()
 {
     return 0; // TBI
 }
 
 
-std::size_t DefaultPrinterStatusCommands::getErrorStatus()
+std::size_t PrinterStatusCommands::getErrorStatus()
 {
     return 0; // TBI
 }
 
 
-std::size_t DefaultPrinterStatusCommands::getPaperStatus()
+std::size_t PrinterStatusCommands::getPaperStatus()
 {
     return 0; // TBI
 }

@@ -5,7 +5,7 @@
 //
 
 
-#include "DefaultBitImageCommands.h"
+#include "BitImageCommands.h"
 
 
 namespace ofx {
@@ -13,17 +13,17 @@ namespace ESCPOS {
 namespace Commands {
 
 
-DefaultBitImageCommands::DefaultBitImageCommands()
+BitImageCommands::BitImageCommands()
 {
 }
 
 
-DefaultBitImageCommands::~DefaultBitImageCommands()
+BitImageCommands::~BitImageCommands()
 {
 }
 
 
-std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& pixels,
+std::size_t BitImageCommands::printImage(const ofPixels_<unsigned char>& pixels,
                                                 ofAlignHorz alignHorz,
                                                 float ditherThreshold,
                                                 float ditherQuantWeight,
@@ -142,7 +142,7 @@ std::size_t DefaultBitImageCommands::printImage(const ofPixels_<unsigned char>& 
 }
 
 
-std::size_t DefaultBitImageCommands::setPageModePrintArea(std::size_t x,
+std::size_t BitImageCommands::setPageModePrintArea(std::size_t x,
                                                           std::size_t y,
                                                           std::size_t width,
                                                           std::size_t height)
@@ -165,7 +165,7 @@ std::size_t DefaultBitImageCommands::setPageModePrintArea(std::size_t x,
 }
 
 
-std::size_t DefaultBitImageCommands::selectBitImageMode(const ofPixels_<unsigned char>& binaryPixels,
+std::size_t BitImageCommands::selectBitImageMode(const ofPixels_<unsigned char>& binaryPixels,
                                                         Codes::PrintResolution printResolution)
 {
     // width = nL + (nH * 256)
@@ -216,13 +216,13 @@ std::size_t DefaultBitImageCommands::selectBitImageMode(const ofPixels_<unsigned
 }
 
 
-uint8_t DefaultBitImageCommands::getHighByte(std::size_t d)
+uint8_t BitImageCommands::getHighByte(std::size_t d)
 {
     return uint8_t(d >> 8);
 }
 
 
-uint8_t DefaultBitImageCommands::getLowByte(std::size_t d)
+uint8_t BitImageCommands::getLowByte(std::size_t d)
 {
     return uint8_t(d & 0xFF);
 }

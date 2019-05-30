@@ -10,8 +10,8 @@
 
 #include "ofxSerial.h"
 #include "ofx/ESCPOS/Codes.h"
-#include "ofx/ESCPOS/Commands/DefaultCharacterCommands.h"
-#include "ofx/ESCPOS/DefaultSerialPrinter.h"
+#include "ofx/ESCPOS/Commands/CharacterCommands.h"
+#include "ofx/ESCPOS/SerialPrinter.h"
 
 
 namespace ofxESCPOS = ofx::ESCPOS;
