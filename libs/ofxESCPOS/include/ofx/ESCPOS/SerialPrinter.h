@@ -8,7 +8,9 @@
 #pragma once
 
 
+#include <map>
 #include <string>
+#include <vector>
 #include "ofPixels.h"
 #include "ofRectangle.h"
 #include "ofx/IO/AbstractTypes.h"
@@ -86,16 +88,31 @@ public:
     virtual std::size_t getErrorStatus();
     virtual std::size_t getPaperStatus();
 
-    //    virtual uint8_t getPrinterModelId();
-    //
-    //    virtual const std::string& getFirmwareVersion();
-    //    virtual const std::string& getManufacturer();
-    //    virtual const std::string& getPrinterName();
-    //
-    //    virtual uint8_t getTypeId();
-    //
-    //    virtual bool multibyteCharactersSupported();
-    //    virtual bool autocutterInstalled();
+    // Real-time commands.
+    /// \sa https://reference.epson-biz.com/modules/ref_escpos/index.php?content_id=190
+    /// \returns true if confirmation response was received.
+    virtual bool clearBuffers();
+
+    virtual uint8_t modelId();
+    virtual uint8_t typeId();
+    virtual uint8_t versionId();
+
+    virtual bool multibyteCharacterSupport();
+    virtual bool autoCutterInstalled();
+    virtual bool customerDisplayInstalled();
+
+    virtual bool columnEmulationMode();
+
+    virtual std::string firmwareVersion();
+    virtual std::string manufacterer();
+    virtual std::string model();
+    virtual std::string serialNumber();
+    virtual std::string additionalFonts();
+
+
+    // Test print.
+    virtual void testPrint(Codes::TestPrintPattern pattern,
+                           Codes::TestPrintPaper paper = Codes::TEST_PRINT_PAPER_ROLL);
 
 
 protected:
@@ -109,26 +126,30 @@ protected:
     static uint8_t getHighByte(std::size_t d);
     static uint8_t getLowByte(std::size_t d);
 
-
-//    std::string getSerialNumber();
-
-
 private:
     PrinterProfile _profile;
 
+    uint8_t _modelId = std::numeric_limits<uint8_t>::max();
+    uint8_t _typeId = std::numeric_limits<uint8_t>::max();
+    uint8_t _versionId = std::numeric_limits<uint8_t>::max();
 
-    /// \brief Printer Status
-    std::bitset<8> _typeId;
+    uint8_t _columnEmulationMode = std::numeric_limits<uint8_t>::max();
+
     std::string _firmwareVersion;
     std::string _manufacturer;
-    std::string _printerName;
+    std::string _model;
     std::string _serialNumber;
     std::string _additionalFonts;
 
+    void _cacheCodePages();
+
+    std::string _readString(uint8_t header,
+                            uint8_t terminator,
+                            std::size_t maxSize);
+
+    std::map<Codes::CodePage, std::map<char32_t, char>> _codePages;
+
 };
-
-
-typedef SerialPrinter DefaultSerialPrinter;
 
 
 } } // namespace ofx::ESCPOS

@@ -7,6 +7,7 @@
 
 #include "ofx/ESCPOS/SerialPrinter.h"
 #include "ofx/IO/ByteBuffer.h"
+#include "ofx/Unicode.h"
 
 
 namespace ofx {
@@ -15,32 +16,13 @@ namespace ESCPOS {
 
 SerialPrinter::SerialPrinter()
 {
+    _cacheCodePages();
 }
 
 
 SerialPrinter::~SerialPrinter()
 {
 }
-
-
-//std::string SerialPrinter::getSerialNumber()
-//{
-//    std::size_t b = writeBytes({
-//        ESCPOS::Codes::GS,
-//        'I',
-//        68
-//    });
-//
-//    std::cout << b << " bytes written." << std::endl;
-//
-//    uint8_t buffer[256];
-//
-//    std::size_t bytesRead = readBytes(buffer, 256);
-//
-//    std::cout << bytesRead << " bytes read." << std::endl;
-//
-//    return "";
-//}
 
 
 std::size_t SerialPrinter::initialize()
@@ -194,6 +176,9 @@ std::size_t SerialPrinter::printImage(const ofPixels_<unsigned char>& pixels,
                                       float ditherQuantWeight,
                                       Codes::PrintResolution printResolution)
 {
+    // Disable realtime commands ...
+    // https://reference.epson-biz.com/modules/ref_escpos/index.php?content_id=197#gs_lparen_cd
+
 
     std::size_t numVerticalDots = 0;
     std::size_t maxHorizontalDots = 0;
@@ -416,7 +401,150 @@ std::size_t SerialPrinter::getPaperStatus()
 }
 
 
+bool SerialPrinter::clearBuffers()
+{
+    writeBytes({ Codes::DLE, Codes::DC4, 8, 1, 3, 20, 1, 6, 2, 8 });
+    uint8_t buffer[3];
+    return 3 == readBytes(buffer, 3)
+        && buffer[0] == 55 // Header
+        && buffer[1] == 37 // Identifier
+        && buffer[2] == 0; // NUL
+}
 
+
+uint8_t SerialPrinter::modelId()
+{
+    if (_modelId == std::numeric_limits<uint8_t>::max())
+    {
+        writeBytes({ Codes::GS, 'I', 1 });
+        readByte(_modelId);
+    }
+
+    return _modelId;
+}
+
+
+uint8_t SerialPrinter::typeId()
+{
+    if (_typeId == std::numeric_limits<uint8_t>::max())
+    {
+        writeBytes({ Codes::GS, 'I', 2 });
+        readByte(_typeId);
+    }
+
+    return _typeId;
+}
+
+
+uint8_t SerialPrinter::versionId()
+{
+    if (_versionId == std::numeric_limits<uint8_t>::max())
+    {
+        writeBytes({ Codes::GS, 'I', 3 });
+        readByte(_versionId);
+    }
+
+    return _versionId;
+}
+
+
+bool SerialPrinter::multibyteCharacterSupport()
+{
+    std::bitset<8> id = modelId();
+    return id[0];
+}
+
+
+bool SerialPrinter::autoCutterInstalled()
+{
+    std::bitset<8> id = modelId();
+    return id[1];
+}
+
+
+bool SerialPrinter::customerDisplayInstalled()
+{
+    std::bitset<8> id = modelId();
+    return id[2];
+}
+
+
+bool SerialPrinter::columnEmulationMode()
+{
+    if (_columnEmulationMode == std::numeric_limits<uint8_t>::max())
+    {
+        writeBytes({ Codes::GS, 'I', 35 });
+        auto mode = _readString(61, 0, 83);
+        if (mode.size() == 2 && mode[0] == 35)
+            _columnEmulationMode = mode[1];
+        else
+            _columnEmulationMode = '0';
+    }
+
+    return _columnEmulationMode != '0';
+}
+
+
+std::string SerialPrinter::firmwareVersion()
+{
+    if (_firmwareVersion.empty())
+    {
+        writeBytes({ Codes::GS, 'I', 65 });
+        _firmwareVersion = _readString('_', 0, 83);
+    }
+    return _firmwareVersion;
+}
+
+
+std::string SerialPrinter::manufacterer()
+{
+    if (_manufacturer.empty())
+    {
+        writeBytes({ Codes::GS, 'I', 66 });
+        _manufacturer = _readString('_', 0, 83);
+    }
+    return _manufacturer;
+}
+
+
+std::string SerialPrinter::model()
+{
+    if (_model.empty())
+    {
+        writeBytes({ Codes::GS, 'I', 67 });
+        _model = _readString('_', 0, 83);
+    }
+    return _model;
+}
+
+
+std::string SerialPrinter::serialNumber()
+{
+    if (_serialNumber.empty())
+    {
+        writeBytes({ Codes::GS, 'I', 68 });
+        _serialNumber = _readString('_', 0, 83);
+    }
+    return _serialNumber;
+}
+
+
+std::string SerialPrinter::additionalFonts()
+{
+    if (_additionalFonts.empty())
+    {
+        writeBytes({ Codes::GS, 'I', 69 });
+        _additionalFonts = _readString('_', 0, 83);
+    }
+    return _additionalFonts;
+}
+
+
+void SerialPrinter::testPrint(Codes::TestPrintPattern pattern,
+                              Codes::TestPrintPaper paper)
+{
+    writeBytes({ Codes::GS, '(', 'A', 2, 0, paper, pattern });
+}
 
 
 std::size_t SerialPrinter::selectBitImageMode(const ofPixels_<unsigned char>& binaryPixels,
@@ -479,6 +607,49 @@ uint8_t SerialPrinter::getHighByte(std::size_t d)
 uint8_t SerialPrinter::getLowByte(std::size_t d)
 {
     return uint8_t(d & 0xFF);
+}
+
+
+void SerialPrinter::_cacheCodePages()
+{
+    auto start = std::chrono::high_resolution_clock::now();
+
+    std::string table(256, '0');
+    std::iota(table.begin(), table.end(), 0);
+
+    for (auto codePage: _profile.codePages)
+    {
+        std::map<char32_t, char> page;
+
+        TextConverter convert(to_string(codePage), "UTF-8");
+        char c = 0;
+        for (auto utf32: ofUTF8Iterator(convert.convert(table)))
+            page[utf32] = c++;
+
+        _codePages[codePage] = page;
+    }
+    auto stop = std::chrono::high_resolution_clock::now();
+
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+
+    std::cout << "Time taken by function: " << duration.count() << " ms" << std::endl;
+
+
+}
+
+
+std::string SerialPrinter::_readString(uint8_t header,
+                                       uint8_t terminator,
+                                       std::size_t maxSize)
+{
+    std::string s = readStringUntil(terminator, maxSize);
+    if (!s.empty() && s[0] == header)
+        s = s.substr(1);
+    if (!s.empty() && s.back() == terminator)
+        s.resize(s.size() - 1);
+    if (s.empty())
+        s = "N/A";
+    return s;
 }
 
 

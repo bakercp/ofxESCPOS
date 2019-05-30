@@ -196,6 +196,12 @@ public:
     };
 
 
+    /// \brief Code page enumeration.
+    ///
+    /// These enumeration values are non-standard (e.g. PC437 is usually known
+    /// as CP437). They can be converted to more standard names using the
+    /// to_string and from_string methods.
+    ///
     /// \sa https://reference.epson-biz.com/modules/ref_charcode_en/index.php?content_id=118
 	enum CodePage: uint8_t
     {
@@ -231,9 +237,9 @@ public:
         PC869       = 38,  ///< Greek                http://en.wikipedia.org/wiki/Code_page_869
         ISO8859_2   = 39,  ///< Latin2               http://en.wikipedia.org/wiki/ISO/IEC_8859-2
         ISO8859_15  = 40,  ///< Latin9               http://en.wikipedia.org/wiki/ISO/IEC_8859-15
-        PC1098      = 41,  ///< Farsi                http://www-01.ibm.com/software/globalization/ccsid/ccsid1098.html
-        PC1118      = 42,  ///< Lithuanian
-        PC1119      = 43,  ///< Lithuanian
+        PC1098      = 41,  ///< Farsi                http://www-01.ibm.com/software/globalization/ccsid/ccsid1098.html / https://en.wikipedia.org/wiki/Code_page_1098
+        PC1118      = 42,  ///< Lithuanian           https://en.wikipedia.org/wiki/Code_page_1118 or CP772
+        PC1119      = 43,  ///< Lithuanian           https://en.wikipedia.org/wiki/Code_page_1119 or CP774
         PC1125      = 44,  ///< Ukrainian            http://ascii-table.com/codepage.php?1125
         WPC1250     = 45,  ///< Latin2               http://en.wikipedia.org/wiki/Windows-1250
         WPC1251     = 46,  ///< Cyrillic             http://en.wikipedia.org/wiki/Windows-1251
@@ -297,6 +303,23 @@ public:
         STATUS_PAPER          = 4
     };
 
+
+    /// \sa https://reference.epson-biz.com/modules/ref_escpos/index.php?content_id=196#gs_lparen_ca
+    enum TestPrintPaper: uint8_t
+    {
+        TEST_PRINT_PAPER_SHEET = 0,
+        TEST_PRINT_PAPER_ROLL = 1
+    };
+
+    /// \sa https://reference.epson-biz.com/modules/ref_escpos/index.php?content_id=196#gs_lparen_ca
+    enum TestPrintPattern: uint8_t
+    {
+        TEST_PRINT_PATTERN_HEX_DUMP = 1,
+        TEST_PRINT_PATTERN_STATUS = 2,
+        TEST_PRINT_PATTERN_ROLLING = 3,
+        TEST_PRINT_PATTERN_AUTO_SET_PAPER_LAYOUT = 64
+    };
+
 };
 
 
@@ -304,48 +327,48 @@ inline std::string to_string(Codes::CodePage page)
 {
     switch (page)
     {
-        case Codes::CodePage::PC437: return "PC437";
-        case Codes::CodePage::Katakana: return "Katakana";
-        case Codes::CodePage::PC850: return "PC850";
-        case Codes::CodePage::PC860: return "PC860";
-        case Codes::CodePage::PC863: return "PC863";
-        case Codes::CodePage::PC865: return "PC865";
-        case Codes::CodePage::PC851: return "PC851";
-        case Codes::CodePage::PC853: return "PC853";
-        case Codes::CodePage::PC857: return "PC857";
-        case Codes::CodePage::PC737: return "PC737";
-        case Codes::CodePage::ISO8859_7: return "ISO8859_7";
-        case Codes::CodePage::WPC1252: return "WPC1252";
-        case Codes::CodePage::PC866: return "PC866";
-        case Codes::CodePage::PC852: return "PC852";
-        case Codes::CodePage::PC858: return "PC858";
+        case Codes::CodePage::PC437: return "CP437";
+        case Codes::CodePage::Katakana: return "CP932";//Katakana"; https://mike42.me/blog/2018-05-how-to-print-the-characters-in-an-esc-pos-printer-code-page
+        case Codes::CodePage::PC850: return "CP850";
+        case Codes::CodePage::PC860: return "CP860";
+        case Codes::CodePage::PC863: return "CP863";
+        case Codes::CodePage::PC865: return "CP865";
+        case Codes::CodePage::PC851: return "CP851";
+        case Codes::CodePage::PC853: return "CP853";
+        case Codes::CodePage::PC857: return "CP857";
+        case Codes::CodePage::PC737: return "CP737";
+        case Codes::CodePage::ISO8859_7: return "ISO8859-7";
+        case Codes::CodePage::WPC1252: return "CP1252";
+        case Codes::CodePage::PC866: return "CP866";
+        case Codes::CodePage::PC852: return "CP852";
+        case Codes::CodePage::PC858: return "CP858";
         case Codes::CodePage::KU42: return "KU42";
-        case Codes::CodePage::TIS11: return "TIS11";
+        case Codes::CodePage::TIS11: return "TIS-620";// TIS11"; https://github.com/mike42/escpos-php/issues/51
         case Codes::CodePage::TIS18: return "TIS18";
         case Codes::CodePage::TCVN_3_I: return "TCVN_3_I";
         case Codes::CodePage::TCVN_3_II: return "TCVN_3_II";
-        case Codes::CodePage::PC720: return "PC720";
-        case Codes::CodePage::PC775: return "PC775";
-        case Codes::CodePage::PC855: return "PC855";
-        case Codes::CodePage::PC861: return "PC861";
-        case Codes::CodePage::PC862: return "PC862";
-        case Codes::CodePage::PC864: return "PC864";
-        case Codes::CodePage::PC869: return "PC869";
-        case Codes::CodePage::ISO8859_2: return "ISO8859_2";
-        case Codes::CodePage::ISO8859_15: return "ISO8859_15";
-        case Codes::CodePage::PC1098: return "PC1098";
-        case Codes::CodePage::PC1118: return "PC1118";
-        case Codes::CodePage::PC1119: return "PC1119";
-        case Codes::CodePage::PC1125: return "PC1125";
-        case Codes::CodePage::WPC1250: return "WPC1250";
-        case Codes::CodePage::WPC1251: return "WPC1251";
-        case Codes::CodePage::WPC1253: return "WPC1253";
-        case Codes::CodePage::WPC1254: return "WPC1254";
-        case Codes::CodePage::WPC1255: return "WPC1255";
-        case Codes::CodePage::WPC1256: return "WPC1256";
-        case Codes::CodePage::WPC1257: return "WPC1257";
-        case Codes::CodePage::WPC1258: return "WPC1258";
-        case Codes::CodePage::KZ_1048: return "KZ_1048";
+        case Codes::CodePage::PC720: return "CP720";
+        case Codes::CodePage::PC775: return "CP775";
+        case Codes::CodePage::PC855: return "CP855";
+        case Codes::CodePage::PC861: return "CP861";
+        case Codes::CodePage::PC862: return "CP862";
+        case Codes::CodePage::PC864: return "CP864";
+        case Codes::CodePage::PC869: return "CP869";
+        case Codes::CodePage::ISO8859_2: return "ISO8859-2";
+        case Codes::CodePage::ISO8859_15: return "ISO8859-15";
+        case Codes::CodePage::PC1098: return "CP1098"; // URDU https://en.wikipedia.org/wiki/Code_page_1098
+        case Codes::CodePage::PC1118: return "CP774"; // aka 774 https://en.wikipedia.org/wiki/Code_page_1118
+        case Codes::CodePage::PC1119: return "CP772"; // aka 772 https://en.wikipedia.org/wiki/Code_page_1119
+        case Codes::CodePage::PC1125: return "CP1125";
+        case Codes::CodePage::WPC1250: return "CP1250";
+        case Codes::CodePage::WPC1251: return "CP1251";
+        case Codes::CodePage::WPC1253: return "CP1253";
+        case Codes::CodePage::WPC1254: return "CP1254";
+        case Codes::CodePage::WPC1255: return "CP1255";
+        case Codes::CodePage::WPC1256: return "CP1256";
+        case Codes::CodePage::WPC1257: return "CP1257";
+        case Codes::CodePage::WPC1258: return "CP1258";
+        case Codes::CodePage::KZ_1048: return "KZ-1048";
         case Codes::CodePage::UNKNOWN: return "UNKNOWN";
         case Codes::CodePage::USER_PAGE: return "USER_PAGE";
     }
@@ -356,50 +379,54 @@ inline std::string to_string(Codes::CodePage page)
 
 inline Codes::CodePage from_string(std::string page)
 {
-    if (page == "PC437") return Codes::CodePage::PC437;
-    else if (page == "Katakana") return Codes::CodePage::Katakana;
-    else if (page == "PC850") return Codes::CodePage::PC850;
-    else if (page == "PC860") return Codes::CodePage::PC860;
-    else if (page == "PC863") return Codes::CodePage::PC863;
-    else if (page == "PC865") return Codes::CodePage::PC865;
-    else if (page == "PC851") return Codes::CodePage::PC851;
-    else if (page == "PC853") return Codes::CodePage::PC853;
-    else if (page == "PC857") return Codes::CodePage::PC857;
-    else if (page == "PC737") return Codes::CodePage::PC737;
-    else if (page == "ISO8859_7") return Codes::CodePage::ISO8859_7;
-    else if (page == "WPC1252") return Codes::CodePage::WPC1252;
-    else if (page == "PC866") return Codes::CodePage::PC866;
-    else if (page == "PC852") return Codes::CodePage::PC852;
-    else if (page == "PC858") return Codes::CodePage::PC858;
-    else if (page == "KU42") return Codes::CodePage::KU42;
-    else if (page == "TIS11") return Codes::CodePage::TIS11;
-    else if (page == "TIS18") return Codes::CodePage::TIS18;
-    else if (page == "TCVN_3_I") return Codes::CodePage::TCVN_3_I;
-    else if (page == "TCVN_3_II") return Codes::CodePage::TCVN_3_II;
-    else if (page == "PC720") return Codes::CodePage::PC720;
-    else if (page == "PC775") return Codes::CodePage::PC775;
-    else if (page == "PC855") return Codes::CodePage::PC855;
-    else if (page == "PC861") return Codes::CodePage::PC861;
-    else if (page == "PC862") return Codes::CodePage::PC862;
-    else if (page == "PC864") return Codes::CodePage::PC864;
-    else if (page == "PC869") return Codes::CodePage::PC869;
-    else if (page == "ISO8859_2") return Codes::CodePage::ISO8859_2;
-    else if (page == "ISO8859_15") return Codes::CodePage::ISO8859_15;
-    else if (page == "PC1098") return Codes::CodePage::PC1098;
-    else if (page == "PC1118") return Codes::CodePage::PC1118;
-    else if (page == "PC1119") return Codes::CodePage::PC1119;
-    else if (page == "PC1125") return Codes::CodePage::PC1125;
-    else if (page == "WPC1250") return Codes::CodePage::WPC1250;
-    else if (page == "WPC1251") return Codes::CodePage::WPC1251;
-    else if (page == "WPC1253") return Codes::CodePage::WPC1253;
-    else if (page == "WPC1254") return Codes::CodePage::WPC1254;
-    else if (page == "WPC1255") return Codes::CodePage::WPC1255;
-    else if (page == "WPC1256") return Codes::CodePage::WPC1256;
-    else if (page == "WPC1257") return Codes::CodePage::WPC1257;
-    else if (page == "WPC1258") return Codes::CodePage::WPC1258;
-    else if (page == "KZ_1048") return Codes::CodePage::KZ_1048;
-    else if (page == "UNKNOWN") return Codes::CodePage::UNKNOWN;
-    else if (page == "USER_PAGE") return Codes::CodePage::USER_PAGE;
+    if (page == to_string(Codes::PC437)) return Codes::PC437;
+    else if (page == to_string(Codes::Katakana)) return Codes::Katakana;
+    else if (page == to_string(Codes::PC850)) return Codes::PC850;
+    else if (page == to_string(Codes::PC860)) return Codes::PC860;
+    else if (page == to_string(Codes::PC863)) return Codes::PC863;
+    else if (page == to_string(Codes::PC865)) return Codes::PC865;
+
+    else if (page == to_string(Codes::PC851)) return Codes::PC851;
+    else if (page == to_string(Codes::PC853)) return Codes::PC853;
+    else if (page == to_string(Codes::PC857)) return Codes::PC857;
+    else if (page == to_string(Codes::PC737)) return Codes::PC737;
+    else if (page == to_string(Codes::ISO8859_7)) return Codes::ISO8859_7;
+    else if (page == to_string(Codes::WPC1252)) return Codes::WPC1252;
+    else if (page == to_string(Codes::PC866)) return Codes::PC866;
+    else if (page == to_string(Codes::PC852)) return Codes::PC852;
+    else if (page == to_string(Codes::PC858)) return Codes::PC858;
+    else if (page == to_string(Codes::KU42)) return Codes::KU42;
+    else if (page == to_string(Codes::TIS11)) return Codes::TIS11;
+
+    else if (page == to_string(Codes::TIS18)) return Codes::TIS18;
+
+    else if (page == to_string(Codes::TCVN_3_I)) return Codes::TCVN_3_I;
+    else if (page == to_string(Codes::TCVN_3_II)) return Codes::TCVN_3_II;
+    else if (page == to_string(Codes::PC720)) return Codes::PC720;
+    else if (page == to_string(Codes::PC775)) return Codes::PC775;
+    else if (page == to_string(Codes::PC855)) return Codes::PC855;
+    else if (page == to_string(Codes::PC861)) return Codes::PC861;
+    else if (page == to_string(Codes::PC862)) return Codes::PC862;
+    else if (page == to_string(Codes::PC864)) return Codes::PC864;
+    else if (page == to_string(Codes::PC869)) return Codes::PC869;
+    else if (page == to_string(Codes::ISO8859_2)) return Codes::ISO8859_2;
+    else if (page == to_string(Codes::ISO8859_15)) return Codes::ISO8859_15;
+    else if (page == to_string(Codes::PC1098)) return Codes::PC1098;
+    else if (page == to_string(Codes::PC1118)) return Codes::PC1118;
+    else if (page == to_string(Codes::PC1119)) return Codes::PC1119;
+    else if (page == to_string(Codes::PC1125)) return Codes::PC1125;
+    else if (page == to_string(Codes::WPC1250)) return Codes::WPC1250;
+    else if (page == to_string(Codes::WPC1251)) return Codes::WPC1251;
+    else if (page == to_string(Codes::WPC1253)) return Codes::WPC1253;
+    else if (page == to_string(Codes::WPC1254)) return Codes::WPC1254;
+    else if (page == to_string(Codes::WPC1255)) return Codes::WPC1255;
+    else if (page == to_string(Codes::WPC1256)) return Codes::WPC1256;
+    else if (page == to_string(Codes::WPC1257)) return Codes::WPC1257;
+    else if (page == to_string(Codes::WPC1258)) return Codes::WPC1258;
+    else if (page == to_string(Codes::KZ_1048)) return Codes::KZ_1048;
+
+    else if (page == to_string(Codes::UNKNOWN)) return Codes::UNKNOWN;
+    else if (page == to_string(Codes::USER_PAGE)) return Codes::USER_PAGE;
 
     return Codes::CodePage::UNKNOWN;
 }
