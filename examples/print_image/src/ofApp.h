@@ -22,7 +22,7 @@ public:
     void keyPressed(int key) override;
 
     // The printer.
-    ofxESCPOS::DefaultSerialPrinter printer;
+    ofxESCPOS::SerialPrinter printer;
 
     // A camera grabber.
     ofVideoGrabber grabber;

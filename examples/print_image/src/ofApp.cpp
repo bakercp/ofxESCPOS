@@ -28,7 +28,7 @@ void ofApp::setup()
     
     // Connect to the first available port.
     // Confirm that this is the one you want and the correct speed.
-    if (!printer.setup(115200))
+    if (!printer.setup(38400))
     {
         ofLogError("ofApp::setup") << "Unable to connect to: " << printer.port();
         ofExit();
@@ -89,9 +89,7 @@ void ofApp::keyPressed(int key)
                        OF_ALIGN_HORZ_CENTER,
                        ditherThreshold,
                        ditherQuantWeight,
-                       ofxESCPOS::BaseCodes::RESOLUTION_24_DOTS_DOUBLE_DENSITY,
-                       ofxESCPOS::DefaultSerialPrinter::DEFAULT_PRINT_HEAD_WIDTH,
-                       ofxESCPOS::DefaultSerialPrinter::DEFAULT_PRINT_HEAD_HEIGHT);
+                       ofxESCPOS::Codes::RESOLUTION_24_DOTS_DOUBLE_DENSITY);
 
     printer.flush();
     printer.cut();
