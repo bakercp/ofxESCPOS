@@ -13,6 +13,7 @@
 #include <vector>
 #include "ofPixels.h"
 #include "ofRectangle.h"
+#include "ofx/Unicode.h"
 #include "ofx/IO/AbstractTypes.h"
 #include "ofx/IO/ImageUtils.h"
 #include "ofx/IO/SerialDevice.h"
@@ -148,6 +149,8 @@ private:
                             std::size_t maxSize);
 
     std::map<Codes::CodePage, std::map<char32_t, char>> _codePages;
+    std::map<Codes::CodePage, TextConverter> _toCodePage;
+    std::map<Codes::CodePage, TextConverter> _fromCodePage;
 
 };
 

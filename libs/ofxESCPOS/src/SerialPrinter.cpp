@@ -7,7 +7,6 @@
 
 #include "ofx/ESCPOS/SerialPrinter.h"
 #include "ofx/IO/ByteBuffer.h"
-#include "ofx/Unicode.h"
 
 
 namespace ofx {
@@ -33,12 +32,23 @@ std::size_t SerialPrinter::initialize()
 
 std::size_t SerialPrinter::print(const std::string& text)
 {
+
+
+
+
+
     return writeBytes(text);
 }
 
 
 std::size_t SerialPrinter::println(const std::string& text)
 {
+
+
+
+
+
+
     return writeBytes(text + "\n");
 }
 
@@ -612,29 +622,25 @@ uint8_t SerialPrinter::getLowByte(std::size_t d)
 
 void SerialPrinter::_cacheCodePages()
 {
-    auto start = std::chrono::high_resolution_clock::now();
+    _codePages.clear();
+    _toCodePage.clear();
+    _fromCodePage.clear();
 
     std::string table(256, '0');
     std::iota(table.begin(), table.end(), 0);
 
     for (auto codePage: _profile.codePages)
     {
-        std::map<char32_t, char> page;
+        _toCodePage[codePage] = TextConverter("UTF-8", to_string(codePage));
+        _fromCodePage[codePage] = TextConverter(to_string(codePage), "UTF-8");
 
+        std::map<char32_t, char> page;
         TextConverter convert(to_string(codePage), "UTF-8");
         char c = 0;
         for (auto utf32: ofUTF8Iterator(convert.convert(table)))
             page[utf32] = c++;
-
         _codePages[codePage] = page;
     }
-    auto stop = std::chrono::high_resolution_clock::now();
-
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-
-    std::cout << "Time taken by function: " << duration.count() << " ms" << std::endl;
-
-
 }
 
 
