@@ -21,12 +21,13 @@ public:
     void setup() override;
     void draw() override;
 
-    void imageTest(ESCPOS::DefaultSerialPrinter& printer);
-    void printerTest(ESCPOS::DefaultSerialPrinter& printer);
-
     void keyPressed(int key) override;
 
-    std::vector<ESCPOS::DefaultSerialPrinter> printers;
+    void imageTest(ESCPOS::SerialPrinter& printer);
+    void printerTest(ESCPOS::SerialPrinter& printer);
+
+
+    std::vector<ESCPOS::SerialPrinter> printers;
 
     ofPixels image;
 };
